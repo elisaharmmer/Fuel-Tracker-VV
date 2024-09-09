@@ -74,11 +74,16 @@ Apresentação do projeto finalizado através de uma aplicação web e de mídia
 Contribuidores
 </h1>
 
+<p align="center">Pessoas responsáveis pela aplicação:
+
 <p align="center">
 <img src="assets/nicolas-aigner.jpeg" alt="Nícolas Aigner" width="90" style="border-radius: 50%;">
-</p>
+</p> @nicolasaigner, estudante do 2º peíodo de Ciência da Computação. :notebook:</p>
 
-<p>Agradecimentos especiais para @nicolasaigner, estudante do 2º peíodo de Ciência da Computação, que aceitou o desafio de idealizar e desenvolver todo o projeto ao meu lado. :notebook:</p>
+<p align="center">
+<img src="assets/elisa-harmmer.jpeg" alt="Elisa Harmmer Ferreira" width="90" style="border-radius: 50%;">
+
+</p> @elisaharmmer, estudante do 2º peíodo de Sistemas  de Informação ß:notebook:</p>
 
 <h1>
 Apoio & Colaborações
