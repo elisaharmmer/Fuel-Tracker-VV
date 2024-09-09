@@ -76,8 +76,8 @@ Contribuidores
 
 <p align="center">Pessoas responsáveis pela aplicação:
 
-<p align="center">
-  <img src="assets/nicolas-aigner.jpeg" alt="Nícolas Aigner" width="90" style="border-radius: 50%; display: block; margin: auto;" />
+<p align="center" style='border-radius: 50%; width: 90px; display: block; margin: auto;'>
+  <img src="assets/nicolas-aigner.jpeg" alt="Nícolas Aigner" width="90" style='border-radius: 50%; width: 90px; display: block; margin: auto;' />
 </p>
 
 <p align="center">@nicolasaigner, estudante do 2º período de Ciência da Computação :laptop:</p>
