@@ -15,8 +15,37 @@ Fuel-Tracker-VV
 
 :gear: O processo de filtragem e limpeza dos dados obtidos foi realizado sob a utilização de scripts específicos com a linguagem de programação Python dentro do ambiente de desenvolvimento (IDE) Pycharm. Além disso, visando o melhor rendimento do projeto e otimização dos processos,aproveitamos esse momento para criar as primeiras restrições. Clique aqui para conferir detalhadamente como realizamos esse processo.
 
-:open_file_folder: Posteriormente, seguimos com o agrupamento dos dados no SGBD Microsoft SQL Server, o que nos permitiu dar continuidade no desenvolvimento das restrições e regras essenciais para a visualização das informações geradas. Utilizamos da ferramenta Mermaid para desenvolver e conceituar a parte em questão. 
+:open_file_folder: Posteriormente, seguimos com o agrupamento dos dados no SGBD Microsoft SQL Server, o que nos permitiu dar continuidade no desenvolvimento das restrições e regras essenciais para a visualização das informações geradas. Utilizamos da ferramenta Mermaid para desenvolver e conceituar a parte em questão.
 
-<p align="center">
-<img src="assets/mermaid-diagram.png" alt="Diagrama Mermaid" width="300">
-</p>
+```Mermaid
+erDiagram
+    POSTO ||--o{ PRECO_COLETADO : "1:N"
+    COMBUSTIVEL ||--o{ PRECO_COLETADO : "1:N"
+
+    POSTO {
+      string CNPJ PK "Primary Key, Not Null, UNIQUE, 14 CHARS"
+      string RazaoSocial "Not Null"
+      string NomeFantasia
+      string Bandeira
+      string Logradouro "Not Null"
+      string Numero "Not Null"
+      string Bairro "Not Null"
+      string Cidade "Not Null"
+      string Estado "Not Null, DEFAULT ES"
+      string CEP "Not Null"
+    }
+
+    COMBUSTIVEL {
+      int ID_Combustivel PK "Primary Key, Auto Increment, Not Null"
+      string Nome "Not Null, UNIQUE"
+    }
+
+    PRECO_COLETADO {
+      int ID_Preco PK "Primary Key, Auto Increment, Not Null"
+      float Preco "Not Null, CHECK (Preco > 0)"
+      string UnidadeMedida "Not Null"
+      date DataColeta "Not Null"
+      string PostoCNPJ FK "Foreign Key references POSTO(CNPJ), Not Null"
+      int CombustivelID FK "Foreign Key references COMBUSTIVEL(ID_Combustivel), Not Null"
+    }
+```
