@@ -5,7 +5,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PostoController } from './controllers/posto.controller';
 import { PostoService } from './services/posto.service';
-import { Posto } from './entities/posto.entity';  // Entidade Posto
+import { Posto } from './entities/posto.entity';
+import {CombustivelController} from "./controllers/combustivel.controller";
+import {PrecoController} from "./controllers/preco.controller";
+import {CombustivelService} from "./services/combustivel.service";
+import {PrecoService} from "./services/preco.service";
+import {Combustivel} from "./entities/combustivel.entity";
+import {PrecoColetado} from "./entities/preco-coletado.entity";  // Entidade Posto
 
 @Module({
   imports: [
@@ -25,9 +31,9 @@ import { Posto } from './entities/posto.entity';  // Entidade Posto
         encrypt: false,
       },
     }),
-    TypeOrmModule.forFeature([Posto])  // Registra o repositório para a entidade Posto
+    TypeOrmModule.forFeature([Posto, Combustivel, PrecoColetado])  // Registra o repositório para a entidade Posto
   ],
-  controllers: [AppController, PostoController],
-  providers: [AppService, PostoService],
+  controllers: [AppController, PostoController, CombustivelController, PrecoController],
+  providers: [AppService, PostoService, CombustivelService, PrecoService],
 })
 export class AppModule {}

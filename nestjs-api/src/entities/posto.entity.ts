@@ -1,34 +1,38 @@
-import { Entity, Column, PrimaryColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn, OneToMany } from 'typeorm';
+import { PrecoColetado } from './preco-coletado.entity';
 
 @Entity('POSTO')
 export class Posto {
-    @PrimaryColumn()
+    @PrimaryColumn({ type: 'varchar', length: 14 })
     cnpj: string;
 
-    @Column()
+    @Column({ type: 'nvarchar', length: 255 })
     razaoSocial: string;
 
-    @Column()
+    @Column({ type: 'nvarchar', length: 255, nullable: true })
     nomeFantasia: string;
 
-    @Column()
+    @Column({ type: 'nvarchar', length: 100, nullable: true })
     bandeira: string;
 
-    @Column()
+    @Column({ type: 'nvarchar', length: 255 })
     logradouro: string;
 
-    @Column()
+    @Column({ type: 'nvarchar', length: 20 })
     numero: string;
 
-    @Column()
+    @Column({ type: 'nvarchar', length: 100 })
     bairro: string;
 
-    @Column()
+    @Column({ type: 'nvarchar', length: 100 })
     cidade: string;
 
-    @Column()
+    @Column({ type: 'nvarchar', length: 50 })
     estado: string;
 
-    @Column()
+    @Column({ type: 'nvarchar', length: 10 })
     cep: string;
+
+    @OneToMany(() => PrecoColetado, (precoColetado) => precoColetado.posto)
+    precosColetados: PrecoColetado[];
 }

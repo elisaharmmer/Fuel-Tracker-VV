@@ -1,10 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { PrecoColetado } from './preco-coletado.entity';
 
 @Entity('COMBUSTIVEL')
 export class Combustivel {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn({ name: 'ID_Combustivel' })
     id: number;
 
-    @Column()
+    @Column({ type: 'nvarchar', length: 100, unique: true })
     nome: string;
+
+    @OneToMany(() => PrecoColetado, (precoColetado) => precoColetado.combustivel)
+    precosColetados: PrecoColetado[];
 }

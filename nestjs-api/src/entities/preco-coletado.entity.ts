@@ -1,26 +1,24 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Posto } from './posto.entity';
 import { Combustivel } from './combustivel.entity';
 
 @Entity('PRECO_COLETADO')
 export class PrecoColetado {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn({ name: 'ID_Preco' })
     id: number;
 
-    @Column('decimal', { precision: 10, scale: 3 })
+    @Column({ type: 'decimal', precision: 10, scale: 3 })
     preco: number;
 
-    @Column()
+    @Column({ type: 'nvarchar', length: 10 })
     unidadeMedida: string;
 
-    @Column('date')
+    @Column({ type: 'date' })
     dataColeta: Date;
 
-    @ManyToOne(() => Posto)
-    @JoinColumn({ name: 'PostoCNPJ' })
+    @ManyToOne(() => Posto, (posto) => posto.precosColetados)
     posto: Posto;
 
-    @ManyToOne(() => Combustivel)
-    @JoinColumn({ name: 'CombustivelID' })
+    @ManyToOne(() => Combustivel, (combustivel) => combustivel.precosColetados)
     combustivel: Combustivel;
 }

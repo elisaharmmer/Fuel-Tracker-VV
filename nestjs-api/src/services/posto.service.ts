@@ -10,7 +10,13 @@ export class PostoService {
         private readonly postoRepository: Repository<Posto>,
     ) {}
 
-    async findAll(): Promise<Posto[]> {
+    getAllPostos(): Promise<Posto[]> {
         return this.postoRepository.find();
+    }
+
+    getRelatorioPostos(dataInicio: string, dataFim: string): Promise<any[]> {
+        return this.postoRepository.query(
+            `EXEC sp_ResumoPostosEPrecos @DataInicio = '${dataInicio}', @DataFim = '${dataFim}'`,
+        );
     }
 }
