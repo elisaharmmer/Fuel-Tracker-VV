@@ -77,12 +77,16 @@ Contribuidores
 <p align="center">Pessoas responsáveis pela aplicação:
 
 <p align="center">
-<img src="assets/nicolas-aigner.jpeg" alt="Nícolas Aigner" width="90" style="border-radius:50%;">
-</p> @nicolasaigner, estudante do 2º peíodo de Ciência da Computação. :laptop:</p>
+  <img src="assets/nicolas-aigner.jpeg" alt="Nícolas Aigner" width="90" style="border-radius: 50%; display: block; margin: auto;" />
+</p>
+
+<p align="center">@nicolasaigner, estudante do 2º período de Ciência da Computação :laptop:</p>
 
 <p align="center">
-<img src="assets/elisa-harmmer.jpeg" alt="Elisa Harmmer Ferreira" width="90" style="border-radius:50%;">
-</p> @elisaharmmer, estudante do 2º peíodo de Sistemas  de Informação :laptop:</p>
+  <img src="assets/elisa-harmmer.jpeg" alt="Elisa Harmmer Ferreira" width="90" style="border-radius: 50%; display: block; margin: auto;" />
+</p>
+
+<p align="center">@elisaharmmer, estudante do 2º período de Sistemas de Informação :laptop:</p>
 
 <h1>
 Apoio & Colaborações
