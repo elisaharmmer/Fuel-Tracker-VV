@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <h1>
 Fuel Tracker VV
 <img src="assets/app-logo.png" alt="Logo da aplicação" width="45" align="left">
@@ -110,7 +109,3 @@ Nós adoraríamos contar com a sua colaboração! Se você tem sugestões, ideia
 
 ✨ Sinta-se à vontade para nos contatar se precisar de ajuda! ✨
 </p>
-=======
-# Fuel-Tracker-VV
-Projeto de criação de banco de dados e aplicação web para consulta de valores dos principais tipos de combustíveis revendidos em todos os postos de Vila Velha-ES!
->>>>>>> 5c58f9f93010d1606b16a3e07cd66091caeb7ea3
