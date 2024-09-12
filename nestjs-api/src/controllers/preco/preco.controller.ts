@@ -1,5 +1,5 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import {PrecoService} from "../services/preco.service";
+import {PrecoService} from "../../services/preco.service";
 
 
 @Controller('precos')

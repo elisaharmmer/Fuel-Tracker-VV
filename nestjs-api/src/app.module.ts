@@ -3,15 +3,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { PostoController } from './controllers/posto.controller';
+import { PostoController } from './controllers/posto/posto.controller';
 import { PostoService } from './services/posto.service';
 import { Posto } from './entities/posto.entity';
-import {CombustivelController} from "./controllers/combustivel.controller";
-import {PrecoController} from "./controllers/preco.controller";
+import {CombustivelController} from "./controllers/combustivel/combustivel.controller";
+import {PrecoController} from "./controllers/preco/preco.controller";
 import {CombustivelService} from "./services/combustivel.service";
 import {PrecoService} from "./services/preco.service";
 import {Combustivel} from "./entities/combustivel.entity";
-import {PrecoColetado} from "./entities/preco-coletado.entity";  // Entidade Posto
+import {PrecoColetado} from "./entities/preco-coletado.entity";
+import { HealthModule } from './modules/health/health.module';
 
 @Module({
   imports: [
@@ -30,7 +31,8 @@ import {PrecoColetado} from "./entities/preco-coletado.entity";  // Entidade Pos
       logging: true,
       logger: "debug"
     }),
-    TypeOrmModule.forFeature([Posto, Combustivel, PrecoColetado])  // Registra o repositório para a entidade Posto
+    TypeOrmModule.forFeature([Posto, Combustivel, PrecoColetado]),
+    HealthModule
   ],
   controllers: [AppController, PostoController, CombustivelController, PrecoController],
   providers: [AppService, PostoService, CombustivelService, PrecoService],
