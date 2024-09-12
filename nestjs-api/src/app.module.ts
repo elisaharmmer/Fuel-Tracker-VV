@@ -19,17 +19,16 @@ import {PrecoColetado} from "./entities/preco-coletado.entity";  // Entidade Pos
       isGlobal: true,
     }),
     TypeOrmModule.forRoot({
-      type: 'mssql',
-      host: 'sqlserver', // Host do serviço no docker-compose
-      port: 1433,
-      username: 'sa',
-      password: 'SenhaForte123',
-      database: 'CombustiveisDB',
+      type: 'postgres',
+      host: process.env.POSTGRES_HOST,
+      port: 5432,
+      username: process.env.POSTGRES_USER,
+      password: process.env.POSTGRES_PASSWORD,
+      database: process.env.POSTGRES_DATABASE,
       entities: [__dirname + '/**/*.entity{.ts,.js}'], // Certifique-se de que as entidades estão no caminho correto
       synchronize: false,
-      options: {
-        encrypt: false,
-      },
+      logging: true,
+      logger: "debug"
     }),
     TypeOrmModule.forFeature([Posto, Combustivel, PrecoColetado])  // Registra o repositório para a entidade Posto
   ],
