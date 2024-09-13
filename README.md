@@ -79,11 +79,11 @@ Contribuidores
 <p align="center" style='border-radius: 50%; width: 90px; display: block; margin: auto;'>
   <img src="assets/nicolas-aigner.png" alt="Nícolas Aigner" width="90" style='border-radius: 50%; width: 90px; display: block; margin: auto;' />
 </p>
-<p align="center">@nicolasaigner, estudante do 2º período de Ciência da Computação</p>
+<p align="center"><a href="https://github.com/nicolasaigner" target="_blank">@nicolasaigner</a>, estudante do 2º período de Ciência da Computação</p>
 
-<p align="center"> <img src="assets/elisa-harmmer.png" alt="Elisa Harmmer Ferreira" width="90" style="border-radius: 50%; display: block; margin: auto;" />
+<p align="center"><img src="assets/elisa-harmmer.png" alt="Elisa Harmmer Ferreira" width="90" style="border-radius: 50%; display: block; margin: auto;" />
 </p>
-<p align="center">@elisaharmmer, estudante do 2º período de Sistemas de Informação</p>
+<p align="center"><a href="https://github.com/elisaharmmer" target="_blank"></a>@elisaharmmer, estudante do 2º período de Sistemas de Informação</p>
 
 <h1>
 Apoio & Colaborações
