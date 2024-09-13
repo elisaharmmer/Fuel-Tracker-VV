@@ -3,18 +3,18 @@ import { PostoService } from '../../services/posto.service';
 
 @Controller('postos')
 export class PostoController {
-    constructor(private readonly postoService: PostoService) {}
+  constructor(private readonly postoService: PostoService) {}
 
-    @Get()
-    getAllPostos() {
-        return this.postoService.getAllPostos();
-    }
+  @Get()
+  getAllPostos() {
+    return this.postoService.getAllPostos();
+  }
 
-    @Get('relatorio')
-    getRelatorioPostos(
-        @Query('dataInicio') dataInicio: string,
-        @Query('dataFim') dataFim: string,
-    ) {
-        return this.postoService.getRelatorioPostos(dataInicio, dataFim);
-    }
+  @Get('relatorio')
+  getRelatorioPostos(
+    @Query('dataInicio') dataInicio: string,
+    @Query('dataFim') dataFim: string,
+  ) {
+    return this.postoService.getRelatorioPostos(dataInicio, dataFim);
+  }
 }

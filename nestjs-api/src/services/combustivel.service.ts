@@ -5,12 +5,12 @@ import { Combustivel } from '../entities/combustivel.entity';
 
 @Injectable()
 export class CombustivelService {
-    constructor(
-        @InjectRepository(Combustivel)
-        private readonly combustivelRepository: Repository<Combustivel>,
-    ) {}
+  constructor(
+    @InjectRepository(Combustivel)
+    private readonly combustivelRepository: Repository<Combustivel>,
+  ) {}
 
-    getAllCombustiveis(): Promise<Combustivel[]> {
-        return this.combustivelRepository.find();
-    }
+  getAllCombustiveis(): Promise<Combustivel[]> {
+    return this.combustivelRepository.find();
+  }
 }

@@ -5,4 +5,6 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   await app.listen(process.env.APP_PORT || 3000);
 }
-bootstrap().then((data) => console.log('Success Bootstrap App')).catch((error) => console.log('Error Bootstrap App', error));
+bootstrap()
+  .then((data) => console.log('Success Bootstrap App'))
+  .catch((error) => console.log('Error Bootstrap App', error));

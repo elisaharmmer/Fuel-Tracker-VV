@@ -5,10 +5,7 @@ import { HealthController } from '../../controllers/health/health.controller';
 import { HttpModule } from '@nestjs/axios';
 
 @Module({
-  imports: [
-    TerminusModule,
-    HttpModule
-  ],
+  imports: [TerminusModule, HttpModule],
   controllers: [HealthController],
   providers: [TypeOrmHealthIndicator],
 })

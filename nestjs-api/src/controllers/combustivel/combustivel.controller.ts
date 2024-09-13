@@ -3,10 +3,10 @@ import { CombustivelService } from '../../services/combustivel.service';
 
 @Controller('combustiveis')
 export class CombustivelController {
-    constructor(private readonly combustivelService: CombustivelService) {}
+  constructor(private readonly combustivelService: CombustivelService) {}
 
-    @Get()
-    getAllCombustiveis() {
-        return this.combustivelService.getAllCombustiveis();
-    }
+  @Get()
+  getAllCombustiveis() {
+    return this.combustivelService.getAllCombustiveis();
+  }
 }

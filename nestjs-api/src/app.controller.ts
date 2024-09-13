@@ -6,15 +6,15 @@ import { Request } from 'express';
 @Controller()
 export class AppController {
   constructor(
-      private readonly appService: AppService,
-      private readonly httpAdapterHost: HttpAdapterHost,
+    private readonly appService: AppService,
+    private readonly httpAdapterHost: HttpAdapterHost,
   ) {}
 
   @Get()
-  getHello(): { message: string, ok: boolean } {
+  getHello(): { message: string; ok: boolean } {
     return {
       message: this.appService.getHello(),
-      ok: true
+      ok: true,
     };
   }
 
@@ -29,8 +29,9 @@ export class AppController {
     if (!router) {
       console.error('Router not available on this platform.');
       return {
-        description: 'No router available in the current environment. This might be Vercel.',
-        routes: []
+        description:
+          'No router available in the current environment. This might be Vercel.',
+        routes: [],
       };
     }
 
@@ -40,14 +41,15 @@ export class AppController {
     console.log('Host', host);
 
     const routes = router.stack
-        .filter((layer) => layer.route) // Filtra apenas as rotas
-        .map((layer) => ({
-          method: Object.keys(layer.route.methods)[0].toUpperCase(),
-          path: `${host}${layer.route.path}`, // Adiciona o domínio completo ao caminho
-        }));
+      .filter((layer) => layer.route) // Filtra apenas as rotas
+      .map((layer) => ({
+        method: Object.keys(layer.route.methods)[0].toUpperCase(),
+        path: `${host}${layer.route.path}`, // Adiciona o domínio completo ao caminho
+      }));
 
     const result = {
-      description: 'Lista de todas as rotas disponíveis na API com domínio completo',
+      description:
+        'Lista de todas as rotas disponíveis na API com domínio completo',
       routes,
     };
     console.log('RESULT', result);

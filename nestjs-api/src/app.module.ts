@@ -6,12 +6,12 @@ import { AppService } from './app.service';
 import { PostoController } from './controllers/posto/posto.controller';
 import { PostoService } from './services/posto.service';
 import { Posto } from './entities/posto.entity';
-import {CombustivelController} from "./controllers/combustivel/combustivel.controller";
-import {PrecoController} from "./controllers/preco/preco.controller";
-import {CombustivelService} from "./services/combustivel.service";
-import {PrecoService} from "./services/preco.service";
-import {Combustivel} from "./entities/combustivel.entity";
-import {PrecoColetado} from "./entities/preco-coletado.entity";
+import { CombustivelController } from './controllers/combustivel/combustivel.controller';
+import { PrecoController } from './controllers/preco/preco.controller';
+import { CombustivelService } from './services/combustivel.service';
+import { PrecoService } from './services/preco.service';
+import { Combustivel } from './entities/combustivel.entity';
+import { PrecoColetado } from './entities/preco-coletado.entity';
 import { HealthModule } from './modules/health/health.module';
 
 @Module({
@@ -29,12 +29,17 @@ import { HealthModule } from './modules/health/health.module';
       entities: [__dirname + '/**/*.entity{.ts,.js}'], // Certifique-se de que as entidades estão no caminho correto
       synchronize: false,
       logging: true,
-      logger: "debug"
+      logger: 'debug',
     }),
     TypeOrmModule.forFeature([Posto, Combustivel, PrecoColetado]),
-    HealthModule
+    HealthModule,
   ],
-  controllers: [AppController, PostoController, CombustivelController, PrecoController],
+  controllers: [
+    AppController,
+    PostoController,
+    CombustivelController,
+    PrecoController,
+  ],
   providers: [AppService, PostoService, CombustivelService, PrecoService],
 })
 export class AppModule {}
