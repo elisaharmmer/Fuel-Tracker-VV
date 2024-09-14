@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserverdb
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=SenhaForte123
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserverdata:/var/opt/mssql
+      - ./database:/usr/src/app/database # Montar a pasta com os scripts SQL
+
+  nest-api:
+    build: ./nestjs-api
+    container_name: nestjs-api
+    environment:
+      - DB_HOST=sqlserver
+      - DB_PORT=1433
+      - DB_USERNAME=api_user
+      - DB_PASSWORD=SenhaSegura123!
+      - DB_DATABASE=CombustiveisDB
+    ports:
+      - "3000:3000"
+    depends_on:
+      - sqlserver
+
+  run-sql:
+    image: mcr.microsoft.com/mssql-tools
+    container_name: run-sql
+    depends_on:
+      - sqlserver
+    volumes:
+      - ./database:/usr/src/app/database # Montar a pasta com os scripts SQL
+    entrypoint: /bin/bash -c "
+      sleep 30;
+      /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P SenhaForte123 -d master -i /usr/src/app/database/create_database.sql &&
+      /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P SenhaForte123 -d CombustiveisDB -i /usr/src/app/database/inserts_database.sql"
+
+volumes:
+  sqlserverdata:
