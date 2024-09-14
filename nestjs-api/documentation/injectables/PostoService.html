@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>nestjs-api documentation</title>
+        <title>API Fuel Tracker VV</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -64,7 +64,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">nestjs-api documentation</a>
+                    <a href="../" class="navbar-brand">API Fuel Tracker VV</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -336,20 +336,20 @@ import { Posto } from &#x27;../entities/posto.entity&#x27;;
 
 @Injectable()
 export class PostoService {
-    constructor(
-        @InjectRepository(Posto)
-        private readonly postoRepository: Repository&lt;Posto&gt;,
-    ) {}
+  constructor(
+    @InjectRepository(Posto)
+    private readonly postoRepository: Repository&lt;Posto&gt;,
+  ) {}
 
-    getAllPostos(): Promise&lt;Posto[]&gt; {
-        return this.postoRepository.find();
-    }
+  getAllPostos(): Promise&lt;Posto[]&gt; {
+    return this.postoRepository.find();
+  }
 
-    getRelatorioPostos(dataInicio: string, dataFim: string): Promise&lt;any[]&gt; {
-        return this.postoRepository.query(
-            &#x60;EXEC sp_ResumoPostosEPrecos @DataInicio &#x3D; &#x27;${dataInicio}&#x27;, @DataFim &#x3D; &#x27;${dataFim}&#x27;&#x60;,
-        );
-    }
+  getRelatorioPostos(dataInicio: string, dataFim: string): Promise&lt;any[]&gt; {
+    return this.postoRepository.query(
+      &#x60;EXEC sp_ResumoPostosEPrecos @DataInicio &#x3D; &#x27;${dataInicio}&#x27;, @DataFim &#x3D; &#x27;${dataFim}&#x27;&#x60;,
+    );
+  }
 }
 </code></pre>
     </div>

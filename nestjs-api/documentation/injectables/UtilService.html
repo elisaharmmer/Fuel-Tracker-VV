@@ -79,16 +79,19 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content controller">
+               <div class="content injectable">
                    <div class="content-data">
 
 
 
 
 
+
+
+
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">Controllers</li>
-  <li class="breadcrumb-item" >AppController</li>
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >UtilService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -112,10 +115,8 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app.controller.ts</code>
+            <code>src/services/util.service.ts</code>
         </p>
-
-
 
 
 
@@ -135,27 +136,16 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier"></span>
                                     <span class="modifier">Async</span>
-                                <a href="#getBairros" >getBairros</a>
+                                <a href="#getAll" >getAll</a>
                             </li>
                             <li>
-                                    <span class="modifier"></span>
                                     <span class="modifier">Async</span>
-                                <a href="#getDatas" >getDatas</a>
+                                <a href="#getBairrosDisponiveis" >getBairrosDisponiveis</a>
                             </li>
                             <li>
-                                    <span class="modifier"></span>
-                                <a href="#getHello" >getHello</a>
-                            </li>
-                            <li>
-                                    <span class="modifier"></span>
-                                <a href="#getRoutes" >getRoutes</a>
-                            </li>
-                            <li>
-                                    <span class="modifier"></span>
                                     <span class="modifier">Async</span>
-                                <a href="#getUtils" >getUtils</a>
+                                <a href="#getMesesAnosDisponiveis" >getMesesAnosDisponiveis</a>
                             </li>
                         </ul>
                     </td>
@@ -169,6 +159,79 @@
     </table>
 </section>
 
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(precoRepository: <a href="../entitys/PrecoColetado.html" target="_self">Repository&lt;PrecoColetado&gt;</a>, postoRepository: <a href="../entitys/Posto.html" target="_self">Repository&lt;Posto&gt;</a>, combustivelRepository: <a href="../entitys/Combustivel.html" target="_self">Repository&lt;Combustivel&gt;</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/services/util.service.ts:9</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>precoRepository</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/PrecoColetado.html" target="_self" >Repository&lt;PrecoColetado&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>postoRepository</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/Posto.html" target="_self" >Repository&lt;Posto&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>combustivelRepository</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/Combustivel.html" target="_self" >Repository&lt;Combustivel&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
             <section data-compodoc="block-methods">
     
     <h3 id="methods">
@@ -178,250 +241,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getBairros"></a>
+                    <a name="getAll"></a>
                     <span class="name">
-                            <span class="modifier"></span>
                             <span class="modifier">Async</span>
-                        <span ><b>getBairros</b></span>
-                        <a href="#getBairros"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>getAll</b></span>
+                        <a href="#getAll"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getBairros()</code>
+                    <code>getAll()</code>
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@Get(&#x27;bairros&#x27;)<br /></code>
-                </td>
-            </tr>
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="62"
-                                    class="link-to-prism">src/app.controller.ts:62</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getDatas"></a>
-                    <span class="name">
-                            <span class="modifier"></span>
-                            <span class="modifier">Async</span>
-                        <span ><b>getDatas</b></span>
-                        <a href="#getDatas"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getDatas()</code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@Get(&#x27;datas&#x27;)<br /></code>
-                </td>
-            </tr>
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="57"
-                                    class="link-to-prism">src/app.controller.ts:57</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getHello"></a>
-                    <span class="name">
-                            <span class="modifier"></span>
-                        <span ><b>getHello</b></span>
-                        <a href="#getHello"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getHello()</code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@Get()<br /></code>
-                </td>
-            </tr>
 
                     <tr>
                         <td class="col-md-4">
                             <div class="io-line">Defined in <a href="" data-line="16"
-                                    class="link-to-prism">src/app.controller.ts:16</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>literal type</code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getRoutes"></a>
-                    <span class="name">
-                            <span class="modifier"></span>
-                        <span ><b>getRoutes</b></span>
-                        <a href="#getRoutes"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getRoutes(request: Request)</code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@Get(&#x27;/rotas&#x27;)<br /></code>
-                </td>
-            </tr>
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="24"
-                                    class="link-to-prism">src/app.controller.ts:24</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>request</td>
-                                            <td>
-                                                        <code>Request</code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>{ description: string; routes: any; }</code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getUtils"></a>
-                    <span class="name">
-                            <span class="modifier"></span>
-                            <span class="modifier">Async</span>
-                        <span ><b>getUtils</b></span>
-                        <a href="#getUtils"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getUtils()</code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@Get(&#x27;utils&#x27;)<br /></code>
-                </td>
-            </tr>
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="52"
-                                    class="link-to-prism">src/app.controller.ts:52</a></div>
+                                    class="link-to-prism">src/services/util.service.ts:16</a></div>
                         </td>
                     </tr>
 
@@ -437,81 +276,147 @@
             </tr>
         </tbody>
     </table>
-</section>    </div>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getBairrosDisponiveis"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getBairrosDisponiveis</b></span>
+                        <a href="#getBairrosDisponiveis"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getBairrosDisponiveis()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="47"
+                                    class="link-to-prism">src/services/util.service.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getMesesAnosDisponiveis"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getMesesAnosDisponiveis</b></span>
+                        <a href="#getMesesAnosDisponiveis"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getMesesAnosDisponiveis()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="38"
+                                    class="link-to-prism">src/services/util.service.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Controller, Get, Req } from &#x27;@nestjs/common&#x27;;
-import { AppService } from &#x27;./app.service&#x27;;
-import { HttpAdapterHost } from &#x27;@nestjs/core&#x27;;
-import { Request } from &#x27;express&#x27;;
-import { UtilService } from &#x27;./services/util.service&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;;
+import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
+import { Repository, LessThanOrEqual, DataSource } from &#x27;typeorm&#x27;;
+import { PrecoColetado } from &#x27;../entities/preco-coletado.entity&#x27;;
+import { Posto } from &#x27;../entities/posto.entity&#x27;;
+import { Combustivel } from &#x27;../entities/combustivel.entity&#x27;;
 
-@Controller()
-export class AppController {
+@Injectable()
+export class UtilService {
   constructor(
-    private readonly appService: AppService,
-    private readonly utilService: UtilService,
-    private readonly httpAdapterHost: HttpAdapterHost,
+    @InjectRepository(PrecoColetado) private precoRepository: Repository&lt;PrecoColetado&gt;,
+    @InjectRepository(Posto) private postoRepository: Repository&lt;Posto&gt;,
+    @InjectRepository(Combustivel) private combustivelRepository: Repository&lt;Combustivel&gt;,
   ) {}
 
-  @Get()
-  getHello(): { message: string; ok: boolean } {
-    return {
-      message: this.appService.getHello(),
-      ok: true,
-    };
+  async getAll() {
+    return [
+      {
+        nome: &#x27;combustivies&#x27;,
+        rota: &#x27;/combustiveis&#x27;,
+        parametros: null,
+        descricao: &#x27;Retorna todos os combustíveis disponíveis&#x27;
+      },
+      {
+        nome: &#x27;datas&#x27;,
+        rota: &#x27;/datas&#x27;,
+        parametros: null,
+        descricao: &#x27;Retorna todas as datas com mês e ano disponível&#x27;
+      },{
+        nome: &#x27;bairros&#x27;,
+        rota: &#x27;/bairros&#x27;,
+        parametros: null,
+        descricao: &#x27;Retorna todos os bairros disponiveis&#x27;
+      },
+    ];
   }
 
-  @Get(&#x27;/rotas&#x27;)
-  getRoutes(@Req() request: Request) {
-    const httpServer &#x3D; this.httpAdapterHost.httpAdapter.getHttpServer();
-    const router &#x3D; httpServer?._events?.request?._router;
-    if (!router) {
-      console.error(&#x27;Router not available on this platform.&#x27;);
-      return {
-        description:
-          &#x27;Nenhuma rota disponível no ambiente atual. Pode ser Vercel.&#x27;,
-        routes: [],
-      };
-    }
-
-    const host &#x3D; &#x60;${request.protocol}://${request.get(&#x27;host&#x27;)}&#x60;;
-    const routes &#x3D; router.stack
-      .filter((layer) &#x3D;&gt; layer.route) // Filtra apenas as rotas
-      .map((layer) &#x3D;&gt; ({
-        method: Object.keys(layer.route.methods)[0].toUpperCase(),
-        path: &#x60;${host}${layer.route.path}&#x60;, // Adiciona o domínio completo ao caminho
-      }));
-
-    return {
-      description:
-        &#x27;Lista de todas as rotas disponíveis na API com domínio completo&#x27;,
-      routes,
-    };
+  async getMesesAnosDisponiveis() {
+    return await this.precoRepository.createQueryBuilder(&#x27;pc&#x27;)
+      .select(&#x27;DISTINCT TO_CHAR(pc.&quot;DataColeta&quot;, \&#x27;MM\&#x27;)&#x27;, &#x27;mes&#x27;)
+      .addSelect(&#x27;TO_CHAR(pc.&quot;DataColeta&quot;, \&#x27;YYYY\&#x27;)&#x27;, &#x27;ano&#x27;)
+      .orderBy(&#x27;ano&#x27;, &#x27;ASC&#x27;)
+      .addOrderBy(&#x27;mes&#x27;, &#x27;ASC&#x27;)
+      .getRawMany();
   }
 
-  @Get(&#x27;utils&#x27;)
-  async getUtils() {
-    return this.utilService.getAll();
-  }
-
-  @Get(&#x27;datas&#x27;)
-  async getDatas() {
-    return this.utilService.getMesesAnosDisponiveis();
-  }
-
-  @Get(&#x27;bairros&#x27;)
-  async getBairros() {
-    return this.utilService.getBairrosDisponiveis();
+  async getBairrosDisponiveis() {
+    return await this.postoRepository.createQueryBuilder(&#x27;po&#x27;)
+      .select(&#x27;DISTINCT po.Bairro&#x27;, &#x27;bairro&#x27;)
+      .orderBy(&#x27;po.Bairro&#x27;, &#x27;ASC&#x27;)
+      .getRawMany();
   }
 }
 </code></pre>
     </div>
+
 </div>
-
-
-
 
 
 
@@ -550,8 +455,8 @@ export class AppController {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'controller';
-            var COMPODOC_CURRENT_PAGE_URL = 'AppController.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'UtilService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

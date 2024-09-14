@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>nestjs-api documentation</title>
+        <title>API Fuel Tracker VV</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -64,7 +64,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">nestjs-api documentation</a>
+                    <a href="../" class="navbar-brand">API Fuel Tracker VV</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -137,7 +137,31 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#findMenorPrecoPorCombustivel" >findMenorPrecoPorCombustivel</a>
+                                <a href="#getAll" >getAll</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getMaiorPrecoCombustivel" >getMaiorPrecoCombustivel</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getMediaBairro" >getMediaBairro</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getMediaCombustivel" >getMediaCombustivel</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getMediaMensal" >getMediaMensal</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getMediaPrecoCombustivel" >getMediaPrecoCombustivel</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getMenorPrecoCombustivel" >getMenorPrecoCombustivel</a>
                             </li>
                         </ul>
                     </td>
@@ -157,12 +181,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(precoRepository: <a href="../entitys/PrecoColetado.html" target="_self">Repository&lt;PrecoColetado&gt;</a>, postoRepository: <a href="../entitys/Posto.html" target="_self">Repository&lt;Posto&gt;</a>, combustivelRepository: <a href="../entitys/Combustivel.html" target="_self">Repository&lt;Combustivel&gt;</a>)</code>
+<code>constructor(precoRepository: <a href="../entitys/PrecoColetado.html" target="_self">Repository&lt;PrecoColetado&gt;</a>, postoRepository: <a href="../entitys/Posto.html" target="_self">Repository&lt;Posto&gt;</a>, combustivelRepository: <a href="../entitys/Combustivel.html" target="_self">Repository&lt;Combustivel&gt;</a>, dataSource: DataSource)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/services/preco.service.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/services/preco.service.ts:9</a></div>
                             </td>
                         </tr>
 
@@ -215,6 +239,18 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>dataSource</td>
+                                                  
+                                                        <td>
+                                                                    <code>DataSource</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -233,26 +269,114 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="findMenorPrecoPorCombustivel"></a>
+                    <a name="getAll"></a>
                     <span class="name">
                             <span class="modifier">Async</span>
-                        <span ><b>findMenorPrecoPorCombustivel</b></span>
-                        <a href="#findMenorPrecoPorCombustivel"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>getAll</b></span>
+                        <a href="#getAll"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>findMenorPrecoPorCombustivel(bairro?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, nomeCombustivel?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>getAll(page: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, limit: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="20"
-                                    class="link-to-prism">src/services/preco.service.ts:20</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="18"
+                                    class="link-to-prism">src/services/preco.service.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>page</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>1</code>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>limit</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>50</code>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getMaiorPrecoCombustivel"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getMaiorPrecoCombustivel</b></span>
+                        <a href="#getMaiorPrecoCombustivel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getMaiorPrecoCombustivel(bairro?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, combustivel?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="207"
+                                    class="link-to-prism">src/services/preco.service.ts:207</a></div>
                         </td>
                     </tr>
 
@@ -285,7 +409,370 @@
 
                                         </tr>
                                         <tr>
-                                                <td>nomeCombustivel</td>
+                                                <td>combustivel</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getMediaBairro"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getMediaBairro</b></span>
+                        <a href="#getMediaBairro"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getMediaBairro(bairro: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, combustivel: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="31"
+                                    class="link-to-prism">src/services/preco.service.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>bairro</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>combustivel</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getMediaCombustivel"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getMediaCombustivel</b></span>
+                        <a href="#getMediaCombustivel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getMediaCombustivel(mes?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, ano?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="76"
+                                    class="link-to-prism">src/services/preco.service.ts:76</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>mes</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>ano</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getMediaMensal"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getMediaMensal</b></span>
+                        <a href="#getMediaMensal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getMediaMensal()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="63"
+                                    class="link-to-prism">src/services/preco.service.ts:63</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getMediaPrecoCombustivel"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getMediaPrecoCombustivel</b></span>
+                        <a href="#getMediaPrecoCombustivel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getMediaPrecoCombustivel(bairro?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, combustivel?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="149"
+                                    class="link-to-prism">src/services/preco.service.ts:149</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>bairro</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>combustivel</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getMenorPrecoCombustivel"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getMenorPrecoCombustivel</b></span>
+                        <a href="#getMenorPrecoCombustivel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getMenorPrecoCombustivel(bairro?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, combustivel?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/services/preco.service.ts:92</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>bairro</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>combustivel</td>
                                             <td>
                                                             <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
@@ -318,50 +805,268 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;;
 import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
-import { Repository } from &#x27;typeorm&#x27;;
-import {PrecoColetado} from &quot;../entities/preco-coletado.entity&quot;;
-import {Posto} from &quot;../entities/posto.entity&quot;;
-import {Combustivel} from &quot;../entities/combustivel.entity&quot;;
-
+import { Repository, LessThanOrEqual, DataSource } from &#x27;typeorm&#x27;;
+import { PrecoColetado } from &#x27;../entities/preco-coletado.entity&#x27;;
+import { Posto } from &#x27;../entities/posto.entity&#x27;;
+import { Combustivel } from &#x27;../entities/combustivel.entity&#x27;;
 
 @Injectable()
 export class PrecoService {
-    constructor(
-        @InjectRepository(PrecoColetado)
-        private precoRepository: Repository&lt;PrecoColetado&gt;,
-        @InjectRepository(Posto)
-        private postoRepository: Repository&lt;Posto&gt;,
-        @InjectRepository(Combustivel)
-        private combustivelRepository: Repository&lt;Combustivel&gt;,
-    ) {}
+  constructor(
+    @InjectRepository(PrecoColetado) private precoRepository: Repository&lt;PrecoColetado&gt;,
+    @InjectRepository(Posto) private postoRepository: Repository&lt;Posto&gt;,
+    @InjectRepository(Combustivel) private combustivelRepository: Repository&lt;Combustivel&gt;,
+    private dataSource: DataSource
+  ) {}
 
-    async findMenorPrecoPorCombustivel(bairro?: string, nomeCombustivel?: string) {
-        const query &#x3D; this.precoRepository.createQueryBuilder(&#x27;preco&#x27;)
-            .leftJoinAndSelect(&#x27;preco.posto&#x27;, &#x27;posto&#x27;)
-            .leftJoinAndSelect(&#x27;preco.combustivel&#x27;, &#x27;combustivel&#x27;)
-            .select([
-                &#x27;posto.nomeFantasia&#x27;,
-                &#x27;posto.logradouro&#x27;,
-                &#x27;posto.bairro&#x27;,
-                &#x27;combustivel.nome&#x27;,
-                &#x27;MIN(preco.preco) AS menorpreco&#x27;,
-                &#x27;preco.dataColeta&#x27;,
-            ])
-            .groupBy(&#x27;posto.nomeFantasia, posto.logradouro, posto.bairro, combustivel.nome, preco.dataColeta&#x27;)
-            .orderBy(&#x27;combustivel.nome&#x27;, &#x27;ASC&#x27;)
-            .addOrderBy(&#x27;preco.dataColeta&#x27;, &#x27;ASC&#x27;);
+  // Método getAll com paginação e ordenação por data decrescente
+  async getAll(page &#x3D; 1, limit &#x3D; 50) {
+    const today &#x3D; new Date();
+    const skip &#x3D; (page - 1) * limit;
 
-        // Aplicar os filtros opcionais de bairro e combustível
-        if (bairro) {
-            query.andWhere(&#x27;LOWER(posto.bairro) &#x3D; LOWER(:bairro)&#x27;, { bairro });
-        }
+    return await this.precoRepository.find({
+      relations: [&#x27;posto&#x27;, &#x27;combustivel&#x27;],
+      where: { dataColeta: LessThanOrEqual(today) },
+      order: { dataColeta: &#x27;DESC&#x27; },
+      skip,
+      take: limit,  // Limite de resultados por página (50 por padrão)
+    });
+  }
 
-        if (nomeCombustivel) {
-            query.andWhere(&#x27;LOWER(combustivel.nome) &#x3D; LOWER(:nomeCombustivel)&#x27;, { nomeCombustivel });
-        }
+  async getMediaBairro(bairro: string, combustivel: string) {
 
-        return query.getRawMany();
+      return await this.postoRepository.createQueryBuilder(&#x27;po&#x27;)
+        .select([
+          &#x27;po.NomeFantasia AS nome_posto&#x27;,
+          &#x27;po.Logradouro AS logradouro&#x27;,
+          &#x27;po.Numero AS numero&#x27;,
+          &#x27;po.Bairro AS bairro&#x27;,
+          &#x27;po.Cidade AS cidade&#x27;,
+          &#x27;po.Estado AS estado&#x27;,
+          &#x27;po.CEP AS cep&#x27;,
+          &#x27;co.Nome AS nome_combustivel&#x27;,
+          &#x27;ROUND(MIN(pc.Preco), 3) AS menor_preco&#x27;,
+          &quot;TO_CHAR(pc.DataColeta, &#x27;YYYY-MM&#x27;) AS mes_coleta&quot;
+        ])
+        .innerJoin(PrecoColetado, &#x27;pc&#x27;, &#x27;po.ID_Posto &#x3D; pc.PostoID&#x27;)
+        .innerJoin(Combustivel, &#x27;co&#x27;, &#x27;pc.CombustivelID &#x3D; co.ID_Combustivel&#x27;)
+        .where(&#x27;po.Bairro &#x3D; :bairro&#x27;, { bairro: bairro })
+        .andWhere(&#x27;co.Nome &#x3D; :nome_combustivel&#x27;, { nome_combustivel: combustivel })
+        .groupBy(&#x27;po.NomeFantasia&#x27;)
+        .addGroupBy(&#x27;po.Logradouro&#x27;)
+        .addGroupBy(&#x27;po.Numero&#x27;)
+        .addGroupBy(&#x27;po.Bairro&#x27;)
+        .addGroupBy(&#x27;po.Cidade&#x27;)
+        .addGroupBy(&#x27;po.Estado&#x27;)
+        .addGroupBy(&#x27;po.CEP&#x27;)
+        .addGroupBy(&#x27;co.Nome&#x27;)
+        .addGroupBy(&quot;TO_CHAR(pc.DataColeta, &#x27;YYYY-MM&#x27;)&quot;)
+        .orderBy(&#x27;mes_coleta&#x27;, &#x27;DESC&#x27;)
+        .getRawMany();
+  }
+
+  async getMediaMensal() {
+
+    return await this.precoRepository.createQueryBuilder(&#x27;pc&#x27;)
+      .select(&quot;TO_CHAR(pc.DataColeta, &#x27;YYYY-MM&#x27;)&quot;, &#x27;mes_coleta&#x27;)
+      .addSelect(&#x27;co.Nome&#x27;, &#x27;nome_combustivel&#x27;)
+      .addSelect(&#x27;ROUND(AVG(pc.Preco), 3)&#x27;, &#x27;preco_medio&#x27;)
+      .innerJoin(Combustivel, &#x27;co&#x27;, &#x27;pc.CombustivelID &#x3D; co.ID_Combustivel&#x27;)
+      .groupBy(&quot;TO_CHAR(pc.DataColeta, &#x27;YYYY-MM&#x27;)&quot;)
+      .addGroupBy(&#x27;co.Nome&#x27;)
+      .orderBy(&#x27;mes_coleta&#x27;, &#x27;DESC&#x27;)
+      .getRawMany();
+  }
+
+  async getMediaCombustivel(mes?: string, ano?: string) {
+    const query &#x3D; this.precoRepository.createQueryBuilder(&#x27;pc&#x27;)
+      .select(&#x27;co.&quot;Nome&quot;&#x27;, &#x27;nome_combustivel&#x27;)
+      .addSelect(&#x27;ROUND(AVG(pc.&quot;Preco&quot;), 3)&#x27;, &#x27;preco_medio&#x27;)
+      .innerJoin(Combustivel, &#x27;co&#x27;, &#x27;pc.&quot;CombustivelID&quot; &#x3D; co.&quot;ID_Combustivel&quot;&#x27;);
+
+    if (mes &amp;&amp; ano) {
+      query.where(&#x27;TO_CHAR(pc.&quot;DataColeta&quot;, \&#x27;MM\&#x27;) &#x3D; :mes&#x27;, { mes })
+        .andWhere(&#x27;TO_CHAR(pc.&quot;DataColeta&quot;, \&#x27;YYYY\&#x27;) &#x3D; :ano&#x27;, { ano });
     }
+
+    query.groupBy(&#x27;co.&quot;Nome&quot;&#x27;);
+
+    return await query.getRawMany();
+  }
+
+  async getMenorPrecoCombustivel(bairro?: string, combustivel?: string) {
+    const rawResults &#x3D; await this.postoRepository.createQueryBuilder(&#x27;po&#x27;)
+      .select([
+        &#x27;po.NomeFantasia AS nome_posto&#x27;,
+        &#x27;po.Logradouro AS logradouro&#x27;,
+        &#x27;po.Numero AS numero&#x27;,
+        &#x27;po.Bairro AS bairro&#x27;,
+        &#x27;po.Cidade AS cidade&#x27;,
+        &#x27;po.Estado AS estado&#x27;,
+        &#x27;po.CEP AS cep&#x27;,
+        &#x27;co.Nome AS nome_combustivel&#x27;,
+        &#x27;ROUND(pc.Preco, 3) AS menor_preco&#x27;,
+        &#x27;pc.DataColeta AS data_coleta&#x27;
+      ])
+      .innerJoin(PrecoColetado, &#x27;pc&#x27;, &#x27;po.ID_Posto &#x3D; pc.PostoID&#x27;)
+      .innerJoin(Combustivel, &#x27;co&#x27;, &#x27;pc.CombustivelID &#x3D; co.ID_Combustivel&#x27;)
+      .where(&#x27;pc.DataColeta &#x3D; (SELECT MAX(pc2.&quot;DataColeta&quot;) FROM public.&quot;PRECO_COLETADO&quot; pc2 WHERE pc2.&quot;PostoID&quot; &#x3D; po.&quot;ID_Posto&quot; AND pc2.&quot;CombustivelID&quot; &#x3D; co.&quot;ID_Combustivel&quot;)&#x27;)
+      .orderBy(&#x27;menor_preco&#x27;, &#x27;ASC&#x27;);
+
+    if (bairro) {
+      rawResults.andWhere(&#x27;po.Bairro &#x3D; :bairro&#x27;, { bairro });
+    }
+
+    if (combustivel) {
+      rawResults.andWhere(&#x27;co.Nome &#x3D; :nome&#x27;, { nome: combustivel });
+    }
+
+    const results &#x3D; await rawResults.getRawMany();
+
+    // Agrupar resultados por posto
+    const groupedResults &#x3D; results.reduce((acc, curr) &#x3D;&gt; {
+      const postoKey &#x3D; &#x60;${curr.nome_posto}-${curr.logradouro}&#x60;;
+
+      if (!acc[postoKey]) {
+        acc[postoKey] &#x3D; {
+          nome_posto: curr.nome_posto,
+          logradouro: curr.logradouro,
+          numero: curr.numero,
+          bairro: curr.bairro,
+          cidade: curr.cidade,
+          estado: curr.estado,
+          cep: curr.cep,
+          combustiveis: [],
+        };
+      }
+
+      acc[postoKey].combustiveis.push({
+        nome_combustivel: curr.nome_combustivel,
+        menor_preco: curr.menor_preco,
+        data_coleta: curr.data_coleta,
+      });
+
+      return acc;
+    }, {});
+    return Object.values(groupedResults);
+  }
+
+  async getMediaPrecoCombustivel(bairro?: string, combustivel?: string) {
+    const rawResults &#x3D; await this.postoRepository.createQueryBuilder(&#x27;po&#x27;)
+      .select([
+        &#x27;po.NomeFantasia AS nome_posto&#x27;,
+        &#x27;po.Logradouro AS logradouro&#x27;,
+        &#x27;po.Numero AS numero&#x27;,
+        &#x27;po.Bairro AS bairro&#x27;,
+        &#x27;po.Cidade AS cidade&#x27;,
+        &#x27;po.Estado AS estado&#x27;,
+        &#x27;po.CEP AS cep&#x27;,
+        &#x27;co.Nome AS nome_combustivel&#x27;,
+        &#x27;ROUND(AVG(pc.Preco), 3) AS media_preco&#x27;,
+        &#x27;MAX(pc.DataColeta) AS data_coleta&#x27;
+      ])
+      .innerJoin(PrecoColetado, &#x27;pc&#x27;, &#x27;po.ID_Posto &#x3D; pc.PostoID&#x27;)
+      .innerJoin(Combustivel, &#x27;co&#x27;, &#x27;pc.CombustivelID &#x3D; co.ID_Combustivel&#x27;)
+      .groupBy(&#x27;po.ID_Posto, po.NomeFantasia, po.Logradouro, po.Numero, po.Bairro, po.Cidade, po.Estado, po.CEP, co.Nome&#x27;)
+      .orderBy(&#x27;media_preco&#x27;, &#x27;ASC&#x27;);
+
+    if (bairro) {
+      rawResults.andWhere(&#x27;po.Bairro &#x3D; :bairro&#x27;, { bairro });
+    }
+
+    if (combustivel) {
+      rawResults.andWhere(&#x27;co.Nome &#x3D; :nome&#x27;, { nome: combustivel });
+    }
+
+    const results &#x3D; await rawResults.getRawMany();
+
+    // Agrupar resultados por posto
+    const groupedResults &#x3D; results.reduce((acc, curr) &#x3D;&gt; {
+      const postoKey &#x3D; &#x60;${curr.nome_posto}-${curr.logradouro}&#x60;;
+
+      if (!acc[postoKey]) {
+        acc[postoKey] &#x3D; {
+          nome_posto: curr.nome_posto,
+          logradouro: curr.logradouro,
+          numero: curr.numero,
+          bairro: curr.bairro,
+          cidade: curr.cidade,
+          estado: curr.estado,
+          cep: curr.cep,
+          combustiveis: [],
+        };
+      }
+
+      acc[postoKey].combustiveis.push({
+        nome_combustivel: curr.nome_combustivel,
+        media_preco: curr.media_preco,
+        data_coleta: curr.data_coleta,
+      });
+
+      return acc;
+    }, {});
+
+    return Object.values(groupedResults);
+  }
+
+  async getMaiorPrecoCombustivel(bairro?: string, combustivel?: string) {
+    const rawResults &#x3D; await this.postoRepository.createQueryBuilder(&#x27;po&#x27;)
+      .select([
+        &#x27;po.NomeFantasia AS nome_posto&#x27;,
+        &#x27;po.Logradouro AS logradouro&#x27;,
+        &#x27;po.Numero AS numero&#x27;,
+        &#x27;po.Bairro AS bairro&#x27;,
+        &#x27;po.Cidade AS cidade&#x27;,
+        &#x27;po.Estado AS estado&#x27;,
+        &#x27;po.CEP AS cep&#x27;,
+        &#x27;co.Nome AS nome_combustivel&#x27;,
+        &#x27;ROUND(MAX(pc.Preco), 3) AS maior_preco&#x27;,
+        &#x27;MAX(pc.DataColeta) AS data_coleta&#x27;
+      ])
+      .innerJoin(PrecoColetado, &#x27;pc&#x27;, &#x27;po.ID_Posto &#x3D; pc.PostoID&#x27;)
+      .innerJoin(Combustivel, &#x27;co&#x27;, &#x27;pc.CombustivelID &#x3D; co.ID_Combustivel&#x27;)
+      .groupBy(&#x27;po.ID_Posto, po.NomeFantasia, po.Logradouro, po.Numero, po.Bairro, po.Cidade, po.Estado, po.CEP, co.Nome&#x27;)
+      .orderBy(&#x27;maior_preco&#x27;, &#x27;DESC&#x27;);
+
+    if (bairro) {
+      rawResults.andWhere(&#x27;po.Bairro &#x3D; :bairro&#x27;, { bairro });
+    }
+
+    if (combustivel) {
+      rawResults.andWhere(&#x27;co.Nome &#x3D; :nome&#x27;, { nome: combustivel });
+    }
+
+    const results &#x3D; await rawResults.getRawMany();
+
+    // Agrupar resultados por posto
+    const groupedResults &#x3D; results.reduce((acc, curr) &#x3D;&gt; {
+      const postoKey &#x3D; &#x60;${curr.nome_posto}-${curr.logradouro}&#x60;;
+
+      if (!acc[postoKey]) {
+        acc[postoKey] &#x3D; {
+          nome_posto: curr.nome_posto,
+          logradouro: curr.logradouro,
+          numero: curr.numero,
+          bairro: curr.bairro,
+          cidade: curr.cidade,
+          estado: curr.estado,
+          cep: curr.cep,
+          combustiveis: [],
+        };
+      }
+
+      acc[postoKey].combustiveis.push({
+        nome_combustivel: curr.nome_combustivel,
+        maior_preco: curr.maior_preco,
+        data_coleta: curr.data_coleta,
+      });
+
+      return acc;
+    }, {});
+
+    return Object.values(groupedResults);
+  }
+
 }
 </code></pre>
     </div>

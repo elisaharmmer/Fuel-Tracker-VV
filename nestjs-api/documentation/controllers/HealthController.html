@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>nestjs-api documentation</title>
+        <title>API Fuel Tracker VV</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -64,7 +64,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">nestjs-api documentation</a>
+                    <a href="../" class="navbar-brand">API Fuel Tracker VV</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -197,8 +197,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="34"
-                                    class="link-to-prism">src/controllers/health/health.controller.ts:34</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="38"
+                                    class="link-to-prism">src/controllers/health/health.controller.ts:38</a></div>
                         </td>
                     </tr>
 
@@ -244,8 +244,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="14"
-                                    class="link-to-prism">src/controllers/health/health.controller.ts:14</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="18"
+                                    class="link-to-prism">src/controllers/health/health.controller.ts:18</a></div>
                         </td>
                     </tr>
 
@@ -266,7 +266,11 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Controller, Get } from &#x27;@nestjs/common&#x27;;
-import { HealthCheck, HealthCheckService, TypeOrmHealthIndicator } from &#x27;@nestjs/terminus&#x27;;
+import {
+  HealthCheck,
+  HealthCheckService,
+  TypeOrmHealthIndicator,
+} from &#x27;@nestjs/terminus&#x27;;
 
 @Controller(&#x27;health&#x27;)
 export class HealthController {
@@ -280,19 +284,19 @@ export class HealthController {
   @HealthCheck()
   checkGeneral() {
     const startTime &#x3D; Date.now();
-    return this.health.check([
-      () &#x3D;&gt; this.db.pingCheck(&#x27;database&#x27;),
-    ]).then(result &#x3D;&gt; {
-      const endTime &#x3D; Date.now();
-      return {
-        ...result,
-        info: {
-          ...result.info,
-          responseTime: &#x60;${endTime - startTime}ms&#x60;,
-          description: &#x27;Status geral da API&#x27;,
-        }
-      };
-    });
+    return this.health
+      .check([() &#x3D;&gt; this.db.pingCheck(&#x27;database&#x27;)])
+      .then((result) &#x3D;&gt; {
+        const endTime &#x3D; Date.now();
+        return {
+          ...result,
+          info: {
+            ...result.info,
+            responseTime: &#x60;${endTime - startTime}ms&#x60;,
+            description: &#x27;Status geral da API&#x27;,
+          },
+        };
+      });
   }
 
   // Verifica o status detalhado do banco de dados com logs
@@ -300,19 +304,19 @@ export class HealthController {
   @HealthCheck()
   checkDatabase() {
     const startTime &#x3D; Date.now();
-    return this.health.check([
-      () &#x3D;&gt; this.db.pingCheck(&#x27;database&#x27;),
-    ]).then(result &#x3D;&gt; {
-      const endTime &#x3D; Date.now();
-      return {
-        ...result,
-        info: {
-          ...result.info,
-          responseTime: &#x60;${endTime - startTime}ms&#x60;,
-          description: &#x27;Verificação detalhada do banco de dados&#x27;,
-        }
-      };
-    });
+    return this.health
+      .check([() &#x3D;&gt; this.db.pingCheck(&#x27;database&#x27;)])
+      .then((result) &#x3D;&gt; {
+        const endTime &#x3D; Date.now();
+        return {
+          ...result,
+          info: {
+            ...result.info,
+            responseTime: &#x60;${endTime - startTime}ms&#x60;,
+            description: &#x27;Verificação detalhada do banco de dados&#x27;,
+          },
+        };
+      });
   }
 }
 </code></pre>

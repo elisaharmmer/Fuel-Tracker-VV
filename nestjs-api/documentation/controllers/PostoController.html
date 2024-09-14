@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>nestjs-api documentation</title>
+        <title>API Fuel Tracker VV</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -64,7 +64,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">nestjs-api documentation</a>
+                    <a href="../" class="navbar-brand">API Fuel Tracker VV</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -308,20 +308,20 @@ import { PostoService } from &#x27;../../services/posto.service&#x27;;
 
 @Controller(&#x27;postos&#x27;)
 export class PostoController {
-    constructor(private readonly postoService: PostoService) {}
+  constructor(private readonly postoService: PostoService) {}
 
-    @Get()
-    getAllPostos() {
-        return this.postoService.getAllPostos();
-    }
+  @Get()
+  getAllPostos() {
+    return this.postoService.getAllPostos();
+  }
 
-    @Get(&#x27;relatorio&#x27;)
-    getRelatorioPostos(
-        @Query(&#x27;dataInicio&#x27;) dataInicio: string,
-        @Query(&#x27;dataFim&#x27;) dataFim: string,
-    ) {
-        return this.postoService.getRelatorioPostos(dataInicio, dataFim);
-    }
+  @Get(&#x27;relatorio&#x27;)
+  getRelatorioPostos(
+    @Query(&#x27;dataInicio&#x27;) dataInicio: string,
+    @Query(&#x27;dataFim&#x27;) dataFim: string,
+  ) {
+    return this.postoService.getRelatorioPostos(dataInicio, dataFim);
+  }
 }
 </code></pre>
     </div>

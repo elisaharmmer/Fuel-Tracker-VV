@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>nestjs-api documentation</title>
+        <title>API Fuel Tracker VV</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -64,7 +64,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">nestjs-api documentation</a>
+                    <a href="../" class="navbar-brand">API Fuel Tracker VV</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -205,7 +205,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/entities/preco-coletado.entity.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/entities/preco-coletado.entity.ts:31</a></div>
                         </td>
                     </tr>
 
@@ -241,7 +241,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/entities/preco-coletado.entity.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/entities/preco-coletado.entity.ts:23</a></div>
                         </td>
                     </tr>
 
@@ -277,7 +277,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/entities/preco-coletado.entity.ts:8</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/entities/preco-coletado.entity.ts:14</a></div>
                         </td>
                     </tr>
 
@@ -308,13 +308,13 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @ManyToOne(undefined, posto &#x3D;&gt; posto.precosColetados)<br />@JoinColumn({name: &#x27;PostoCNPJ&#x27;})<br />
+                            @ManyToOne(undefined, posto &#x3D;&gt; posto.precosColetados)<br />@JoinColumn({name: &#x27;PostoID&#x27;})<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/entities/preco-coletado.entity.ts:21</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/entities/preco-coletado.entity.ts:27</a></div>
                         </td>
                     </tr>
 
@@ -350,7 +350,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/entities/preco-coletado.entity.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/entities/preco-coletado.entity.ts:17</a></div>
                         </td>
                     </tr>
 
@@ -386,7 +386,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/entities/preco-coletado.entity.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/entities/preco-coletado.entity.ts:20</a></div>
                         </td>
                     </tr>
 
@@ -398,31 +398,37 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from &#x27;typeorm&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+} from &#x27;typeorm&#x27;;
 import { Posto } from &#x27;./posto.entity&#x27;;
 import { Combustivel } from &#x27;./combustivel.entity&#x27;;
 
 @Entity(&#x27;PRECO_COLETADO&#x27;)
 export class PrecoColetado {
-    @PrimaryGeneratedColumn({ name: &#x27;ID_Preco&#x27; })
-    id: number;
+  @PrimaryGeneratedColumn({ name: &#x27;ID_Preco&#x27; })
+  id: number;
 
-    @Column({ type: &#x27;numeric&#x27;, precision: 10, scale: 3, name: &#x27;Preco&#x27; })
-    preco: number;
+  @Column({ type: &#x27;numeric&#x27;, precision: 10, scale: 3, name: &#x27;Preco&#x27; })
+  preco: number;
 
-    @Column({ type: &#x27;varchar&#x27;, length: 10, name: &#x27;UnidadeMedida&#x27; })
-    unidadeMedida: string;
+  @Column({ type: &#x27;varchar&#x27;, length: 10, name: &#x27;UnidadeMedida&#x27; })
+  unidadeMedida: string;
 
-    @Column({ type: &#x27;date&#x27;, name: &#x27;DataColeta&#x27; })
-    dataColeta: Date;
+  @Column({ type: &#x27;date&#x27;, name: &#x27;DataColeta&#x27; })
+  dataColeta: Date;
 
-    @ManyToOne(() &#x3D;&gt; Posto, (posto) &#x3D;&gt; posto.precosColetados)
-    @JoinColumn({ name: &#x27;PostoCNPJ&#x27; })
-    posto: Posto;
+  @ManyToOne(() &#x3D;&gt; Posto, (posto) &#x3D;&gt; posto.precosColetados)
+  @JoinColumn({ name: &#x27;PostoID&#x27; })  // Alterado para referenciar corretamente PostoID
+  posto: Posto;
 
-    @ManyToOne(() &#x3D;&gt; Combustivel, (combustivel) &#x3D;&gt; combustivel.precosColetados)
-    @JoinColumn({ name: &#x27;CombustivelID&#x27; })
-    combustivel: Combustivel;
+  @ManyToOne(() &#x3D;&gt; Combustivel, (combustivel) &#x3D;&gt; combustivel.precosColetados)
+  @JoinColumn({ name: &#x27;CombustivelID&#x27; })
+  combustivel: Combustivel;
 }
 </code></pre>
     </div>

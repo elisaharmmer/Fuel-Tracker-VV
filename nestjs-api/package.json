@@ -1,8 +1,10 @@
 {
   "name": "nestjs-api",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "API para retornar os dados de postos combustíveis de Vila Velha - ES do Ano de 2022 até 2024",
+  "author": "Elisa Harmmer Ferreira (https://github.com/elisaharmmer) / Nícolas Aigner (https://github.com/nicolasaigner)",
+  "repository": "https://github.com/elisaharmmer/Fuel-Tracker-VV",
+  "domain": "fuel-tracker-vv.vercel.app",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -18,7 +20,8 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "docs": "compodoc -p tsconfig.json -n \"API Fuel Tracker VV\""
   },
   "dependencies": {
     "@nestjs/axios": "^3.0.3",
