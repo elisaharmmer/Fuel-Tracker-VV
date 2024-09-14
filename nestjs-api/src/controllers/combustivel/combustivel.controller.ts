@@ -9,4 +9,5 @@ export class CombustivelController {
   getAllCombustiveis() {
     return this.combustivelService.getAllCombustiveis();
   }
+
 }

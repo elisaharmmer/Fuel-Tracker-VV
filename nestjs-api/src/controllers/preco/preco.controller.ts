@@ -21,6 +21,32 @@ export class PrecoController {
     @Query('bairro') bairro?: string,
     @Query('combustivel') combustivel?: string,
   ) {
-    return this.precoService.findMenorPrecoPorCombustivel(bairro, combustivel);
+    // if (!bairro && !combustivel) {
+    //   return {
+    //     error: true,
+    //     message: 'Necessário os campos de bairro e combustível'
+    //   };
+    // }
+    return this.precoService.getMenorPrecoCombustivel(bairro, combustivel);
+  }
+
+  @Get('media-bairro')
+  async getMediaBairro(@Query('bairro') bairro: string, @Query('combustivel') combustivel: string) {
+    return this.precoService.getMediaBairro(bairro, combustivel);
+  }
+
+  @Get('media-combustivel')
+  async getMediaCombustivel(@Query('mes') mes?: string, @Query('ano') ano?: string) {
+    return this.precoService.getMediaCombustivel(mes, ano);
+  }
+
+  @Get('media-mensal')
+  async getMediaMensal() {
+    return this.precoService.getMediaMensal();
+  }
+
+  @Get('datas-disponiveis')
+  async getDatasDisponiveis() {
+    return this.precoService.getMesesAnosDisponiveis();
   }
 }
