@@ -1,12 +1,10 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* Estilos Gerais */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
 }
 
 header {
@@ -14,74 +12,85 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: #f980eb;
+    color: white;
+}
+
+.logo img {
+    width: 50px;
+    margin-right: 10px;
 }
 
 nav ul {
     list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
 }
 
 nav ul li {
-    margin: 0 15px;
+    margin-left: 20px;
 }
 
 nav ul li a {
-    text-decoration: none;
-    color: #333;
-}
-
-.get-started {
-    padding: 10px 20px;
-    background-color: #28a745;
     color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-.hero {
+.botao-principal {
+    padding: 10px 20px;
+    background-color: #f56a79;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+section.hero {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 50px;
+    background-color: white;
 }
 
-.hero-text {
+.texto-hero {
     max-width: 50%;
 }
 
-.hero-text h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
+.imagem-hero img {
+    width: 300px;
 }
 
-.hero-text p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-}
-
-.buttons a {
+.botoes-lojas a {
     display: inline-block;
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
     margin-right: 10px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
     text-decoration: none;
-    border-radius: 5px;
 }
 
-.hero-image img {
-    max-width: 100%;
+section.servicos {
+    display: flex;
+    justify-content: space-around;
+    padding: 50px;
+    background-color: #f4f4f9;
+}
+
+.servico {
+    text-align: center;
 }
 
 footer {
     text-align: center;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #333;
+    color: white;
 }
 
-.social-icons a img {
+footer .redes-sociais a img {
     width: 30px;
     margin: 0 10px;
 }
