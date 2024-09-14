@@ -2,11 +2,13 @@ import { Controller, Get, Req } from '@nestjs/common';
 import { AppService } from './app.service';
 import { HttpAdapterHost } from '@nestjs/core';
 import { Request } from 'express';
+import { UtilService } from './services/util.service';
 
 @Controller()
 export class AppController {
   constructor(
     private readonly appService: AppService,
+    private readonly utilService: UtilService,
     private readonly httpAdapterHost: HttpAdapterHost,
   ) {}
 
@@ -55,4 +57,21 @@ export class AppController {
     console.log('RESULT', result);
     return result;
   }
+
+  @Get('utils')
+  async getUtils() {
+    return this.utilService.getAll();
+  }
+
+  @Get('datas')
+  async getDatas() {
+    return this.utilService.getMesesAnosDisponiveis();
+  }
+
+  @Get('bairros')
+  async getBairros() {
+    return this.utilService.getBairrosDisponiveis();
+  }
+
+
 }

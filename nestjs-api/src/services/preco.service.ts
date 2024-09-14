@@ -146,12 +146,120 @@ export class PrecoService {
     return Object.values(groupedResults);
   }
 
-  async getMesesAnosDisponiveis() {
-    return await this.precoRepository.createQueryBuilder('pc')
-      .select('DISTINCT TO_CHAR(pc."DataColeta", \'MM\')', 'mes')
-      .addSelect('TO_CHAR(pc."DataColeta", \'YYYY\')', 'ano')
-      .orderBy('ano', 'ASC')
-      .addOrderBy('mes', 'ASC')
-      .getRawMany();
+  async getMediaPrecoCombustivel(bairro?: string, combustivel?: string) {
+    const rawResults = await this.postoRepository.createQueryBuilder('po')
+      .select([
+        'po.NomeFantasia AS nome_posto',
+        'po.Logradouro AS logradouro',
+        'po.Numero AS numero',
+        'po.Bairro AS bairro',
+        'po.Cidade AS cidade',
+        'po.Estado AS estado',
+        'po.CEP AS cep',
+        'co.Nome AS nome_combustivel',
+        'ROUND(AVG(pc.Preco), 3) AS media_preco',
+        'MAX(pc.DataColeta) AS data_coleta'
+      ])
+      .innerJoin(PrecoColetado, 'pc', 'po.ID_Posto = pc.PostoID')
+      .innerJoin(Combustivel, 'co', 'pc.CombustivelID = co.ID_Combustivel')
+      .groupBy('po.ID_Posto, po.NomeFantasia, po.Logradouro, po.Numero, po.Bairro, po.Cidade, po.Estado, po.CEP, co.Nome')
+      .orderBy('media_preco', 'ASC');
+
+    if (bairro) {
+      rawResults.andWhere('po.Bairro = :bairro', { bairro });
+    }
+
+    if (combustivel) {
+      rawResults.andWhere('co.Nome = :nome', { nome: combustivel });
+    }
+
+    const results = await rawResults.getRawMany();
+
+    // Agrupar resultados por posto
+    const groupedResults = results.reduce((acc, curr) => {
+      const postoKey = `${curr.nome_posto}-${curr.logradouro}`;
+
+      if (!acc[postoKey]) {
+        acc[postoKey] = {
+          nome_posto: curr.nome_posto,
+          logradouro: curr.logradouro,
+          numero: curr.numero,
+          bairro: curr.bairro,
+          cidade: curr.cidade,
+          estado: curr.estado,
+          cep: curr.cep,
+          combustiveis: [],
+        };
+      }
+
+      acc[postoKey].combustiveis.push({
+        nome_combustivel: curr.nome_combustivel,
+        media_preco: curr.media_preco,
+        data_coleta: curr.data_coleta,
+      });
+
+      return acc;
+    }, {});
+
+    return Object.values(groupedResults);
   }
+
+  async getMaiorPrecoCombustivel(bairro?: string, combustivel?: string) {
+    const rawResults = await this.postoRepository.createQueryBuilder('po')
+      .select([
+        'po.NomeFantasia AS nome_posto',
+        'po.Logradouro AS logradouro',
+        'po.Numero AS numero',
+        'po.Bairro AS bairro',
+        'po.Cidade AS cidade',
+        'po.Estado AS estado',
+        'po.CEP AS cep',
+        'co.Nome AS nome_combustivel',
+        'ROUND(MAX(pc.Preco), 3) AS maior_preco',
+        'MAX(pc.DataColeta) AS data_coleta'
+      ])
+      .innerJoin(PrecoColetado, 'pc', 'po.ID_Posto = pc.PostoID')
+      .innerJoin(Combustivel, 'co', 'pc.CombustivelID = co.ID_Combustivel')
+      .groupBy('po.ID_Posto, po.NomeFantasia, po.Logradouro, po.Numero, po.Bairro, po.Cidade, po.Estado, po.CEP, co.Nome')
+      .orderBy('maior_preco', 'DESC');
+
+    if (bairro) {
+      rawResults.andWhere('po.Bairro = :bairro', { bairro });
+    }
+
+    if (combustivel) {
+      rawResults.andWhere('co.Nome = :nome', { nome: combustivel });
+    }
+
+    const results = await rawResults.getRawMany();
+
+    // Agrupar resultados por posto
+    const groupedResults = results.reduce((acc, curr) => {
+      const postoKey = `${curr.nome_posto}-${curr.logradouro}`;
+
+      if (!acc[postoKey]) {
+        acc[postoKey] = {
+          nome_posto: curr.nome_posto,
+          logradouro: curr.logradouro,
+          numero: curr.numero,
+          bairro: curr.bairro,
+          cidade: curr.cidade,
+          estado: curr.estado,
+          cep: curr.cep,
+          combustiveis: [],
+        };
+      }
+
+      acc[postoKey].combustiveis.push({
+        nome_combustivel: curr.nome_combustivel,
+        maior_preco: curr.maior_preco,
+        data_coleta: curr.data_coleta,
+      });
+
+      return acc;
+    }, {});
+
+    return Object.values(groupedResults);
+  }
+
 }

@@ -13,6 +13,7 @@ import { PrecoService } from './services/preco.service';
 import { Combustivel } from './entities/combustivel.entity';
 import { PrecoColetado } from './entities/preco-coletado.entity';
 import { HealthModule } from './modules/health/health.module';
+import { UtilService } from './services/util.service';
 
 @Module({
   imports: [
@@ -40,6 +41,6 @@ import { HealthModule } from './modules/health/health.module';
     CombustivelController,
     PrecoController,
   ],
-  providers: [AppService, PostoService, CombustivelService, PrecoService],
+  providers: [AppService, PostoService, CombustivelService, PrecoService, UtilService],
 })
 export class AppModule {}
