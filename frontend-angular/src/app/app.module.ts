@@ -8,10 +8,22 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 
 import { AppComponent } from './app.component';
+import { GasStationListComponent } from './gas-station-list/gas-station-list.component';
+import { GasStationDetailsComponent } from './gas-station-details/gas-station-details.component';
+import { PriceChartsComponent } from './price-charts/price-charts.component';
+import { AveragePricesComponent } from './average-prices/average-prices.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import {MatListModule} from "@angular/material/list";
+import {MatDividerModule} from "@angular/material/divider";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    GasStationListComponent,
+    GasStationDetailsComponent,
+    PriceChartsComponent,
+    AveragePricesComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +32,9 @@ import { AppComponent } from './app.component';
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatListModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

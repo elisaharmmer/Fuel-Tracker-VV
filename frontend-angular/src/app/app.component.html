@@ -3,7 +3,7 @@
     <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-    <span class="toolbar-title">Gas Stations</span>
+    <span class="toolbar-title">Fuel Tracker VV</span>
     <span class="spacer"></span>
     <button mat-icon-button (click)="toggleTheme()">
       <mat-icon>{{ isDarkTheme ? 'brightness_7' : 'brightness_2' }}</mat-icon>
@@ -11,23 +11,13 @@
   </mat-toolbar>
   <mat-sidenav-container class="example-container">
     <mat-sidenav #sidenav mode="side" opened>
-      <!-- Side navigation content -->
-      <p>Sidenav content</p>
+      <app-sidenav></app-sidenav>
     </mat-sidenav>
     <mat-sidenav-content>
       <div class="content">
-        <mat-card *ngFor="let station of gasStations" class="example-card">
-          <mat-card-header>
-            <mat-card-title>{{ station.name }}</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <p>Gasolina Aditivada: {{ station.gasolinaAditivada }}</p>
-            <p>Diesel S10: {{ station.dieselS10 }}</p>
-            <p>Etanol: {{ station.etanol }}</p>
-            <p>Diesel S500: {{ station.dieselS500 }}</p>
-            <p>Gasolina Comum: {{ station.gasolinaComum }}</p>
-          </mat-card-content>
-        </mat-card>
+        <app-gas-station-list></app-gas-station-list>
+        <app-price-charts></app-price-charts>
+        <app-average-prices></app-average-prices>
       </div>
     </mat-sidenav-content>
   </mat-sidenav-container>

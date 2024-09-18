@@ -1,0 +1,9 @@
+.station-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .example-card {
+    margin-bottom: 16px;
+  }
+}
