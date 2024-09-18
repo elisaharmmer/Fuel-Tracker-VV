@@ -1,0 +1,33 @@
+<div [class.dark-theme]="isDarkTheme" [class.light-theme]="!isDarkTheme">
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="toggleTheme()">
+      <mat-icon>{{ isDarkTheme ? 'brightness_7' : 'brightness_2' }}</mat-icon>
+    </button>
+    <span>Gas Stations</span>
+  </mat-toolbar>
+  <mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav mode="side" opened>
+      <!-- Side navigation content -->
+      <p>Sidenav content</p>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="content">
+        <mat-card *ngFor="let station of gasStations" class="example-card">
+          <mat-card-header>
+            <mat-card-title>{{ station.name }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>Gasolina Aditivada: {{ station.gasolinaAditivada }}</p>
+            <p>Diesel S10: {{ station.dieselS10 }}</p>
+            <p>Etanol: {{ station.etanol }}</p>
+            <p>Diesel S500: {{ station.dieselS500 }}</p>
+            <p>Gasolina Comum: {{ station.gasolinaComum }}</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  <mat-toolbar color="primary" class="footer">
+    <span>Footer content</span>
+  </mat-toolbar>
+</div>
