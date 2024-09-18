@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  isDarkTheme = false;
+  isDarkTheme = true; // Tema padrão é o dark
 
   gasStations = [
     { name: 'Posto 1', gasolinaAditivada: 'R$ 5,50', dieselS10: 'R$ 4,20', etanol: 'R$ 3,80', dieselS500: 'R$ 4,00', gasolinaComum: 'R$ 5,30' },

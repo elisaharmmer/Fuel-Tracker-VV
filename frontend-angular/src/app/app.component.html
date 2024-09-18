@@ -1,9 +1,13 @@
 <div [class.dark-theme]="isDarkTheme" [class.light-theme]="!isDarkTheme">
   <mat-toolbar color="primary">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="toolbar-title">Gas Stations</span>
+    <span class="spacer"></span>
     <button mat-icon-button (click)="toggleTheme()">
       <mat-icon>{{ isDarkTheme ? 'brightness_7' : 'brightness_2' }}</mat-icon>
     </button>
-    <span>Gas Stations</span>
   </mat-toolbar>
   <mat-sidenav-container class="example-container">
     <mat-sidenav #sidenav mode="side" opened>
