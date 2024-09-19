@@ -1,0 +1,11 @@
+.filter-container {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.station-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

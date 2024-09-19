@@ -1,0 +1,38 @@
+<div class="filter-container">
+  <mat-form-field>
+    <mat-label>Buscar Posto</mat-label>
+    <input type="text" matInput [matAutocomplete]="auto" [(ngModel)]="searchTerm" (ngModelChange)="filterStations()">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions" [value]="option">
+        {{ option }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Bairro</mat-label>
+    <mat-select [(ngModel)]="selectedNeighborhood" (selectionChange)="filterStations()">
+      <mat-option *ngFor="let neighborhood of neighborhoods" [value]="neighborhood">{{ neighborhood }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Tipo de Combustível</mat-label>
+    <mat-select [(ngModel)]="selectedFuelType" (selectionChange)="filterStations()">
+      <mat-option *ngFor="let fuelType of fuelTypes" [value]="fuelType">{{ fuelType }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div class="station-list">
+  <mat-card *ngFor="let station of filteredGasStations" class="example-card">
+    <mat-card-header>
+      <mat-card-title>{{ station.nomeFantasia }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p *ngFor="let preco of station.precosColetados">
+        {{ preco.combustivel.nome }}: {{ preco.preco | currency:'BRL' }}
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>

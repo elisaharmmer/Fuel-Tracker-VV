@@ -6,15 +6,22 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { GasStationListComponent } from './gas-station-list/gas-station-list.component';
-import { GasStationDetailsComponent } from './gas-station-details/gas-station-details.component';
-import { PriceChartsComponent } from './price-charts/price-charts.component';
-import { AveragePricesComponent } from './average-prices/average-prices.component';
-import { SidenavComponent } from './sidenav/sidenav.component';
-import {MatListModule} from "@angular/material/list";
-import {MatDividerModule} from "@angular/material/divider";
+import {HttpClientModule} from "@angular/common/http";
+import {GasStationListComponent} from "./components/gas-station-list/gas-station-list.component";
+import {GasStationDetailsComponent} from "./components/gas-station-details/gas-station-details.component";
+import {PriceChartsComponent} from "./components/price-charts/price-charts.component";
+import {AveragePricesComponent} from "./components/average-prices/average-prices.component";
+import {SidenavComponent} from "./components/sidenav/sidenav.component";
 
 @NgModule({
   declarations: [
@@ -34,7 +41,14 @@ import {MatDividerModule} from "@angular/material/divider";
     MatIconModule,
     MatCardModule,
     MatListModule,
-    MatDividerModule
+    MatDividerModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatOptionModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
