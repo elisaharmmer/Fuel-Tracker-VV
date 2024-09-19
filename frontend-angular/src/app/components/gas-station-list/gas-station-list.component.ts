@@ -31,7 +31,6 @@ export class GasStationListComponent implements OnInit {
   loadGasStations() {
     this.gasStationService.getPostosDetalhados().subscribe(
       (data: PostoCombustivelDetalhado[]) => {
-        console.log('Postos Detalhados', data);
         this.gasStations = data;
         this.filteredGasStations = this.gasStations;
         this.filteredOptions = this.gasStations.map(station => station.posto_nome);
@@ -64,13 +63,46 @@ export class GasStationListComponent implements OnInit {
     );
   }
 
+  clearFilters() {
+    this.searchTerm = '';
+    this.selectedNeighborhood = '';
+    this.selectedFuelType = '';
+    this.filterStations(); // Atualiza a lista com todos os postos
+  }
+
+  clearFilter(filterType: string) {
+    switch (filterType) {
+      case 'searchTerm':
+        this.searchTerm = '';
+        break;
+      case 'neighborhood':
+        this.selectedNeighborhood = '';
+        this.searchTerm = ''; // Limpa também o autocomplete
+        break;
+      case 'fuelType':
+        this.selectedFuelType = '';
+        break;
+    }
+    this.filterStations();
+  }
+
+
   filterStations() {
+    // Verifica se o bairro foi alterado e limpa o campo de busca
+    if (this.selectedNeighborhood) {
+      this.searchTerm = ''; // Limpa o valor selecionado no autocomplete
+    }
+
     this.filteredGasStations = this.gasStations.filter(station => {
       const matchesSearch = station.posto_nome.toLowerCase().includes(this.searchTerm.toLowerCase());
       const matchesNeighborhood = !this.selectedNeighborhood || station.posto_bairro === this.selectedNeighborhood;
-      const matchesFuelType = !this.selectedFuelType ||
-        station.combustiveis.some(combustivel => combustivel.combustivel_nome.toLowerCase().includes(this.selectedFuelType.toLowerCase()));
+      const matchesFuelType = !this.selectedFuelType || station.combustiveis.some(combustivel => combustivel.combustivel_nome.toLowerCase().includes(this.selectedFuelType.toLowerCase()));
       return matchesSearch && matchesNeighborhood && matchesFuelType;
     });
+
+    // Atualiza as opções do autocomplete para mostrar apenas os postos do bairro selecionado
+    this.filteredOptions = this.filteredGasStations.map(station => station.posto_nome);
   }
+
+
 }

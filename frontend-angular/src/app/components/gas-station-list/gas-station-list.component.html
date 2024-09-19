@@ -1,3 +1,6 @@
+<h2>
+  Filtros:
+</h2>
 <div class="filter-container">
   <mat-form-field>
     <mat-label>Buscar Posto</mat-label>
@@ -7,6 +10,9 @@
         {{ option }}
       </mat-option>
     </mat-autocomplete>
+    <button mat-icon-button *ngIf="searchTerm" matSuffix (click)="clearFilter('searchTerm')">
+      <mat-icon>clear</mat-icon>
+    </button>
   </mat-form-field>
 
   <mat-form-field>
@@ -14,6 +20,9 @@
     <mat-select [(ngModel)]="selectedNeighborhood" (selectionChange)="filterStations()">
       <mat-option *ngFor="let neighborhood of neighborhoods" [value]="neighborhood">{{ neighborhood }}</mat-option>
     </mat-select>
+    <button mat-icon-button *ngIf="selectedNeighborhood" matSuffix (click)="clearFilter('neighborhood')">
+      <mat-icon>clear</mat-icon>
+    </button>
   </mat-form-field>
 
   <mat-form-field>
@@ -21,19 +30,33 @@
     <mat-select [(ngModel)]="selectedFuelType" (selectionChange)="filterStations()">
       <mat-option *ngFor="let fuelType of fuelTypes" [value]="fuelType">{{ fuelType }}</mat-option>
     </mat-select>
+    <button mat-icon-button *ngIf="selectedFuelType" matSuffix (click)="clearFilter('fuelType')">
+      <mat-icon>clear</mat-icon>
+    </button>
   </mat-form-field>
 </div>
 
+<h2>
+  Listagem de postos
+</h2>
 <div class="station-list">
   <mat-card *ngFor="let station of filteredGasStations" class="example-card">
     <mat-card-header>
       <mat-card-title>{{ station.posto_nome }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <div *ngFor="let combustivel of station.combustiveis">
-        <p>{{ combustivel.combustivel_nome }}: {{ combustivel.preco | replaceComma }}</p>
-      </div>
+      Endereço:
+      {{ station.posto_logradouro}}, {{ station.posto_numero}}, {{ station.posto_bairro}}, {{ station.posto_cidade}}, {{ station.posto_estado}} - {{ station.posto_cep}}
     </mat-card-content>
+    <mat-card-footer class="card-footer">
+<!--      <mat-chip-set aria-label="combustíveis">-->
+        <div *ngFor="let combustivel of station.combustiveis" class="item-gas">
+<!--          <mat-chip>-->
+            <mat-icon>local_gas_station</mat-icon> {{ combustivel.combustivel_nome }}: {{ combustivel.preco | replaceComma }}
+<!--          </mat-chip>-->
+        </div>
+<!--      </mat-chip-set>-->
+    </mat-card-footer>
   </mat-card>
 </div>
 

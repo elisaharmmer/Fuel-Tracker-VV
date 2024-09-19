@@ -23,6 +23,7 @@ import {PriceChartsComponent} from "./components/price-charts/price-charts.compo
 import {AveragePricesComponent} from "./components/average-prices/average-prices.component";
 import {SidenavComponent} from "./components/sidenav/sidenav.component";
 import { ReplaceCommaPipe } from './pipes/replace-comma.pipe';
+import {MatChipsModule} from "@angular/material/chips";
 
 @NgModule({
   declarations: [
@@ -34,24 +35,25 @@ import { ReplaceCommaPipe } from './pipes/replace-comma.pipe';
     SidenavComponent,
     ReplaceCommaPipe
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatIconModule,
-    MatCardModule,
-    MatListModule,
-    MatDividerModule,
-    MatAutocompleteModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatOptionModule,
-    FormsModule,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatButtonModule,
+        MatIconModule,
+        MatCardModule,
+        MatListModule,
+        MatDividerModule,
+        MatAutocompleteModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatOptionModule,
+        FormsModule,
+        HttpClientModule,
+        MatChipsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
