@@ -1,42 +1,98 @@
 version: '3.8'
 services:
-  sqlserver:
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: sqlserverdb
-    environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=SenhaForte123
-    ports:
-      - "1433:1433"
-    volumes:
-      - sqlserverdata:/var/opt/mssql
-      - ./database:/usr/src/app/database # Montar a pasta com os scripts SQL
+  # sqlserver-db:
+  #   image: mcr.microsoft.com/mssql/server:2019-latest
+  #   container_name: sqlserver-db
+  #   environment:
+  #     SA_PASSWORD: 'SenhaForte123'
+  #     ACCEPT_EULA: 'Y'
+  #   ports:
+  #     - "1433:1433"
+  #   volumes:
+  #     - sqlserver_data:/var/opt/mssql
+  #   networks:
+  #     - db-network
+  #
+  # run-sql-sqlserver:
+  #   image: mcr.microsoft.com/mssql-tools
+  #   container_name: run-sql-sqlserver
+  #   depends_on:
+  #     - sqlserver-db
+  #   entrypoint: /bin/bash
+  #   command: >
+  #     -c "
+  #     sleep 15;
+  #     /opt/mssql-tools/bin/sqlcmd -S sqlserver-db -U sa -P 'SenhaForte123' -i /scripts/inserts_database.sql;
+  #     exit 0"
+  #   volumes:
+  #     - ./database:/scripts
+  #   networks:
+  #     - db-network
 
-  nest-api:
-    build: ./nestjs-api
+  postgres-db:
+    image: postgres:latest
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: strongpassword
+      POSTGRES_DB: combustiveisdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/postgres:/scripts
+    networks:
+      - db-network
+
+  run-sql-postgres:
+    image: postgres:latest
+    container_name: run-sql-postgres
+    depends_on:
+      - postgres-db
+    entrypoint: /bin/bash
+    command: >
+      -c "
+      sleep 10; 
+      export PGPASSWORD='strongpassword'; 
+      psql -h postgres-db -U postgres -d combustiveisdb -f /scripts/create_database.sql;
+      psql -h postgres-db -U postgres -d combustiveisdb -f /scripts/inserts_database.sql;
+      exit 0"
+    volumes:
+      - ./database/postgres:/scripts
+    networks:
+      - db-network
+
+  nestjs-api:
+    build:
+      context: ./nestjs-api
+      dockerfile: Dockerfile
     container_name: nestjs-api
     environment:
-      - DB_HOST=sqlserver
-      - DB_PORT=1433
-      - DB_USERNAME=api_user
-      - DB_PASSWORD=SenhaSegura123!
-      - DB_DATABASE=CombustiveisDB
-    ports:
-      - "3000:3000"
-    depends_on:
-      - sqlserver
+      APP_PORT: 3001
+      POSTGRES_HOST: postgres-db
+      POSTGRES_DATABASE: combustiveisdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: strongpassword
 
-  run-sql:
-    image: mcr.microsoft.com/mssql-tools
-    container_name: run-sql
+      DB_HOST_SQLSERVER: sqlserver-db
+      DB_PORT_SQLSERVER: 1433
+      DB_USER_SQLSERVER: sa
+      DB_PASS_SQLSERVER: SenhaForte123
+    ports:
+      - "3000:3001"
     depends_on:
-      - sqlserver
-    volumes:
-      - ./database:/usr/src/app/database # Montar a pasta com os scripts SQL
-    entrypoint: /bin/bash -c "
-      sleep 30;
-      /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P SenhaForte123 -d master -i /usr/src/app/database/create_database.sql &&
-      /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P SenhaForte123 -d CombustiveisDB -i /usr/src/app/database/inserts_database.sql"
+      - postgres-db
+    #   - sqlserver-db
+    networks:
+      - db-network
+      - external-network
+
+networks:
+  db-network:
+    driver: bridge
+  external-network:
+    driver: bridge
 
 volumes:
-  sqlserverdata:
+  postgres_data:
+  # sqlserver_data:
