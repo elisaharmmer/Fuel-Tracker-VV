@@ -1,19 +1,19 @@
 <div *ngIf="posto">
-  <h1>{{ posto.nome_fantasia }}</h1>
+  <h1><b>{{ posto.nome_fantasia }}</b></h1>
   <p>
-    Endereço: {{ posto.logradouro }}, {{ posto.numero }}, {{ posto.bairro }},
+    <mat-icon>add_location</mat-icon> Endereço: {{ posto.logradouro }}, {{ posto.numero }}, {{ posto.bairro }},
     {{ posto.cidade }}, {{ posto.estado }} - {{ posto.cep }}
   </p>
 </div>
 <div>
-  <mat-tab-group>
+  <mat-tab-group color="accent">
     <mat-tab label="Gráfico">
       <div style="height: 100%; display: flex; align-items: center;">
         <canvas id="combustiveisChart"></canvas>
       </div>
     </mat-tab>
     <mat-tab label="Tabela">
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" style="width: 100%;">
         <mat-label>Filtro</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Filtre os combustíveis" #inputFilter />
       </mat-form-field>
@@ -55,19 +55,21 @@
               <mat-card-title>{{ key }}</mat-card-title>
             </mat-card-header>
             <mat-card-content>
+              <mat-divider></mat-divider>
               <p>
                 <mat-icon>trending_up</mat-icon> Máximo: R$ {{ combustivelStats[key].maximum }}
                 <br>
-                Data: {{ combustivelStats[key].maxDate | date: 'shortDate' }}
+                <mat-icon>event</mat-icon> Data: {{ combustivelStats[key].maxDate | date: 'shortDate' }}
               </p>
               <p>
                 <mat-icon>trending_down</mat-icon> Mínimo: R$ {{ combustivelStats[key].minimum }}
                 <br>
-                Data: {{ combustivelStats[key].minDate | date: 'shortDate' }}
+                <mat-icon>event</mat-icon> Data: {{ combustivelStats[key].minDate | date: 'shortDate' }}
               </p>
-              <p>
+              <mat-divider></mat-divider>
+              <b>
                 <mat-icon>trending_flat</mat-icon> Média: R$ {{ combustivelStats[key].average }}
-              </p>
+              </b>
             </mat-card-content>
           </mat-card>
         </div>
