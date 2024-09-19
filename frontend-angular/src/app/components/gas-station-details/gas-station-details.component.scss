@@ -1,8 +1,3 @@
-/* Geral */
-:host {
-  display: block;
-  height: 100%;
-}
 
 /* Tab Group */
 .mat-tab-group {
@@ -36,6 +31,7 @@
 /* Stats Container */
 .stats-container {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   gap: 8px;
   flex-wrap: nowrap;
@@ -43,9 +39,9 @@
 }
 
 .card-container {
-  flex: 1 1 18%;
+  flex: 1 1 18%; /* Ajuste para garantir que cinco cards caberão em uma linha */
+  margin: 8px;
   min-width: 150px;
-  box-sizing: border-box;
 }
 
 /* Ajustes para dispositivos móveis */
@@ -61,4 +57,24 @@
   .card-container {
     flex: 1 1 100%;
   }
+}
+
+.stats-container {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+  justify-content: space-between;
+  overflow-x: auto; /* Permite o scroll horizontal se necessário */
+}
+
+mat-icon {
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+.stats-tab {
+  overflow: auto; /* Permite o scroll dentro da aba ativa */
+  height: calc(200vh - 100px); /* Ajuste a altura conforme necessário */
+  display: flex;
+  padding: 16px;
 }

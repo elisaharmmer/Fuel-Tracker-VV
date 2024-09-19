@@ -53,30 +53,32 @@ export class GasStationDetailsComponent implements OnInit, AfterViewInit {
   calculateStats() {
     Object.keys(this.combustiveis).forEach(combustivelNome => {
       const precos = this.combustiveis[combustivelNome];
-      const total = precos.reduce((sum, item) => sum + item.preco, 0);
+      const total = precos.reduce((sum, item) => sum + parseFloat(item.preco), 0);
       const avg = (total / precos.length).toFixed(2);
-      const min = Math.min(...precos.map(item => item.preco));
-      const max = Math.max(...precos.map(item => item.preco));
+      const min = Math.min(...precos.map(item => parseFloat(item.preco)));
+      const max = Math.max(...precos.map(item => parseFloat(item.preco)));
 
       // Encontrar as datas para os valores mínimo e máximo
       const minDate = precos
-        .filter(item => item.preco === min)
+        .filter(item => parseFloat(item.preco) === min)
         .map(item => item.data_coleta)
-        .sort()[0];
+        .sort((a, b) => new Date(a).getTime() - new Date(b).getTime())[0];
+
       const maxDate = precos
-        .filter(item => item.preco === max)
+        .filter(item => parseFloat(item.preco) === max)
         .map(item => item.data_coleta)
-        .sort()[0];
+        .sort((a, b) => new Date(a).getTime() - new Date(b).getTime())[0];
 
       this.combustivelStats[combustivelNome] = {
         average: avg,
-        minimum: min,
-        maximum: max,
+        minimum: min.toFixed(2),
+        maximum: max.toFixed(2),
         minDate: minDate,
         maxDate: maxDate
       };
     });
   }
+
 
 
   objectKeys(obj: any) {
@@ -110,7 +112,7 @@ export class GasStationDetailsComponent implements OnInit, AfterViewInit {
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false, // Permite que o gráfico ajuste sua altura
+        // maintainAspectRatio: false, // Permite que o gráfico ajuste sua altura
         scales: {
           y: {
             beginAtZero: false,

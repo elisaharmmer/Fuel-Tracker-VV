@@ -1,24 +1,48 @@
-:host {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+mat-sidenav-container {
+  height: calc(100vh - 64px); /* Ajusta a altura para excluir a altura do header */
 }
 
-.example-container {
-  flex: 1;
+mat-sidenav-content {
   display: flex;
   flex-direction: column;
 }
 
 .content {
-  flex: 1;
+  flex-grow: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
   overflow: auto;
 }
 
-.mat-tab-group {
+.stats-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: space-around;
+  align-items: stretch;
+  flex: 1;
+}
+
+.card-container {
+  flex: 1 1 18%;
+  margin: 8px;
+  min-width: 150px;
+}
+
+mat-tab-group {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
   height: 100%;
 }
 
-.mat-tab-body-wrapper {
-  height: 100%;
+mat-tab-body {
+  flex-grow: 1;
+  display: flex;
+  overflow: auto;
+}
+
+.spacer {
+  flex: 1 1 auto;
 }
