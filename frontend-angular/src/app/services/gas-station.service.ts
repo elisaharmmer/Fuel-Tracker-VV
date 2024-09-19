@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Posto } from '../models/posto';
+import {Posto, PostoCombustivelDetalhado} from '../models/posto';
 import { Combustivel } from '../models/combustivel';
 
 @Injectable({
@@ -14,6 +14,10 @@ export class GasStationService {
 
   getPostos(): Observable<Posto[]> {
     return this.http.get<Posto[]>(`${this.apiUrl}/postos`);
+  }
+
+  getPostosDetalhados(): Observable<PostoCombustivelDetalhado[]> {
+    return this.http.get<PostoCombustivelDetalhado[]>(`${this.apiUrl}/postos`);
   }
 
   getCombustiveis(): Observable<Combustivel[]> {

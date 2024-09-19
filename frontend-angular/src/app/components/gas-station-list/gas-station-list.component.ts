@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Posto} from "../../models/posto";
-import {GasStationService} from "../../services/gas-station.service";
+import { GasStationService } from "../../services/gas-station.service";
+import {PostoCombustivelDetalhado} from "../../models/posto";
 import {Combustivel} from "../../models/combustivel";
 
 @Component({
@@ -9,7 +9,7 @@ import {Combustivel} from "../../models/combustivel";
   styleUrls: ['./gas-station-list.component.scss']
 })
 export class GasStationListComponent implements OnInit {
-  gasStations: Posto[] = [];
+  gasStations: PostoCombustivelDetalhado[] = [];
   neighborhoods: string[] = [];
   fuelTypes: string[] = [];
 
@@ -18,7 +18,7 @@ export class GasStationListComponent implements OnInit {
   selectedFuelType = '';
 
   filteredOptions: string[] = [];
-  filteredGasStations: Posto[] = [];
+  filteredGasStations: PostoCombustivelDetalhado[] = [];
 
   constructor(private gasStationService: GasStationService) {}
 
@@ -29,11 +29,12 @@ export class GasStationListComponent implements OnInit {
   }
 
   loadGasStations() {
-    this.gasStationService.getPostos().subscribe(
-      (data: Posto[]) => {
+    this.gasStationService.getPostosDetalhados().subscribe(
+      (data: PostoCombustivelDetalhado[]) => {
+        console.log('Postos Detalhados', data);
         this.gasStations = data;
         this.filteredGasStations = this.gasStations;
-        this.filteredOptions = this.gasStations.map(station => station.nomeFantasia);
+        this.filteredOptions = this.gasStations.map(station => station.posto_nome);
       },
       (error) => {
         console.error('Erro ao buscar os postos', error);
@@ -65,10 +66,10 @@ export class GasStationListComponent implements OnInit {
 
   filterStations() {
     this.filteredGasStations = this.gasStations.filter(station => {
-      const matchesSearch = station.nomeFantasia.toLowerCase().includes(this.searchTerm.toLowerCase());
-      const matchesNeighborhood = !this.selectedNeighborhood || station.bairro === this.selectedNeighborhood;
+      const matchesSearch = station.posto_nome.toLowerCase().includes(this.searchTerm.toLowerCase());
+      const matchesNeighborhood = !this.selectedNeighborhood || station.posto_bairro === this.selectedNeighborhood;
       const matchesFuelType = !this.selectedFuelType ||
-        station.precosColetados.some(preco => preco.combustivel.nome.toLowerCase().includes(this.selectedFuelType.toLowerCase()));
+        station.combustiveis.some(combustivel => combustivel.combustivel_nome.toLowerCase().includes(this.selectedFuelType.toLowerCase()));
       return matchesSearch && matchesNeighborhood && matchesFuelType;
     });
   }

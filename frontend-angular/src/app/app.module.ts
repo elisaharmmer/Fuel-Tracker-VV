@@ -22,6 +22,7 @@ import {GasStationDetailsComponent} from "./components/gas-station-details/gas-s
 import {PriceChartsComponent} from "./components/price-charts/price-charts.component";
 import {AveragePricesComponent} from "./components/average-prices/average-prices.component";
 import {SidenavComponent} from "./components/sidenav/sidenav.component";
+import { ReplaceCommaPipe } from './pipes/replace-comma.pipe';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {SidenavComponent} from "./components/sidenav/sidenav.component";
     GasStationDetailsComponent,
     PriceChartsComponent,
     AveragePricesComponent,
-    SidenavComponent
+    SidenavComponent,
+    ReplaceCommaPipe
   ],
   imports: [
     BrowserModule,
