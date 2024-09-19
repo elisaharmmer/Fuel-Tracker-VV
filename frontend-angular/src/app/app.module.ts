@@ -27,7 +27,8 @@ import { MatChipsModule } from "@angular/material/chips";
 import { AppRoutingModule } from './app-routing.module';
 import {MatTableModule} from "@angular/material/table";
 import {MatTabsModule} from "@angular/material/tabs";
-import {MatSortModule} from "@angular/material/sort"; // Importa o AppRoutingModule
+import {MatSortModule} from "@angular/material/sort";
+import { CepMaskPipe } from './pipes/cep-mask.pipe'; // Importa o AppRoutingModule
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {MatSortModule} from "@angular/material/sort"; // Importa o AppRoutingMod
     PriceChartsComponent,
     AveragePricesComponent,
     SidenavComponent,
-    ReplaceCommaPipe
+    ReplaceCommaPipe,
+    CepMaskPipe
   ],
     imports: [
         BrowserModule,

@@ -1,9 +1,11 @@
 <div *ngIf="posto">
   <h1><b>{{ posto.nome_fantasia }}</b></h1>
-  <p>
-    <mat-icon>add_location</mat-icon> Endereço: {{ posto.logradouro }}, {{ posto.numero }}, {{ posto.bairro }},
-    {{ posto.cidade }}, {{ posto.estado }} - {{ posto.cep }}
-  </p>
+  <div style="display: flex; align-items: center;">
+    <mat-icon style="font-size: 42px; width: 42px; height: 42px; margin: 1rem;">pin_drop</mat-icon>
+    <p>
+      Endereço: {{ posto.logradouro }}, {{ posto.numero }}, {{ posto.bairro }}, {{ posto.cidade }}, {{ posto.estado }}. CEP: {{ posto.cep | cepMask }}
+    </p>
+  </div>
 </div>
 <div>
   <mat-tab-group color="accent">
@@ -51,25 +53,43 @@
       <div class="stats-container">
         <div class="card-container" *ngFor="let key of objectKeys(combustivelStats)">
           <mat-card>
-            <mat-card-header>
-              <mat-card-title>{{ key }}</mat-card-title>
+            <mat-card-header style="margin: 10px 0;">
+              <mat-card-title style="font-size: 24px;">{{ key }}</mat-card-title>
             </mat-card-header>
             <mat-card-content>
               <mat-divider></mat-divider>
-              <p>
-                <mat-icon>trending_up</mat-icon> Máximo: R$ {{ combustivelStats[key].maximum }}
-                <br>
-                <mat-icon>event</mat-icon> Data: {{ combustivelStats[key].maxDate | date: 'shortDate' }}
-              </p>
-              <p>
-                <mat-icon>trending_down</mat-icon> Mínimo: R$ {{ combustivelStats[key].minimum }}
-                <br>
-                <mat-icon>event</mat-icon> Data: {{ combustivelStats[key].minDate | date: 'shortDate' }}
-              </p>
+              <div style="display: flex; align-items: center; font-size: 16px;">
+                <mat-icon style="font-size: 40px; width: 40px; height: 40px; margin: 1rem; color: #2e7b32;">trending_up</mat-icon>
+                <div>
+                  Máximo: R$ {{ combustivelStats[key].maximum }}
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; font-size: 16px;">
+                <mat-icon style="font-size: 42px; width: 42px; height: 42px; margin: 1rem; color: #9c973b;">event</mat-icon>
+                <div>
+                  Data: {{ combustivelStats[key].maxDate | date:'dd/MM/yyyy' }}
+                </div>
+              </div>
+              <mat-divider style="margin: 16px 0;"></mat-divider>
+              <div style="display: flex; align-items: center; font-size: 16px;">
+                <mat-icon style="font-size: 40px; width: 40px; height: 40px; margin: 1rem; color: #7b2e2e">trending_down</mat-icon>
+                <div>
+                  Mínimo: R$ {{ combustivelStats[key].maximum }}
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; font-size: 16px;">
+                <mat-icon style="font-size: 42px; width: 42px; height: 42px; margin: 1rem; color: #9c973b;">event</mat-icon>
+                <div>
+                  Data: {{ combustivelStats[key].minDate | date:'dd/MM/yyyy' }}
+                </div>
+              </div>
               <mat-divider></mat-divider>
-              <b>
-                <mat-icon>trending_flat</mat-icon> Média: R$ {{ combustivelStats[key].average }}
-              </b>
+              <div style="display: flex; align-items: center; font-size: 16px;">
+                <mat-icon style="font-size: 40px; width: 40px; height: 40px; margin: 1rem; color: #2e347b">trending_flat</mat-icon>
+                <div>
+                  Média: R$ {{ combustivelStats[key].average }}
+                </div>
+              </div>
             </mat-card-content>
           </mat-card>
         </div>
