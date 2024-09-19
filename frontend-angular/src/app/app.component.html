@@ -9,15 +9,13 @@
       <mat-icon>{{ isDarkTheme ? 'brightness_7' : 'brightness_2' }}</mat-icon>
     </button>
   </mat-toolbar>
-  <mat-sidenav-container class="example-container">
+  <mat-sidenav-container>
     <mat-sidenav #sidenav mode="side" opened>
       <app-sidenav></app-sidenav>
     </mat-sidenav>
     <mat-sidenav-content>
       <div class="content">
-        <app-gas-station-list></app-gas-station-list>
-        <app-price-charts></app-price-charts>
-        <app-average-prices></app-average-prices>
+        <router-outlet></router-outlet>
       </div>
     </mat-sidenav-content>
   </mat-sidenav-container>

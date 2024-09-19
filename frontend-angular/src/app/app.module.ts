@@ -12,18 +12,21 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatOptionModule } from '@angular/material/core';
+import { MatLineModule, MatOptionModule } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import {HttpClientModule} from "@angular/common/http";
-import {GasStationListComponent} from "./components/gas-station-list/gas-station-list.component";
-import {GasStationDetailsComponent} from "./components/gas-station-details/gas-station-details.component";
-import {PriceChartsComponent} from "./components/price-charts/price-charts.component";
-import {AveragePricesComponent} from "./components/average-prices/average-prices.component";
-import {SidenavComponent} from "./components/sidenav/sidenav.component";
+import { HttpClientModule } from "@angular/common/http";
+import { GasStationListComponent } from "./components/gas-station-list/gas-station-list.component";
+import { GasStationDetailsComponent } from "./components/gas-station-details/gas-station-details.component";
+import { PriceChartsComponent } from "./components/price-charts/price-charts.component";
+import { AveragePricesComponent } from "./components/average-prices/average-prices.component";
+import { SidenavComponent } from "./components/sidenav/sidenav.component";
 import { ReplaceCommaPipe } from './pipes/replace-comma.pipe';
-import {MatChipsModule} from "@angular/material/chips";
+import { MatChipsModule } from "@angular/material/chips";
+import { AppRoutingModule } from './app-routing.module';
+import {MatTableModule} from "@angular/material/table";
+import {MatTabsModule} from "@angular/material/tabs"; // Importa o AppRoutingModule
 
 @NgModule({
   declarations: [
@@ -35,25 +38,29 @@ import {MatChipsModule} from "@angular/material/chips";
     SidenavComponent,
     ReplaceCommaPipe
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        MatSidenavModule,
-        MatButtonModule,
-        MatIconModule,
-        MatCardModule,
-        MatListModule,
-        MatDividerModule,
-        MatAutocompleteModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatSelectModule,
-        MatOptionModule,
-        FormsModule,
-        HttpClientModule,
-        MatChipsModule
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatListModule,
+    MatDividerModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatOptionModule,
+    FormsModule,
+    HttpClientModule,
+    MatChipsModule,
+    MatLineModule,
+    AppRoutingModule,
+    MatTableModule,
+    MatTabsModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

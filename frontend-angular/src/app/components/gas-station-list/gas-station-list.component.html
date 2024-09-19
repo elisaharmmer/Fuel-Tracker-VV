@@ -56,8 +56,8 @@
     </mat-card-content>
     <mat-card-actions>
       <div class="action-detail">
-        <a mat-fab extended routerLink=".">
-          <mat-icon>info</mat-icon>
+        <a mat-fab extended [routerLink]="['/posto', station.posto_id]">
+        <mat-icon>info</mat-icon>
           Ver Detalhes
         </a>
       </div>

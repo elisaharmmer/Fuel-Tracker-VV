@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import {Controller, Get, Param, Query} from '@nestjs/common';
 import { PostoService } from '../../services/posto.service';
 
 @Controller('postos')
@@ -8,6 +8,11 @@ export class PostoController {
   @Get()
   getAllPostos() {
     return this.postoService.getAllPostos();
+  }
+
+  @Get(':id')
+  getPosto(@Param('id') id: number) {
+    return this.postoService.getOnePosto(id);
   }
 
   @Get('relatorio')

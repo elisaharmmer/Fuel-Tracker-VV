@@ -102,6 +102,56 @@ export class PostoService {
         return Array.from(postosMap.values());
     }
 
+    async getOnePosto(postoId: number) {
+        const rawResults = await this.postoRepository.createQueryBuilder('p')
+            .leftJoinAndSelect('p.precosColetados', 'pc')
+            .leftJoinAndSelect('pc.combustivel', 'c')
+            .select([
+                'p',
+                'c.Nome AS combustivel_nome',
+                'pc.Preco AS preco',
+                'pc.DataColeta AS data_coleta'
+            ])
+            .where('p.ID_Posto = :postoId', { postoId })
+            .orderBy('pc.DataColeta', 'ASC')
+            .getRawMany();
+
+        if (rawResults.length === 0) {
+            return null; // ou alguma resposta apropriada caso o posto não seja encontrado
+        }
+
+        const postoDetails = {
+            posto_id: rawResults[0].p_ID_Posto,
+            cnpj: rawResults[0].p_CNPJ,
+            razao_social: rawResults[0].p_RazaoSocial,
+            nome_fantasia: rawResults[0].p_NomeFantasia,
+            bandeira: rawResults[0].p_Bandeira,
+            logradouro: rawResults[0].p_Logradouro,
+            numero: rawResults[0].p_Numero,
+            bairro: rawResults[0].p_Bairro,
+            cidade: rawResults[0].p_Cidade,
+            estado: rawResults[0].p_Estado,
+            cep: rawResults[0].p_CEP,
+            combustiveis: {}
+        };
+
+        rawResults.forEach(result => {
+            const { combustivel_nome, preco, data_coleta } = result;
+
+            if (!postoDetails.combustiveis[combustivel_nome]) {
+                postoDetails.combustiveis[combustivel_nome] = [];
+            }
+
+            postoDetails.combustiveis[combustivel_nome].push({
+                preco,
+                data_coleta
+            });
+        });
+
+        return postoDetails;
+    }
+
+
     getRelatorioPostos(dataInicio: string, dataFim: string): Promise<any[]> {
         return this.postoRepository.query(`EXEC sp_ResumoPostosEPrecos @DataInicio = '${dataInicio}', @DataFim = '${dataFim}'`);
     }

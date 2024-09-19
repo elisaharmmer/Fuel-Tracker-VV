@@ -1,7 +1,8 @@
+// gas-station.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {Posto, PostoCombustivelDetalhado} from '../models/posto';
+import { Posto, PostoCombustivelDetalhado } from '../models/posto';
 import { Combustivel } from '../models/combustivel';
 
 @Injectable({
@@ -11,10 +12,6 @@ export class GasStationService {
   private apiUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
-
-  getPostos(): Observable<Posto[]> {
-    return this.http.get<Posto[]>(`${this.apiUrl}/postos`);
-  }
 
   getPostosDetalhados(): Observable<PostoCombustivelDetalhado[]> {
     return this.http.get<PostoCombustivelDetalhado[]>(`${this.apiUrl}/postos`);
@@ -26,5 +23,9 @@ export class GasStationService {
 
   getBairros(): Observable<{ bairro: string }[]> {
     return this.http.get<{ bairro: string }[]>(`${this.apiUrl}/bairros`);
+  }
+
+  getPostoDetalhes(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/postos/${id}`);
   }
 }
