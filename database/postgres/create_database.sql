@@ -26,19 +26,21 @@ create table "POSTO"
     "ID_Posto"     serial
         constraint "POSTO_pkey1"
             primary key,
-    "CNPJ"         varchar(14)  not null
+    "CNPJ"         varchar(14) not null
         constraint cnpj_length_check
             check ((length(("CNPJ")::text) = 14) AND (("CNPJ")::text ~ '^[0-9]+$'::text)),
     "RazaoSocial"  varchar(255) not null,
     "NomeFantasia" varchar(255),
     "Bandeira"     varchar(100),
     "Logradouro"   varchar(255) not null,
-    "Numero"       varchar(20)  not null,
+    "Numero"       varchar(20) not null,
     "Bairro"       varchar(100) not null,
     "Cidade"       varchar(100) not null,
-    "Estado"       varchar(50)  not null,
-    "CEP"          varchar(10)  not null
+    "Estado"       varchar(50) not null,
+    "CEP"          varchar(10) not null,
+    UNIQUE ("CNPJ") -- Aqui você adiciona a restrição de unicidade
 );
+
 
 alter table "POSTO"
     owner to postgres;
