@@ -1,40 +1,80 @@
 <div *ngIf="posto">
   <h1>{{ posto.nome_fantasia }}</h1>
-  <p>Endereço: {{ posto.logradouro }}, {{ posto.numero }}, {{ posto.bairro }}, {{ posto.cidade }}, {{ posto.estado }} - {{ posto.cep }}</p>
+  <p>
+    Endereço: {{ posto.logradouro }}, {{ posto.numero }}, {{ posto.bairro }},
+    {{ posto.cidade }}, {{ posto.estado }} - {{ posto.cep }}
+  </p>
 </div>
 <div>
   <mat-tab-group>
     <mat-tab label="Gráfico">
-      <div>
+      <div class="chart-container">
         <canvas id="combustiveisChart"></canvas>
       </div>
     </mat-tab>
     <mat-tab label="Tabela">
-      <mat-form-field appearance="fill">
-        <mat-label>Filtro</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Filtre os combustíveis">
-      </mat-form-field>
-      <div class="table-container">
-        <table mat-table [dataSource]="dataSource" matSort>
-          <!-- Coluna Combustível -->
-          <ng-container matColumnDef="combustivel">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Combustível</th>
-            <td mat-cell *matCellDef="let element">{{ element.combustivel }}</td>
-          </ng-container>
-          <!-- Coluna Preço -->
-          <ng-container matColumnDef="preco">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Preço</th>
-            <td mat-cell *matCellDef="let element">{{ element.preco | replaceComma }}</td>
-          </ng-container>
-          <!-- Coluna Data da Coleta -->
-          <ng-container matColumnDef="data_coleta">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Data da Coleta</th>
-            <td mat-cell *matCellDef="let element">{{ element.data_coleta }}</td>
-          </ng-container>
+      <div class="tab-content">
+        <mat-form-field appearance="outline">
+          <mat-label>Filtro</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Filtre os combustíveis" #inputFilter />
+        </mat-form-field>
+        <div class="table-container">
+          <table
+            mat-table
+            [dataSource]="dataSource"
+            matSort
+            matSortActive="data_coleta"
+            matSortDirection="asc"
+            matSortDisableClear
+          >
+            <!-- Coluna Combustível -->
+            <ng-container matColumnDef="combustivel">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Combustível</th>
+              <td mat-cell *matCellDef="let element">{{ element.combustivel }}</td>
+            </ng-container>
+            <!-- Coluna Preço -->
+            <ng-container matColumnDef="preco">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Preço</th>
+              <td mat-cell *matCellDef="let element">{{ element.preco | replaceComma }}</td>
+            </ng-container>
+            <!-- Coluna Data da Coleta -->
+            <ng-container matColumnDef="data_coleta">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Data da Coleta</th>
+              <td mat-cell *matCellDef="let element">{{ element.data_coleta }}</td>
+            </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Estatísticas" class="stats-tab">
+      <div class="tab-content">
+        <div class="stats-container">
+          <div class="card-container" *ngFor="let key of objectKeys(combustivelStats)">
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>{{ key }}</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <p>
+                  <mat-icon>trending_up</mat-icon> Máximo: R$ {{ combustivelStats[key].maximum }}
+                  <br>
+                  Data: {{ combustivelStats[key].maxDate | date: 'shortDate' }}
+                </p>
+                <p>
+                  <mat-icon>trending_down</mat-icon> Mínimo: R$ {{ combustivelStats[key].minimum }}
+                  <br>
+                  Data: {{ combustivelStats[key].minDate | date: 'shortDate' }}
+                </p>
+                <p>
+                  <mat-icon>trending_flat</mat-icon> Média: R$ {{ combustivelStats[key].average }}
+                </p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
       </div>
     </mat-tab>
   </mat-tab-group>

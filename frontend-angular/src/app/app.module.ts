@@ -26,7 +26,8 @@ import { ReplaceCommaPipe } from './pipes/replace-comma.pipe';
 import { MatChipsModule } from "@angular/material/chips";
 import { AppRoutingModule } from './app-routing.module';
 import {MatTableModule} from "@angular/material/table";
-import {MatTabsModule} from "@angular/material/tabs"; // Importa o AppRoutingModule
+import {MatTabsModule} from "@angular/material/tabs";
+import {MatSortModule} from "@angular/material/sort"; // Importa o AppRoutingModule
 
 @NgModule({
   declarations: [
@@ -38,29 +39,30 @@ import {MatTabsModule} from "@angular/material/tabs"; // Importa o AppRoutingMod
     SidenavComponent,
     ReplaceCommaPipe
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatIconModule,
-    MatCardModule,
-    MatListModule,
-    MatDividerModule,
-    MatAutocompleteModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatOptionModule,
-    FormsModule,
-    HttpClientModule,
-    MatChipsModule,
-    MatLineModule,
-    AppRoutingModule,
-    MatTableModule,
-    MatTabsModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatButtonModule,
+        MatIconModule,
+        MatCardModule,
+        MatListModule,
+        MatDividerModule,
+        MatAutocompleteModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatOptionModule,
+        FormsModule,
+        HttpClientModule,
+        MatChipsModule,
+        MatLineModule,
+        AppRoutingModule,
+        MatTableModule,
+        MatTabsModule,
+        MatSortModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

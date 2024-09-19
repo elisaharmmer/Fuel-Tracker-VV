@@ -12,38 +12,75 @@ import { Chart } from 'chart.js/auto';
 })
 export class GasStationDetailsComponent implements OnInit, AfterViewInit {
   posto: any;
-  dataSource: MatTableDataSource<any>;
+  dataSource = new MatTableDataSource<any>();
   displayedColumns: string[] = ['combustivel', 'preco', 'data_coleta'];
   chart: any;
+  combustiveis: { [key: string]: any[] } = {}; // Adicionado para armazenar os combustíveis
+  combustivelStats: any = {};
 
-  @ViewChild(MatSort)
-  sort: MatSort = new MatSort;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private route: ActivatedRoute,
     private gasStationService: GasStationService
-  ) {
-    this.dataSource = new MatTableDataSource();
-  }
+  ) {}
 
   ngOnInit(): void {
     const postoId = +this.route.snapshot.paramMap.get('id')!;
     this.gasStationService.getPostoDetalhes(postoId).subscribe(data => {
       this.posto = data;
-      const combinedData = Object.keys(data.combustiveis).flatMap(combustivelNome =>
-        data.combustiveis[combustivelNome].map((item: any) => ({
+      this.combustiveis = data.combustiveis; // Corrigido: Atribuir os dados dos combustíveis
+
+      // Calcular estatísticas para cada combustível
+      this.calculateStats();
+
+      const combinedData = Object.keys(this.combustiveis).flatMap(combustivelNome =>
+        this.combustiveis[combustivelNome].map((item: any) => ({
           combustivel: combustivelNome,
           preco: item.preco,
           data_coleta: new Date(item.data_coleta).toLocaleDateString('pt-BR')
         }))
       );
       this.dataSource.data = combinedData;
-      this.createChart(data.combustiveis); // Criar o gráfico após carregar os dados
+      this.createChart(this.combustiveis);
     });
   }
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+  }
+
+  calculateStats() {
+    Object.keys(this.combustiveis).forEach(combustivelNome => {
+      const precos = this.combustiveis[combustivelNome];
+      const total = precos.reduce((sum, item) => sum + item.preco, 0);
+      const avg = (total / precos.length).toFixed(2);
+      const min = Math.min(...precos.map(item => item.preco));
+      const max = Math.max(...precos.map(item => item.preco));
+
+      // Encontrar as datas para os valores mínimo e máximo
+      const minDate = precos
+        .filter(item => item.preco === min)
+        .map(item => item.data_coleta)
+        .sort()[0];
+      const maxDate = precos
+        .filter(item => item.preco === max)
+        .map(item => item.data_coleta)
+        .sort()[0];
+
+      this.combustivelStats[combustivelNome] = {
+        average: avg,
+        minimum: min,
+        maximum: max,
+        minDate: minDate,
+        maxDate: maxDate
+      };
+    });
+  }
+
+
+  objectKeys(obj: any) {
+    return Object.keys(obj);
   }
 
   applyFilter(event: Event) {
@@ -60,36 +97,40 @@ export class GasStationDetailsComponent implements OnInit, AfterViewInit {
       label: `Preço do ${combustivelNome}`,
       data: combustiveis[combustivelNome].map((item: any) => item.preco),
       borderColor: this.getRandomColor(),
-      fill: false
+      fill: false,
     }));
 
-    this.chart = new Chart('combustiveisChart', {
+    const ctx = document.getElementById('combustiveisChart') as HTMLCanvasElement;
+
+    this.chart = new Chart(ctx, {
       type: 'line',
       data: {
         labels: labels,
-        datasets: datasets
+        datasets: datasets,
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false, // Permite que o gráfico ajuste sua altura
         scales: {
           y: {
             beginAtZero: false,
             title: {
               display: true,
-              text: 'Preço (R$)'
-            }
+              text: 'Preço (R$)',
+            },
           },
           x: {
             title: {
               display: true,
-              text: 'Data da Coleta'
-            }
-          }
-        }
-      }
+              text: 'Data da Coleta',
+            },
+          },
+        },
+      },
     });
   }
 
-  // Função para gerar uma cor aleatória
+
   private getRandomColor(): string {
     const letters = '0123456789ABCDEF';
     let color = '#';

@@ -1,25 +1,24 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .example-container {
-  height: 100vh;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .content {
-  padding: 16px;
-}
-
-.example-card {
-  margin: 8px;
-}
-
-.footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-
-.toolbar-title {
   flex: 1;
+  overflow: auto;
 }
 
-.spacer {
-  flex: 1;
+.mat-tab-group {
+  height: 100%;
+}
+
+.mat-tab-body-wrapper {
+  height: 100%;
 }

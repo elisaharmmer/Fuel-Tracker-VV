@@ -1,9 +1,32 @@
 @use '@angular/material' as mat;
 
-// Remove the default margin of the body
-body {
+html, body {
+  height: 100%;
   margin: 0;
+  padding: 0;
 }
+
+mat-sidenav-container {
+  height: 100%;
+}
+
+mat-sidenav-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+  padding: 16px;
+  overflow: auto;
+}
+
+
+.full-height {
+  height: 100%;
+}
+
 
 // Define the light theme.
 $light-theme: mat.define-light-theme((
@@ -36,3 +59,4 @@ $dark-theme: mat.define-dark-theme((
 .dark-theme {
   @include my-app-theme($dark-theme);
 }
+
