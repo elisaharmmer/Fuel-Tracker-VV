@@ -23,7 +23,7 @@ export class PrecoColetado {
   dataColeta: Date;
 
   @ManyToOne(() => Posto, (posto) => posto.precosColetados)
-  @JoinColumn({ name: 'PostoID' })  // Alterado para referenciar corretamente PostoID
+  @JoinColumn({ name: 'PostoID' })
   posto: Posto;
 
   @ManyToOne(() => Combustivel, (combustivel) => combustivel.precosColetados)
