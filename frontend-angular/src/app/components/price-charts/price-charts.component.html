@@ -1,1 +1,45 @@
-<p>price-charts works!</p>
+<div>
+  <h2>Preço Médio por Posto</h2>
+  <table mat-table [dataSource]="precoMedioPostos">
+    <ng-container matColumnDef="posto">
+      <th mat-header-cell *matHeaderCellDef>Posto</th>
+      <td mat-cell *matCellDef="let element">{{ element.posto }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="combustivel">
+      <th mat-header-cell *matHeaderCellDef>Combustível</th>
+      <td mat-cell *matCellDef="let element">{{ element.combustivel }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="preco_medio">
+      <th mat-header-cell *matHeaderCellDef>Preço Médio</th>
+      <td mat-cell *matCellDef="let element">{{ element.preco_medio | replaceComma }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['posto', 'combustivel', 'preco_medio']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['posto', 'combustivel', 'preco_medio']"></tr>
+  </table>
+</div>
+
+<div>
+  <h2>Variação de Preço por Posto</h2>
+  <table mat-table [dataSource]="variacaoPrecoPostos">
+    <ng-container matColumnDef="posto">
+      <th mat-header-cell *matHeaderCellDef>Posto</th>
+      <td mat-cell *matCellDef="let element">{{ element.posto }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="combustivel">
+      <th mat-header-cell *matHeaderCellDef>Combustível</th>
+      <td mat-cell *matCellDef="let element">{{ element.combustivel }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="variacao">
+      <th mat-header-cell *matHeaderCellDef>Variação de Preço</th>
+      <td mat-cell *matCellDef="let element">{{ element.variacao | replaceComma }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['posto', 'combustivel', 'variacao']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['posto', 'combustivel', 'variacao']"></tr>
+  </table>
+</div>
