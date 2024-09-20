@@ -1,122 +1,184 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GasStationService } from '../../services/gas-station.service';
 import * as moment from 'moment';
-import {Chart} from "chart.js/auto";
+import { Chart, registerables } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import annotationPlugin from 'chartjs-plugin-annotation';
+import { BehaviorSubject, combineLatest, Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import positioners from "chart.js/dist/plugins/plugin.tooltip";
+
+
+// Register the plugins
+Chart.register(...registerables);
+Chart.register([ChartDataLabels, annotationPlugin]);
 
 @Component({
   selector: 'app-price-charts',
   templateUrl: './price-charts.component.html',
-  styleUrls: ['./price-charts.component.scss']
+  styleUrls: ['./price-charts.component.scss'],
 })
-export class PriceChartsComponent implements OnInit {
-  averagePriceData: any[] = [];
-  priceVariationData: any[] = [];
-  dataInicio: moment.Moment;
-  dataFim: moment.Moment;
+export class PriceChartsComponent implements OnInit, OnDestroy {
+  dataInicioSubject = new BehaviorSubject<string | null>(null);
+  dataFimSubject = new BehaviorSubject<string | null>(null);
+  subscription: Subscription = new Subscription();
+  groupedDataByCombustivel: { [key: string]: any[] } = {};
+  charts: Chart[] = [];
 
-  constructor(private gasStationService: GasStationService) {
-    // Definindo a data de fim como hoje e a data de início como 6 meses atrás
-    this.dataFim = moment();
-    this.dataInicio = moment().subtract(6, 'months');
-  }
+  // Added properties for data binding
+  dataInicio: string = '';
+  dataFim: string = '';
+
+  // Expose Object.keys to the template
+  objectKeys = Object.keys;
+
+  constructor(private gasStationService: GasStationService) {}
 
   ngOnInit(): void {
-    this.getAveragePriceByPosto();
-    this.getPriceVariationByPosto();
+    const today = moment().format('YYYY-MM-DD');
+    const sixMonthsAgo = moment().subtract(6, 'months').format('YYYY-MM-DD');
+
+    // Initialize the date properties
+    this.dataInicio = sixMonthsAgo;
+    this.dataFim = today;
+
+    // Update the BehaviorSubjects with the initial dates
+    this.dataInicioSubject.next(this.dataInicio);
+    this.dataFimSubject.next(this.dataFim);
+
+    // Subscribe to changes in dates
+    this.subscription.add(
+      combineLatest([this.dataInicioSubject, this.dataFimSubject])
+        .pipe(filter(([dataInicio, dataFim]) => !!dataInicio && !!dataFim))
+        .subscribe(() => {
+          this.updateCharts();
+        })
+    );
   }
 
-  getAveragePriceByPosto(): void {
-    const formattedDataInicio = this.dataInicio.format('YYYY-MM-DD');
-    const formattedDataFim = this.dataFim.format('YYYY-MM-DD');
-
-    this.gasStationService.getAveragePriceByPosto(formattedDataInicio, formattedDataFim)
-      .subscribe(data => {
-        this.averagePriceData = data;
-        this.createAveragePriceChart();
-      });
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
-  getPriceVariationByPosto(): void {
-    this.gasStationService.getPriceVariationByPosto()
-      .subscribe(data => {
-        this.priceVariationData = data;
-        this.createPriceVariationChart();
-      });
+  updateCharts() {
+    if (this.dataInicio && this.dataFim) {
+      this.gasStationService
+        .getAveragePriceByPosto(this.dataInicio, this.dataFim)
+        .subscribe((data: any[]) => {
+          const filteredData = data.filter(
+            (item: any) => item.preco_medio !== null
+          );
+          this.groupedDataByCombustivel =
+            this.groupDataByCombustivel(filteredData);
+          this.destroyCharts();
+
+          // Wait for the DOM to update before rendering charts
+          setTimeout(() => {
+            this.renderCharts();
+          }, 0);
+        });
+    }
   }
 
-  createAveragePriceChart(): void {
-    const labels = this.averagePriceData.map(item => `${item.posto} - ${item.combustivel}`);
-    const data = this.averagePriceData.map(item => item.preco_medio);
+  groupDataByCombustivel(data: any[]) {
+    return data.reduce((acc, item) => {
+      const combustivel = item.combustivel;
+      if (!acc[combustivel]) {
+        acc[combustivel] = [];
+      }
+      acc[combustivel].push(item);
+      return acc;
+    }, {});
+  }
 
-    new Chart('averagePriceChart', {
-      type: 'bar',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: 'Preço Médio (R$)',
-          data: data,
-          backgroundColor: 'rgba(54, 162, 235, 0.2)',
-          borderColor: 'rgba(54, 162, 235, 1)',
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: 'Preço Médio (R$)'
-            }
-          },
-          x: {
-            title: {
-              display: true,
-              text: 'Postos e Combustíveis'
-            }
+  getAverageByCombustivel(combustivel: any) {
+    return this.groupedDataByCombustivel[combustivel].reduce((sum, item) => parseFloat(sum) + parseFloat(item.preco_medio), 0) / this.groupedDataByCombustivel[combustivel].length;
+  }
+
+  renderCharts() {
+    Object.keys(this.groupedDataByCombustivel).forEach(
+      (combustivel, index) => {
+        const canvas = document.getElementById(
+          `chart-${index}`
+        ) as HTMLCanvasElement;
+
+        if (canvas) {
+          const ctx = canvas.getContext('2d');
+          if (ctx) {
+
+            const avgPrice = this.getAverageByCombustivel(combustivel);
+            const chart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: this.groupedDataByCombustivel[combustivel].map(
+                  (item) => item.posto
+                ),
+                datasets: [
+                  {
+                    label: `Preço Médio (${combustivel})`,
+                    data: this.groupedDataByCombustivel[combustivel].map(
+                      (item) => item.preco_medio
+                    ),
+                    backgroundColor: 'rgb(63, 80, 180, 1)',
+                  },
+                ],
+              },
+              options: {
+                responsive: true,
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                  },
+                },
+                plugins: {
+                  datalabels: {
+                    anchor: 'end',
+                    align: 'end',
+                    formatter: (value: any) => {
+                      return typeof value === 'number' ? value.toFixed(3) : parseFloat(value).toFixed(3);
+                    },
+                  },
+                  annotation: {
+                    annotations: {
+                      average: {
+                        type: 'line',
+                        borderColor: 'red',
+                        borderWidth: 3,
+                        borderDash: [6, 6],
+                        borderDashOffset: 0,
+                        label: {
+                          display: true,
+                          content: `Média: R$ ${avgPrice.toFixed(2)}`,
+                          position: 'end',
+                          backgroundColor: 'red',
+                        },
+                        scaleID: 'y',
+                        value: avgPrice
+                      },
+                    },
+                  },
+                },
+              },
+            });
+            this.charts.push(chart);
           }
         }
       }
-    });
+    );
   }
 
-  createPriceVariationChart(): void {
-    const labels = this.priceVariationData.map(item => item.posto);
-    const data = this.priceVariationData.map(item => item.variacao);
-
-    new Chart('priceVariationChart', {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: 'Variação de Preço (R$)',
-          data: data,
-          borderColor: 'rgba(255, 99, 132, 1)',
-          fill: false
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: 'Variação de Preço (R$)'
-            }
-          },
-          x: {
-            title: {
-              display: true,
-              text: 'Postos'
-            }
-          }
-        }
-      }
-    });
+  destroyCharts() {
+    this.charts.forEach((chart) => chart.destroy());
+    this.charts = [];
   }
 
-  // Atualizar gráficos ao alterar as datas
-  updateCharts(): void {
-    this.getAveragePriceByPosto();
+  onDataInicioChange(newDate: any) {
+    const dateFormatted = moment(newDate).format('YYYY-MM-DD');
+    this.dataInicioSubject.next(dateFormatted);
+  }
+
+  onDataFimChange(newDate: any) {
+    const dateFormatted = moment(newDate).format('YYYY-MM-DD');
+    this.dataFimSubject.next(dateFormatted);
   }
 }

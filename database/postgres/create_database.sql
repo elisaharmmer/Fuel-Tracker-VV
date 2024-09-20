@@ -38,7 +38,7 @@ create table "POSTO"
     "Cidade"       varchar(100) not null,
     "Estado"       varchar(50) not null,
     "CEP"          varchar(10) not null,
-    UNIQUE ("CNPJ") -- Aqui você adiciona a restrição de unicidade
+    UNIQUE ("CNPJ")
 );
 
 
