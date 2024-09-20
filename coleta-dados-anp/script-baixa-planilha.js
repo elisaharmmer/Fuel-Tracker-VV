@@ -78,7 +78,7 @@ const revendedorLinks = Array.from(links).filter(link =>
     link.textContent.includes('Preços por posto revendedor (combustíveis automotivos e GLP P13)')
 );
 
-// Chamao o código que precisa de 3 parâmetros:
+// Chamam o código que precisa de 3 parâmetros:
 // 1. O array de links;
 // 2. A quantidade de downloads a serem feitos de cada vez;
 // 3. O tempo para esperar para a próxima requisição;
