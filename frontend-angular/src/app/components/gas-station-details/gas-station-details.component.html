@@ -1,0 +1,100 @@
+<div *ngIf="posto">
+  <h1><b>{{ posto.nome_fantasia }}</b></h1>
+  <div style="display: flex; align-items: center;">
+    <mat-icon style="font-size: 42px; width: 42px; height: 42px; margin: 1rem;">pin_drop</mat-icon>
+    <p>
+      Endereço: {{ posto.logradouro }}, {{ posto.numero }}, {{ posto.bairro }}, {{ posto.cidade }}, {{ posto.estado }}. CEP: {{ posto.cep | cepMask }}
+    </p>
+  </div>
+</div>
+<div>
+  <mat-tab-group color="accent">
+    <mat-tab label="Gráfico">
+      <div style="height: 100%; display: flex; align-items: center;">
+        <canvas id="combustiveisChart"></canvas>
+      </div>
+    </mat-tab>
+    <mat-tab label="Tabela">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Filtro</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Filtre os combustíveis" #inputFilter />
+      </mat-form-field>
+      <div class="table-container">
+        <table
+          mat-table
+          [dataSource]="dataSource"
+          matSort
+          matSortActive="data_coleta"
+          matSortDirection="asc"
+          matSortDisableClear
+        >
+          <!-- Coluna Combustível -->
+          <ng-container matColumnDef="combustivel">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Combustível</th>
+            <td mat-cell *matCellDef="let element">{{ element.combustivel }}</td>
+          </ng-container>
+          <!-- Coluna Preço -->
+          <ng-container matColumnDef="preco">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Preço</th>
+            <td mat-cell *matCellDef="let element">{{ element.preco | replaceComma }}</td>
+          </ng-container>
+          <!-- Coluna Data da Coleta -->
+          <ng-container matColumnDef="data_coleta">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Data da Coleta</th>
+            <td mat-cell *matCellDef="let element">{{ element.data_coleta }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </mat-tab>
+    <mat-tab label="Estatísticas">
+      <div class="stats-container">
+        <div class="card-container" *ngFor="let key of objectKeys(combustivelStats)">
+          <mat-card>
+            <mat-card-header style="margin: 10px 0;">
+              <mat-card-title style="font-size: 24px;">{{ key }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <mat-divider></mat-divider>
+              <div style="display: flex; align-items: center; font-size: 16px;">
+                <mat-icon style="font-size: 40px; width: 40px; height: 40px; margin: 1rem; color: #2e7b32;">trending_up</mat-icon>
+                <div>
+                  Máximo: R$ {{ combustivelStats[key].maximum }}
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; font-size: 16px;">
+                <mat-icon style="font-size: 42px; width: 42px; height: 42px; margin: 1rem; color: #9c973b;">event</mat-icon>
+                <div>
+                  Data: {{ combustivelStats[key].maxDate | date:'dd/MM/yyyy' }}
+                </div>
+              </div>
+              <mat-divider style="margin: 16px 0;"></mat-divider>
+              <div style="display: flex; align-items: center; font-size: 16px;">
+                <mat-icon style="font-size: 40px; width: 40px; height: 40px; margin: 1rem; color: #7b2e2e">trending_down</mat-icon>
+                <div>
+                  Mínimo: R$ {{ combustivelStats[key].maximum }}
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; font-size: 16px;">
+                <mat-icon style="font-size: 42px; width: 42px; height: 42px; margin: 1rem; color: #9c973b;">event</mat-icon>
+                <div>
+                  Data: {{ combustivelStats[key].minDate | date:'dd/MM/yyyy' }}
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+              <div style="display: flex; align-items: center; font-size: 16px;">
+                <mat-icon style="font-size: 40px; width: 40px; height: 40px; margin: 1rem; color: #2e347b">trending_flat</mat-icon>
+                <div>
+                  Média: R$ {{ combustivelStats[key].average }}
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+
+</div>

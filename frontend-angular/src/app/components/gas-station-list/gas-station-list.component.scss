@@ -1,0 +1,48 @@
+.filter-container {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  width: 100%;
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.station-list {
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  grid-column-gap: 16px;
+
+
+
+  mat-card {
+
+    align-self: stretch;
+    margin: auto;
+    width: 100%;
+
+    mat-card-content {
+      display: block;
+      margin: 10px 0;
+    }
+
+    mat-card-action {
+      .action-detail {
+        display: flex;
+        justify-content: center;
+        width: 120px;
+      }
+    }
+
+    mat-card-footer {
+      .item-gas {
+        padding: 10px;
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,72 @@
+@use '@angular/material' as mat;
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: 800;
+
+}
+
+p {
+  font-size: 16px;
+}
+
+mat-sidenav-container {
+  height: 100%;
+}
+
+mat-sidenav-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+  padding: 16px;
+  overflow: auto;
+}
+
+
+.full-height {
+  height: 100%;
+}
+
+
+// Define the light theme.
+$light-theme: mat.define-light-theme((
+  color: (
+    primary: mat.define-palette(mat.$indigo-palette),
+    accent: mat.define-palette(mat.$pink-palette, A200, A100, A400),
+  ),
+));
+
+// Define the dark theme.
+$dark-theme: mat.define-dark-theme((
+  color: (
+    primary: mat.define-palette(mat.$indigo-palette),
+    accent: mat.define-palette(mat.$cyan-palette, A200, A100, A400),
+  ),
+));
+
+// Create a mixin to include only the component themes we use.
+@mixin my-app-theme($theme) {
+  @include mat.all-component-colors($theme);
+  @include mat.all-component-typographies($theme);
+  @include mat.all-component-densities($theme);
+}
+
+// Apply the themes
+.light-theme {
+  @include my-app-theme($light-theme);
+}
+
+.dark-theme {
+  @include my-app-theme($dark-theme);
+}
+

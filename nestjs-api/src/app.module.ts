@@ -14,6 +14,8 @@ import { Combustivel } from './entities/combustivel.entity';
 import { PrecoColetado } from './entities/preco-coletado.entity';
 import { HealthModule } from './modules/health/health.module';
 import { UtilService } from './services/util.service';
+import {InsightsService} from "./services/insights.service";
+import {InsightsController} from "./controllers/insights/insights.controller";
 
 @Module({
   imports: [
@@ -40,7 +42,8 @@ import { UtilService } from './services/util.service';
     PostoController,
     CombustivelController,
     PrecoController,
+      InsightsController,
   ],
-  providers: [AppService, PostoService, CombustivelService, PrecoService, UtilService],
+  providers: [AppService, PostoService, CombustivelService, PrecoService, UtilService, InsightsService],
 })
 export class AppModule {}
