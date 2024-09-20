@@ -1,23 +1,44 @@
 <div class="charts-container">
-  <!-- Datepickers para selecionar datas -->
+  <!-- Datepickers for selecting dates -->
   <div class="datepickers">
     <mat-form-field>
-      <input matInput [matDatepicker]="inicioPicker" placeholder="Data Início" [(ngModel)]="dataInicio" (ngModelChange)="onDataInicioChange($event)">
-      <mat-datepicker-toggle matSuffix [for]="inicioPicker"></mat-datepicker-toggle>
+      <input
+        matInput
+        [matDatepicker]="inicioPicker"
+        placeholder="Data Início"
+        [(ngModel)]="dataInicio"
+        (dateChange)="onDataInicioChange($event.value)"
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="inicioPicker"
+      ></mat-datepicker-toggle>
       <mat-datepicker #inicioPicker></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput [matDatepicker]="fimPicker" placeholder="Data Fim" [(ngModel)]="dataFim" (ngModelChange)="onDataFimChange($event)">
+      <input
+        matInput
+        [matDatepicker]="fimPicker"
+        placeholder="Data Fim"
+        [(ngModel)]="dataFim"
+        (dateChange)="onDataFimChange($event.value)"
+      />
       <mat-datepicker-toggle matSuffix [for]="fimPicker"></mat-datepicker-toggle>
       <mat-datepicker #fimPicker></mat-datepicker>
     </mat-form-field>
 
-    <button mat-raised-button color="primary" (click)="updateCharts()">Atualizar</button>
+    <button mat-raised-button color="primary" (click)="updateCharts()">
+      Atualizar
+    </button>
   </div>
 
+  <!-- Display charts by fuel type -->
   <div class="chart-grid">
-    <div *ngFor="let combustivel of objectKeys(groupedDataByCombustivel); let i = index" class="chart-item">
+    <div
+      *ngFor="let combustivel of objectKeys(groupedDataByCombustivel); let i = index"
+      class="chart-item"
+    >
       <h3>{{ combustivel }}</h3>
       <canvas id="chart-{{ i }}"></canvas>
     </div>
