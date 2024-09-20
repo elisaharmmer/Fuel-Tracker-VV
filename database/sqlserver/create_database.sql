@@ -112,19 +112,3 @@ BEGIN
     ORDER BY p.NomeFantasia, c.Nome;
 END;
 GO
-
--- Criação do usuário específico para a API NestJS
-CREATE LOGIN api_user WITH PASSWORD = 'SenhaSegura123!';
-GO
-
-CREATE USER api_user FOR LOGIN api_user;
-GO
-
--- Conceder permissões ao usuário para acessar as tabelas e stored procedures
-GRANT SELECT, INSERT, UPDATE, DELETE ON dbo.POSTO TO api_user;
-GRANT SELECT, INSERT, UPDATE, DELETE ON dbo.COMBUSTIVEL TO api_user;
-GRANT SELECT, INSERT, UPDATE, DELETE ON dbo.PRECO_COLETADO TO api_user;
-GRANT EXECUTE ON dbo.sp_MenorPrecoPorCombustivel TO api_user;
-GRANT EXECUTE ON dbo.sp_PrecoMedioCombustivel TO api_user;
-GRANT EXECUTE ON dbo.sp_ResumoPostosEPrecos TO api_user;
-GO

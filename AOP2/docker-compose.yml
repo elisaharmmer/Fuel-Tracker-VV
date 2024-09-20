@@ -1,0 +1,18 @@
+
+version: '3.8'
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=SenhaForte123
+    ports:
+      - 1433:1433
+    volumes:
+      - ./backup:/var/opt/mssql/backup
+    networks:
+      - sqlserver-network
+networks:
+  sqlserver-network:
+    driver: bridge
