@@ -2,13 +2,13 @@
   <!-- Datepickers para selecionar datas -->
   <div class="datepickers">
     <mat-form-field>
-      <input matInput [matDatepicker]="inicioPicker" placeholder="Data Início" [(ngModel)]="dataInicio">
+      <input matInput [matDatepicker]="inicioPicker" placeholder="Data Início" [(ngModel)]="dataInicio" (ngModelChange)="onDataInicioChange($event)">
       <mat-datepicker-toggle matSuffix [for]="inicioPicker"></mat-datepicker-toggle>
       <mat-datepicker #inicioPicker></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput [matDatepicker]="fimPicker" placeholder="Data Fim" [(ngModel)]="dataFim">
+      <input matInput [matDatepicker]="fimPicker" placeholder="Data Fim" [(ngModel)]="dataFim" (ngModelChange)="onDataFimChange($event)">
       <mat-datepicker-toggle matSuffix [for]="fimPicker"></mat-datepicker-toggle>
       <mat-datepicker #fimPicker></mat-datepicker>
     </mat-form-field>
@@ -16,13 +16,10 @@
     <button mat-raised-button color="primary" (click)="updateCharts()">Atualizar</button>
   </div>
 
-  <div>
-    <h2>Preço Médio por Posto e Combustível</h2>
-    <canvas id="averagePriceChart"></canvas>
-  </div>
-
-  <div>
-    <h2>Variação de Preço por Posto</h2>
-    <canvas id="priceVariationChart"></canvas>
+  <div class="chart-grid">
+    <div *ngFor="let combustivel of objectKeys(groupedDataByCombustivel); let i = index" class="chart-item">
+      <h3>{{ combustivel }}</h3>
+      <canvas id="chart-{{ i }}"></canvas>
+    </div>
   </div>
 </div>
