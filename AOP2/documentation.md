@@ -132,7 +132,7 @@ O projeto pode ser executado de duas maneiras: usando Docker Compose ou diretame
 
     
 
-    `git clone <URL_DO_REPOSITÓRIO>`
+    `git clone https://github.com/elisaharmmer/Fuel-Tracker-VV.git`
 
     b. **Navegar até o diretório do projeto**:
 
@@ -162,25 +162,18 @@ O projeto pode ser executado de duas maneiras: usando Docker Compose ou diretame
 
     -   **Script de criação do banco de dados e tabelas**:
 
-     
         `create_database.sql`
 
     -   **Script de inserção de dados**:
 
-     
         `inserts_database.sql`
-
-    -   **Script de criação de stored procedures e índices**:
-
-     
-        `procedures_and_indexes.sql`
 
     f. **Opcional**: Usar o script de backup ou restauração:
 
     -   **Backup**:
-
-     
         `backup_script.sql`
+
+   > Obs.: Se estiver rodando com Docker (Docker-compose), basta executar o backup ou restauração e verificar na pasta `backup` o arquivo .bak;
 
 ### Opção 2: Executando no SQL Server Local
 
@@ -200,13 +193,8 @@ O projeto pode ser executado de duas maneiras: usando Docker Compose ou diretame
         `create_database.sql`
 
     -   **Script de inserção de dados**:
-
      
         `inserts_database.sql`
-
-    -   **Script de criação de stored procedures e índices**:
-
-        `procedures_and_indexes.sql`
 
     c. **Opcional**: Usar o script de backup ou restauração:
 
@@ -217,7 +205,7 @@ O projeto pode ser executado de duas maneiras: usando Docker Compose ou diretame
 
 Para executar os scripts via linha de comando usando o `sqlcmd`, utilize os comandos abaixo, substituindo `<server_name>`, `<username>` e `<password>` pelas informações do seu servidor:
 
-#### Criar o banco de dados e as tabelas
+#### Criar o banco de dados, tabelas, indixes e procedures
 
 ```bash
 sqlcmd -S <server_name> -U <username> -P <password> -i create_database.sql
@@ -227,13 +215,6 @@ sqlcmd -S <server_name> -U <username> -P <password> -i create_database.sql
 
 ```bash
 sqlcmd -S <server_name> -U <username> -P <password> -i inserts_database.sql
-```
-
-#### Criar stored procedures e índices
-
-
-```bash
-sqlcmd -S <server_name> -U <username> -P <password> -i procedures_and_indexes.sql
 ```
 
 #### Realizar o backup ou restauração
@@ -247,11 +228,9 @@ População de Dados
 
 Para atender aos requisitos do projeto, foram inseridos dados reais simulados que incluem:
 
--   **6 postos de combustíveis** em **2 bairros diferentes**.
--   **4 tipos de combustíveis**: Gasolina, Gasolina Aditivada, Etanol e Diesel.
--   **10 coletas de preços para cada posto**, em datas diferentes.
-
-*(Anexar ou descrever os dados inseridos, se necessário.)*
+-   **27 postos de combustíveis** em **18 bairros diferentes**.
+-   **5 tipos de combustíveis**: Gasolina, Gasolina Aditivada, Etanol, Diesel S10 e Diesel S500.
+-   **Pelo menos 10 coletas de preços para cada posto**, em datas diferentes totalizando **4426 Coletas diferentes**.
 
 Teste das Stored Procedures
 ---------------------------
@@ -268,26 +247,32 @@ Após a criação do banco de dados e inserção dos dados, as stored procedures
     -   **Com parâmetros**: Filtra por bairro e/ou combustível.
 
      
-        `EXEC sp_MenorPrecoPorCombustivel @Bairro = 'Centro', @NomeCombustivel = 'Gasolina';`
+        `EXEC sp_MenorPrecoPorCombustivel @Bairro = 'Divino Espírito Santo', @NomeCombustivel = 'Gasolina Comum';`
 
 2.  **sp_PrecoMedioCombustivel**
 
     -   **Sem parâmetros**: Retorna o preço médio geral de todos os combustíveis.
 
      
-        `EXEC sp_PrecoMedioCombustivel;`
+        ```sql
+        EXEC sp_PrecoMedioCombustivel;
+        ```
 
     -   **Com parâmetros**: Filtra por bairro e/ou período.
 
      
-        `EXEC sp_PrecoMedioCombustivel @Bairro = 'Centro', @DataInicio = '2024-01-01', @DataFim = '2024-12-31';`
+        ```sql
+        EXEC sp_PrecoMedioCombustivel @Bairro = 'Divino Espírito Santo', @DataInicio = '2024-01-01', @DataFim = '2024-12-31';
+        ```
 
 3.  **sp_ResumoPostosEPrecos**
 
     -   **Parâmetros obrigatórios**: Data de início e fim.
 
      
-        `EXEC sp_ResumoPostosEPrecos @DataInicio = '2024-01-01', @DataFim = '2024-12-31';`
+        ```sql
+        EXEC sp_ResumoPostosEPrecos @DataInicio = '2024-01-01', @DataFim = '2024-12-31';
+        ```
 
 Backup do Banco de Dados
 ------------------------
@@ -303,11 +288,18 @@ Para restaurar o backup:
     -   Siga as instruções para concluir a restauração.
 2.  **Usando o `sqlcmd`**:
 
-    sql
+   ```sql 
+   RESTORE DATABASE FuelTrackerVV FROM DISK = 'C:\Caminho\Para\FuelTrackerVV.bak' WITH REPLACE;
+   ```
 
-    
+Informações sensíveis
+---------------------
 
-    `RESTORE DATABASE FuelTrackerVV FROM DISK = 'C:\Caminho\Para\FuelTrackerVV.bak' WITH REPLACE;`
+Para fins de teste e executação do projeto, substia:
+
+  - `<server_name>` por `localhost`;
+  - `<username>` por `sa`;
+  - `<password>` por `SenhaForte123`;
 
 Considerações Finais
 --------------------
@@ -328,20 +320,18 @@ Para a AOP3, serão gerados:
 -   **Divulgação dos resultados** para a comunidade local por meio de mídias sociais ou murais públicos.
 -   **Documentação da divulgação**, incluindo imagens ou links conforme exigido.
 
+Você pode ter uma prévia da aplicação nesse link: https://fuel-tracker-vv-zkis.vercel.app (frontend) e https://fuel-tracker-vv.vercel.app (backend)
+
+
 * * * * *
-
-**Observação**: Certifique-se de que todos os scripts mencionados estão disponíveis e funcionais. Verifique também se os dados inseridos atendem às quantidades e especificações exigidas pelo projeto.
-
-**Anexos**:
-
--   `create_database.sql`
--   `inserts_database.sql`
--   `procedures_and_indexes.sql`
--   `FuelTrackerVV.bak`
--   *(Outros arquivos relevantes)*
 
 **Contato para Dúvidas**:
 
--   Nome do Aluno: [Seu Nome]
--   E-mail: [Seu E-mail]
--   Turma: [Sua Turma]
+
+-   Nome do Aluno: Elisa Harmmer Ferreira
+-   E-mail: elisahferreira@gmail.com
+-   Turma: SI2Ead
+---
+-   Nome do Aluno: Nícolas Aigner
+-   E-mail: nicolas.aigner@gmail.com
+-   Turma: CC2Ead
