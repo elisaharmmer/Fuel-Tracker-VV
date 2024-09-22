@@ -274,7 +274,7 @@ export class PriceChartsComponent implements OnInit, OnDestroy {
                 distribution.aboveAverage,
               ];
               backgroundColors = [
-                'rgba(75, 192, 192, 0.6)', // Abaixo da Média
+                'rgba(127,187,250,0.6)', // Abaixo da Média
                 'rgba(255, 99, 132, 0.6)', // Acima da Média
               ];
             } else {
@@ -285,9 +285,9 @@ export class PriceChartsComponent implements OnInit, OnDestroy {
                 distribution.aboveAverage,
               ];
               backgroundColors = [
-                'rgba(75, 192, 192, 0.6)', // Abaixo da Média
-                'rgba(255, 205, 86, 0.6)', // Na Média
-                'rgba(255, 99, 132, 0.6)', // Acima da Média
+                'rgba(118,153,239,0.6)', // Abaixo da Média
+                'rgba(195,195,195,0.6)', // Na Média
+                'rgba(237,99,155,0.6)', // Acima da Média
               ];
             }
 

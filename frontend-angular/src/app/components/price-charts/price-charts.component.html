@@ -57,10 +57,8 @@
 
   <!-- Exibir gráficos por tipo de combustível -->
   <div class="chart-grid">
-    <div
-      class="item"
-      *ngFor="let combustivel of objectKeys(groupedDataByCombustivel); let i = index"
-    >
+    <div class="item" *ngFor="let combustivel of objectKeys(groupedDataByCombustivel); let i = index">
+      <mat-divider></mat-divider>
       <h3>{{ combustivel }}</h3>
       <div class="content">
         <div class="insights">
@@ -86,6 +84,7 @@
             </div>
           </ng-container>
         </div>
+        <mat-divider vertical></mat-divider>
         <div class="chart">
           <canvas id="chart-{{ i }}"></canvas>
         </div>
