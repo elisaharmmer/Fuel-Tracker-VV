@@ -11,18 +11,21 @@
   }
 }
 
-.datepickers {
-  display: flex;
-  height: 80px;
-  gap: 8px;
+.filters {
+  .filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
 
-  mat-form-field {
-    flex: 1;
-  }
+    mat-form-field {
+      flex: 1 1 200px;
+      min-width: 150px;
+    }
 
-  button {
-    align-self: flex-end;
-    margin-bottom: 8px;
+    button {
+      height: 56px; // Alinha a altura com os mat-form-fields
+    }
   }
 }
 
@@ -73,7 +76,7 @@
 
           canvas {
             max-width: 100%;
-            max-height: 200px;
+            max-height: 200px; /* Defina a altura máxima que preferir */
             width: 100%;
             height: auto;
           }

@@ -19,6 +19,7 @@ Chart.register([ChartDataLabels, annotationPlugin]);
 export class PriceChartsComponent implements OnInit, OnDestroy {
   dataInicioSubject = new BehaviorSubject<string | null>(null);
   dataFimSubject = new BehaviorSubject<string | null>(null);
+  combustivelSubject = new BehaviorSubject<string | null>(null);
   subscription: Subscription = new Subscription();
   groupedDataByCombustivel: { [key: string]: any[] } = {};
   insightsByCombustivel: { [key: string]: any } = {};
@@ -28,9 +29,13 @@ export class PriceChartsComponent implements OnInit, OnDestroy {
   // Propriedades para data binding
   dataInicio: string = '';
   dataFim: string = '';
+  combustivelSelecionado: string = '';
 
   // Expor Object.keys para o template
   objectKeys = Object.keys;
+
+  // Lista de combustíveis disponíveis
+  combustiveis: string[] = [];
 
   constructor(private gasStationService: GasStationService) {}
 
@@ -46,12 +51,19 @@ export class PriceChartsComponent implements OnInit, OnDestroy {
     this.dataInicioSubject.next(this.dataInicio);
     this.dataFimSubject.next(this.dataFim);
 
-    // Subscrever às mudanças nas datas
+    // Atualizar os gráficos inicialmente
+    this.updateCharts(this.dataInicio, this.dataFim);
+
+    // Subscrever às mudanças nos filtros
     this.subscription.add(
-      combineLatest([this.dataInicioSubject, this.dataFimSubject])
+      combineLatest([
+        this.dataInicioSubject,
+        this.dataFimSubject,
+        this.combustivelSubject,
+      ])
         .pipe(filter(([dataInicio, dataFim]) => !!dataInicio && !!dataFim))
-        .subscribe(() => {
-          this.updateCharts();
+        .subscribe((data) => {
+          this.updateCharts(String(data[0]), String(data[1]));
         })
     );
   }
@@ -60,16 +72,28 @@ export class PriceChartsComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  updateCharts() {
-    if (this.dataInicio && this.dataFim) {
+  updateCharts(dataInicio: string, dataFim: string) {
+    if (dataInicio && dataFim) {
       this.gasStationService
-        .getAveragePriceByPosto(this.dataInicio, this.dataFim)
+        .getAveragePriceByPosto(dataInicio, dataFim)
         .subscribe((data: any[]) => {
           const filteredData = data.filter(
             (item: any) => item.preco_medio !== null
           );
-          this.groupedDataByCombustivel =
-            this.groupDataByCombustivel(filteredData);
+
+          // Extrair a lista de combustíveis disponíveis
+          this.combustiveis = [
+            ...new Set(filteredData.map((item) => item.combustivel)),
+          ];
+
+          // Aplicar o filtro de combustível
+          const dataToUse = filteredData.filter(
+            (item: any) =>
+              !this.combustivelSelecionado ||
+              item.combustivel === this.combustivelSelecionado
+          );
+
+          this.groupedDataByCombustivel = this.groupDataByCombustivel(dataToUse);
 
           // Calcular os insights para cada combustível
           this.calculateInsights();
@@ -139,13 +163,11 @@ export class PriceChartsComponent implements OnInit, OnDestroy {
       ).length;
 
       const belowAverage = data.filter(
-        (item) =>
-          parseFloat(item.preco_medio) < averagePrice - tolerance
+        (item) => parseFloat(item.preco_medio) < averagePrice - tolerance
       ).length;
 
       const aboveAverage = data.filter(
-        (item) =>
-          parseFloat(item.preco_medio) > averagePrice + tolerance
+        (item) => parseFloat(item.preco_medio) > averagePrice + tolerance
       ).length;
 
       // Percentuais
@@ -247,7 +269,10 @@ export class PriceChartsComponent implements OnInit, OnDestroy {
             if (distribution.equalAverage === 0) {
               // Remover a categoria "Na Média"
               labels = ['Abaixo da Média', 'Acima da Média'];
-              dataValues = [distribution.belowAverage, distribution.aboveAverage];
+              dataValues = [
+                distribution.belowAverage,
+                distribution.aboveAverage,
+              ];
               backgroundColors = [
                 'rgba(75, 192, 192, 0.6)', // Abaixo da Média
                 'rgba(255, 99, 132, 0.6)', // Acima da Média
@@ -321,5 +346,9 @@ export class PriceChartsComponent implements OnInit, OnDestroy {
   onDataFimChange(newDate: any) {
     const dateFormatted = moment(newDate).format('YYYY-MM-DD');
     this.dataFimSubject.next(dateFormatted);
+  }
+
+  onCombustivelChange(newValue: any) {
+    this.combustivelSubject.next(newValue);
   }
 }
