@@ -54,8 +54,8 @@
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <div class="action-detail">
-        <a mat-fab extended [routerLink]="['/posto', station.posto_id]">
+      <div class="action-detail" [routerLink]="['/posto', station.posto_id]">
+        <a mat-fab extended>
         <mat-icon>info</mat-icon>
           Ver Detalhes
         </a>

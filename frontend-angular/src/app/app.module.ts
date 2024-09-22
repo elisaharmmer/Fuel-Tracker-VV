@@ -1,4 +1,4 @@
-import {LOCALE_ID, NgModule} from '@angular/core';
+import {DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -30,11 +30,11 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {MatSortModule} from "@angular/material/sort";
 import { CepMaskPipe } from './pipes/cep-mask.pipe';
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {
-  MAT_MOMENT_DATE_FORMATS,
-  MomentDateAdapter,
-  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
-} from '@angular/material-moment-adapter';
+
+import localePt from '@angular/common/locales/pt';
+import {registerLocaleData} from "@angular/common";
+
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
@@ -77,7 +77,14 @@ import {
     ReactiveFormsModule,
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'pt'}
+    {
+      provide: LOCALE_ID,
+      useValue: 'pt',
+    },
+    {
+      provide: DEFAULT_CURRENCY_CODE,
+      useValue: 'BRL',
+    },
   ],
   bootstrap: [AppComponent]
 })
