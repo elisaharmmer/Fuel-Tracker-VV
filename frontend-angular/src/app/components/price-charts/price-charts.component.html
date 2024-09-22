@@ -1,8 +1,4 @@
 <div class="charts-container">
-  <div class="title-page">
-    <h1>Gráficos de Preços</h1>
-    <mat-divider></mat-divider>
-  </div>
 
   <div class="filters">
     <!-- Filtros -->
@@ -16,7 +12,6 @@
           [(ngModel)]="dataInicio"
           (dateChange)="onDataInicioChange($event.value)"
         />
-        <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle
           matSuffix
           [for]="inicioPicker"
@@ -33,7 +28,6 @@
           [(ngModel)]="dataFim"
           (dateChange)="onDataFimChange($event.value)"
         />
-        <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle
           matSuffix
           [for]="fimPicker"
