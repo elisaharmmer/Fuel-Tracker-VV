@@ -16,6 +16,7 @@
           [(ngModel)]="dataInicio"
           (dateChange)="onDataInicioChange($event.value)"
         />
+        <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle
           matSuffix
           [for]="inicioPicker"
@@ -32,6 +33,7 @@
           [(ngModel)]="dataFim"
           (dateChange)="onDataFimChange($event.value)"
         />
+        <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle
           matSuffix
           [for]="fimPicker"
@@ -52,9 +54,10 @@
         </mat-select>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" (click)="updateCharts('', '')">
+      <button class="button-att" mat-raised-button color="primary" (click)="updateCharts('', '')">
         Atualizar
       </button>
+
     </div>
   </div>
 

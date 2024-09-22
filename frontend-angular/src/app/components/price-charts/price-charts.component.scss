@@ -12,20 +12,29 @@
 }
 
 .filters {
+  margin: 0;
+  padding: 0;
+
   .filter-group {
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
-    align-items: center;
+    align-items: normal;
+    height: 100%;
 
     mat-form-field {
       flex: 1 1 200px;
       min-width: 150px;
+      height: 100%;
     }
 
-    button {
-      height: 56px; // Alinha a altura com os mat-form-fields
+    .button-att {
+      height: auto;
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0;
     }
+
   }
 }
 
