@@ -65,13 +65,10 @@ export class PriceChartsComponent implements OnInit, OnDestroy {
       this.gasStationService
         .getAveragePriceByPosto(this.dataInicio, this.dataFim)
         .subscribe((data: any[]) => {
-          const filteredData = data.filter(
-            (item: any) => item.preco_medio !== null
-          );
-          this.groupedDataByCombustivel =
-            this.groupDataByCombustivel(filteredData);
-          this.destroyCharts();
 
+          const filteredData = data.filter((item: any) => item.preco_medio !== null);
+          this.groupedDataByCombustivel = this.groupDataByCombustivel(filteredData);
+          this.destroyCharts();
           // Wait for the DOM to update before rendering charts
           setTimeout(() => {
             this.renderCharts();
@@ -115,7 +112,7 @@ export class PriceChartsComponent implements OnInit, OnDestroy {
                 ),
                 datasets: [
                   {
-                    label: `Preço Médio (${combustivel})`,
+                    label: `Preço Médio (${combustivel}) (R$)`,
                     data: this.groupedDataByCombustivel[combustivel].map(
                       (item) => item.preco_medio
                     ),
@@ -127,7 +124,7 @@ export class PriceChartsComponent implements OnInit, OnDestroy {
                 responsive: true,
                 scales: {
                   y: {
-                    beginAtZero: true,
+                    beginAtZero: false
                   },
                 },
                 plugins: {
@@ -135,7 +132,7 @@ export class PriceChartsComponent implements OnInit, OnDestroy {
                     anchor: 'end',
                     align: 'end',
                     formatter: (value: any) => {
-                      return typeof value === 'number' ? value.toFixed(3) : parseFloat(value).toFixed(3);
+                      return typeof value === 'number' ? value.toFixed(2) : parseFloat(value).toFixed(2);
                     },
                   },
                   annotation: {

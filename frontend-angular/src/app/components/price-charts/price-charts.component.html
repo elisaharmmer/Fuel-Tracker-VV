@@ -1,44 +1,48 @@
 <div class="charts-container">
-  <!-- Datepickers for selecting dates -->
-  <div class="datepickers">
-    <mat-form-field>
-      <input
-        matInput
-        [matDatepicker]="inicioPicker"
-        placeholder="Data Início"
-        [(ngModel)]="dataInicio"
-        (dateChange)="onDataInicioChange($event.value)"
-      />
-      <mat-datepicker-toggle
-        matSuffix
-        [for]="inicioPicker"
-      ></mat-datepicker-toggle>
-      <mat-datepicker #inicioPicker></mat-datepicker>
-    </mat-form-field>
 
-    <mat-form-field>
-      <input
-        matInput
-        [matDatepicker]="fimPicker"
-        placeholder="Data Fim"
-        [(ngModel)]="dataFim"
-        (dateChange)="onDataFimChange($event.value)"
-      />
-      <mat-datepicker-toggle matSuffix [for]="fimPicker"></mat-datepicker-toggle>
-      <mat-datepicker #fimPicker></mat-datepicker>
-    </mat-form-field>
+  <div class="title-page">
+    <h1>Gráficos de Preços</h1>
+    <mat-divider></mat-divider>
+  </div>
 
-    <button mat-raised-button color="primary" (click)="updateCharts()">
-      Atualizar
-    </button>
+  <div class="filters">
+
+    <!-- Datepickers for selecting dates -->
+    <div class="datepickers">
+      <mat-form-field>
+        <input
+          matInput
+          [matDatepicker]="inicioPicker"
+          placeholder="Data Início"
+          [(ngModel)]="dataInicio"
+          (dateChange)="onDataInicioChange($event.value)" />
+        <mat-datepicker-toggle matSuffix [for]="inicioPicker"></mat-datepicker-toggle>
+        <mat-datepicker #inicioPicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          [matDatepicker]="fimPicker"
+          placeholder="Data Fim"
+          [(ngModel)]="dataFim"
+          (dateChange)="onDataFimChange($event.value)" />
+        <mat-datepicker-toggle matSuffix [for]="fimPicker"></mat-datepicker-toggle>
+        <mat-datepicker #fimPicker></mat-datepicker>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" (click)="updateCharts()">
+        Atualizar
+      </button>
+
+    </div>
+
   </div>
 
   <!-- Display charts by fuel type -->
   <div class="chart-grid">
     <div
-      *ngFor="let combustivel of objectKeys(groupedDataByCombustivel); let i = index"
-      class="chart-item"
-    >
+      *ngFor="let combustivel of objectKeys(groupedDataByCombustivel); let i = index" class="chart-item">
       <h3>{{ combustivel }}</h3>
       <canvas id="chart-{{ i }}"></canvas>
     </div>

@@ -6,12 +6,18 @@
 
 .datepickers {
   display: flex;
+  height: 80px;
   gap: 8px;
+}
+
+.att-button {
+  display: flex;
+  height: 80px;
 }
 
 .chart-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(900px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
   gap: 16px;
 }
 
