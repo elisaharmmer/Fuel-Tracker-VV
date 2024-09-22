@@ -33,6 +33,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 
 import localePt from '@angular/common/locales/pt';
 import {registerLocaleData} from "@angular/common";
+import { ContactComponent } from './components/contact/contact.component';
 
 registerLocaleData(localePt);
 
@@ -45,7 +46,8 @@ registerLocaleData(localePt);
     AveragePricesComponent,
     SidenavComponent,
     ReplaceCommaPipe,
-    CepMaskPipe
+    CepMaskPipe,
+    ContactComponent
   ],
   imports: [
     BrowserModule,

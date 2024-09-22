@@ -1,0 +1,24 @@
+<div class="contact-container">
+  <h1>Contato</h1>
+  <mat-divider></mat-divider>
+
+  <div class="profiles">
+    <div class="profile-card" *ngFor="let profile of profiles">
+      <img [src]="profile.avatar_url" [alt]="profile.name" />
+      <h2>{{ profile.name }}</h2>
+      <p>{{profile.turma}}</p>
+
+<!--      <p>{{ profile.bio }}</p>-->
+
+      <div class="social-links">
+        <a [href]="profile.html_url" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+        <a *ngIf="profile.linkedin" [href]="profile.linkedin" target="_blank">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
