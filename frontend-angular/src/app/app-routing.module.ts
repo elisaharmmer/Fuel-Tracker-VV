@@ -4,6 +4,7 @@ import { GasStationListComponent } from './components/gas-station-list/gas-stati
 import {GasStationDetailsComponent} from "./components/gas-station-details/gas-station-details.component";
 import {PriceChartsComponent} from "./components/price-charts/price-charts.component";
 import {ContactComponent} from "./components/contact/contact.component";
+import {AboutComponent} from "./components/about/about.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/postos', pathMatch: 'full' },
@@ -11,7 +12,7 @@ const routes: Routes = [
   { path: 'posto/:id', component: GasStationDetailsComponent },
   { path: 'graficos', component: PriceChartsComponent },
   { path: 'contato', component: ContactComponent },
-  // { path: 'sobre', component: AboutComponent }
+  { path: 'sobre', component: AboutComponent }
 ];
 
 
