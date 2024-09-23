@@ -12,6 +12,8 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import html2canvas from 'html2canvas';
 import { DownloadEventService } from '../../services/download-event.service';
+import {MatDialog} from "@angular/material/dialog";
+import {ModalAlertComponent} from "../modal-alert/modal-alert.component";
 
 // Registrar os plugins
 Chart.register(...registerables);
@@ -48,7 +50,8 @@ export class PriceChartsComponent implements OnInit, OnDestroy {
 
   constructor(
     private gasStationService: GasStationService,
-    private downloadEventService: DownloadEventService
+    private downloadEventService: DownloadEventService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -444,10 +447,14 @@ export class PriceChartsComponent implements OnInit, OnDestroy {
   }
 
   exportToCSV(): void {
-    // Função para exportar os dados para CSV
+    this.openWarningDialog();
   }
 
   exportToExcel(): void {
-    // Função para exportar os dados para Excel
+    this.openWarningDialog();
+  }
+
+  openWarningDialog(): void {
+    this.dialog.open(ModalAlertComponent);
   }
 }

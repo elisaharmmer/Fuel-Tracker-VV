@@ -36,6 +36,8 @@ import {registerLocaleData} from "@angular/common";
 import { ContactComponent } from './components/contact/contact.component';
 import { AboutComponent } from './components/about/about.component';
 import {MatMenuModule} from "@angular/material/menu";
+import { ModalAlertComponent } from './components/modal-alert/modal-alert.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 registerLocaleData(localePt);
 
@@ -50,38 +52,40 @@ registerLocaleData(localePt);
     ReplaceCommaPipe,
     CepMaskPipe,
     ContactComponent,
-    AboutComponent
+    AboutComponent,
+    ModalAlertComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatIconModule,
-    MatCardModule,
-    MatListModule,
-    MatDividerModule,
-    MatAutocompleteModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatOptionModule,
-    FormsModule,
-    HttpClientModule,
-    MatChipsModule,
-    MatLineModule,
-    AppRoutingModule,
-    MatTableModule,
-    MatTabsModule,
-    MatSortModule,
-    MatFormFieldModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatMenuModule,
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatButtonModule,
+        MatIconModule,
+        MatCardModule,
+        MatListModule,
+        MatDividerModule,
+        MatAutocompleteModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatOptionModule,
+        FormsModule,
+        HttpClientModule,
+        MatChipsModule,
+        MatLineModule,
+        AppRoutingModule,
+        MatTableModule,
+        MatTabsModule,
+        MatSortModule,
+        MatFormFieldModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatMenuModule,
+        MatDialogModule,
+    ],
   providers: [
     {
       provide: LOCALE_ID,
