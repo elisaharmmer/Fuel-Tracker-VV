@@ -1,43 +1,11 @@
 <mat-nav-list>
-  <mat-list-item routerLink="/postos">
+  <mat-list-item *ngFor="let item of navItems" [routerLink]="item.route" routerLinkActive="active" class="item-round">
     <div style="display: flex; align-items: center;">
-      <mat-icon style="font-size: 32px; width: 32px; height: 32px; margin-left: 1rem; margin-right: 1rem;">table</mat-icon>
+      <mat-icon style="font-size: 32px; width: 32px; height: 32px; margin-left: 1rem; margin-right: 1rem;">{{ item.icon }}</mat-icon>
       <div>
-        <a mat-line>Lista de Postos</a>
+        <a mat-line>{{ item.label }}</a>
       </div>
     </div>
   </mat-list-item>
-  <mat-list-item routerLink="/graficos">
-    <div style="display: flex; align-items: center;">
-      <mat-icon style="font-size: 32px; width: 32px; height: 32px; margin-left: 1rem; margin-right: 1rem;">ssid_chart</mat-icon>
-      <div>
-        <a mat-line>Gráficos de Preços</a>
-      </div>
-    </div>
-  </mat-list-item>
-<!--  <mat-list-item>-->
-<!--    <div style="display: flex; align-items: center;">-->
-<!--      <mat-icon style="font-size: 32px; width: 32px; height: 32px; margin-left: 1rem; margin-right: 1rem;">compare_arrows</mat-icon>-->
-<!--      <div>-->
-<!--        <a mat-line routerLink="/comparativo-precos">Comparativo de Preços</a>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </mat-list-item>-->
   <mat-divider></mat-divider>
-  <mat-list-item routerLink="/contato">
-    <div style="display: flex; align-items: center;">
-      <mat-icon style="font-size: 32px; width: 32px; height: 32px; margin-left: 1rem; margin-right: 1rem;">connect_without_contact</mat-icon>
-      <div>
-        <a mat-line>Contato</a>
-      </div>
-    </div>
-  </mat-list-item>
-  <mat-list-item routerLink="/sobre">
-    <div style="display: flex; align-items: center;">
-      <mat-icon style="font-size: 32px; width: 32px; height: 32px; margin-left: 1rem; margin-right: 1rem;">contact_support</mat-icon>
-      <div>
-        <a mat-line>Sobre</a>
-      </div>
-    </div>
-  </mat-list-item>
 </mat-nav-list>
