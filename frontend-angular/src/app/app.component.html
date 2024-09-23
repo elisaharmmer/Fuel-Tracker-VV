@@ -5,6 +5,19 @@
     </button>
     <span class="toolbar-title">Fuel Tracker VV</span>
     <span class="spacer"></span>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>download</mat-icon>
+        <span>CSV/Excel</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>description</mat-icon>
+        <span>PDF</span>
+      </button>
+    </mat-menu>
     <button mat-icon-button (click)="toggleTheme()">
       <mat-icon>{{ isDarkTheme ? 'brightness_7' : 'brightness_2' }}</mat-icon>
     </button>

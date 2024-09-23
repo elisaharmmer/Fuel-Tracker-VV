@@ -35,6 +35,7 @@ import localePt from '@angular/common/locales/pt';
 import {registerLocaleData} from "@angular/common";
 import { ContactComponent } from './components/contact/contact.component';
 import { AboutComponent } from './components/about/about.component';
+import {MatMenuModule} from "@angular/material/menu";
 
 registerLocaleData(localePt);
 
@@ -79,6 +80,7 @@ registerLocaleData(localePt);
     MatNativeDateModule,
     FormsModule,
     ReactiveFormsModule,
+    MatMenuModule,
   ],
   providers: [
     {
