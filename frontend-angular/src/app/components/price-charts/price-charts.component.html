@@ -1,46 +1,94 @@
 <div class="charts-container">
-  <!-- Datepickers for selecting dates -->
-  <div class="datepickers">
-    <mat-form-field>
-      <input
-        matInput
-        [matDatepicker]="inicioPicker"
-        placeholder="Data Início"
-        [(ngModel)]="dataInicio"
-        (dateChange)="onDataInicioChange($event.value)"
-      />
-      <mat-datepicker-toggle
-        matSuffix
-        [for]="inicioPicker"
-      ></mat-datepicker-toggle>
-      <mat-datepicker #inicioPicker></mat-datepicker>
-    </mat-form-field>
 
-    <mat-form-field>
-      <input
-        matInput
-        [matDatepicker]="fimPicker"
-        placeholder="Data Fim"
-        [(ngModel)]="dataFim"
-        (dateChange)="onDataFimChange($event.value)"
-      />
-      <mat-datepicker-toggle matSuffix [for]="fimPicker"></mat-datepicker-toggle>
-      <mat-datepicker #fimPicker></mat-datepicker>
-    </mat-form-field>
+  <div class="filters">
+    <!-- Filtros -->
+    <div class="filter-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Data Início</mat-label>
+        <input
+          matInput
+          [matDatepicker]="inicioPicker"
+          placeholder="Data Início"
+          [(ngModel)]="dataInicio"
+          (dateChange)="onDataInicioChange($event.value)"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="inicioPicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #inicioPicker></mat-datepicker>
+      </mat-form-field>
 
-    <button mat-raised-button color="primary" (click)="updateCharts()">
-      Atualizar
-    </button>
+      <mat-form-field appearance="fill">
+        <mat-label>Data Fim</mat-label>
+        <input
+          matInput
+          [matDatepicker]="fimPicker"
+          placeholder="Data Fim"
+          [(ngModel)]="dataFim"
+          (dateChange)="onDataFimChange($event.value)"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="fimPicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #fimPicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Combustível</mat-label>
+        <mat-select
+          [(value)]="combustivelSelecionado"
+          (selectionChange)="onCombustivelChange($event.value)"
+        >
+          <mat-option value="">Todos</mat-option>
+          <mat-option *ngFor="let combustivel of combustiveis" [value]="combustivel">
+            {{ combustivel }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button class="button-att" mat-raised-button color="primary" (click)="updateCharts('', '')">
+        Atualizar
+      </button>
+
+    </div>
   </div>
 
-  <!-- Display charts by fuel type -->
+  <!-- Exibir gráficos por tipo de combustível -->
   <div class="chart-grid">
-    <div
-      *ngFor="let combustivel of objectKeys(groupedDataByCombustivel); let i = index"
-      class="chart-item"
-    >
+    <div class="item" *ngFor="let combustivel of objectKeys(groupedDataByCombustivel); let i = index">
+      <mat-divider></mat-divider>
       <h3>{{ combustivel }}</h3>
-      <canvas id="chart-{{ i }}"></canvas>
+      <div class="content">
+        <div class="insights">
+          <ng-container *ngIf="insightsByCombustivel[combustivel] as insights">
+            <p><strong>Preço Médio:</strong> R$ {{ insights.averagePrice.toFixed(2) }}</p>
+            <p>
+              <strong>Preço Mínimo:</strong> R$ {{ insights.minPrice.toFixed(2) }} (<em>{{ insights.minPricePosto }}</em>)
+            </p>
+            <p>
+              <strong>Preço Máximo:</strong> R$ {{ insights.maxPrice.toFixed(2) }} (<em>{{ insights.maxPricePosto }}</em>)
+            </p>
+            <p>
+              <strong>Diferença Máx-Mín:</strong>
+              R$ {{ insights.priceDifference.toFixed(2) }}
+              ({{ insights.percentageDifference.toFixed(2) }}% maior)
+            </p>
+            <p><strong>Número de Postos:</strong> {{ insights.numberOfPostos }}</p>
+            <p><strong>Desvio Padrão:</strong> R$ {{ insights.standardDeviation.toFixed(2) }}</p>
+
+            <!-- Gráfico de pizza -->
+            <div class="pie-chart">
+              <canvas id="pie-chart-{{ i }}"></canvas>
+            </div>
+          </ng-container>
+        </div>
+        <mat-divider vertical></mat-divider>
+        <div class="chart">
+          <canvas id="chart-{{ i }}"></canvas>
+        </div>
+      </div>
     </div>
   </div>
 </div>
