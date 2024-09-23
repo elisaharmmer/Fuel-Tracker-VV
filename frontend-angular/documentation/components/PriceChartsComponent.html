@@ -1,0 +1,2256 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Aplicação Web - Fuel Tracker VV</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">Aplicação Web - Fuel Tracker VV</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  PriceChartsComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/price-charts/price-charts.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+                <code>OnDestroy</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-price-charts</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./price-charts.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./price-charts.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#charts" >charts</a>
+                            </li>
+                            <li>
+                                <a href="#combustiveis" >combustiveis</a>
+                            </li>
+                            <li>
+                                <a href="#combustivelSelecionado" >combustivelSelecionado</a>
+                            </li>
+                            <li>
+                                <a href="#combustivelSubject" >combustivelSubject</a>
+                            </li>
+                            <li>
+                                <a href="#dataFim" >dataFim</a>
+                            </li>
+                            <li>
+                                <a href="#dataFimSubject" >dataFimSubject</a>
+                            </li>
+                            <li>
+                                <a href="#dataInicio" >dataInicio</a>
+                            </li>
+                            <li>
+                                <a href="#dataInicioSubject" >dataInicioSubject</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#downloadSubscription" >downloadSubscription</a>
+                            </li>
+                            <li>
+                                <a href="#groupedDataByCombustivel" >groupedDataByCombustivel</a>
+                            </li>
+                            <li>
+                                <a href="#insightsByCombustivel" >insightsByCombustivel</a>
+                            </li>
+                            <li>
+                                <a href="#objectKeys" >objectKeys</a>
+                            </li>
+                            <li>
+                                <a href="#subscription" >subscription</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#calculateInsights" >calculateInsights</a>
+                            </li>
+                            <li>
+                                <a href="#destroyCharts" >destroyCharts</a>
+                            </li>
+                            <li>
+                                <a href="#exportToCSV" >exportToCSV</a>
+                            </li>
+                            <li>
+                                <a href="#exportToExcel" >exportToExcel</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#exportToPDF" >exportToPDF</a>
+                            </li>
+                            <li>
+                                <a href="#groupDataByCombustivel" >groupDataByCombustivel</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onCombustivelChange" >onCombustivelChange</a>
+                            </li>
+                            <li>
+                                <a href="#onDataFimChange" >onDataFimChange</a>
+                            </li>
+                            <li>
+                                <a href="#onDataInicioChange" >onDataInicioChange</a>
+                            </li>
+                            <li>
+                                <a href="#openWarningDialog" >openWarningDialog</a>
+                            </li>
+                            <li>
+                                <a href="#renderCharts" >renderCharts</a>
+                            </li>
+                            <li>
+                                <a href="#updateCharts" >updateCharts</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(gasStationService: <a href="../injectables/GasStationService.html" target="_self">GasStationService</a>, downloadEventService: <a href="../injectables/DownloadEventService.html" target="_self">DownloadEventService</a>, dialog: MatDialog)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:49</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>gasStationService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/GasStationService.html" target="_self" >GasStationService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>downloadEventService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/DownloadEventService.html" target="_self" >DownloadEventService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>dialog</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatDialog</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="calculateInsights"></a>
+                    <span class="name">
+                        <span ><b>calculateInsights</b></span>
+                        <a href="#calculateInsights"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>calculateInsights()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="150"
+                                    class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:150</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroyCharts"></a>
+                    <span class="name">
+                        <span ><b>destroyCharts</b></span>
+                        <a href="#destroyCharts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>destroyCharts()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="354"
+                                    class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:354</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="exportToCSV"></a>
+                    <span class="name">
+                        <span ><b>exportToCSV</b></span>
+                        <a href="#exportToCSV"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>exportToCSV()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="449"
+                                    class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:449</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="exportToExcel"></a>
+                    <span class="name">
+                        <span ><b>exportToExcel</b></span>
+                        <a href="#exportToExcel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>exportToExcel()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="453"
+                                    class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:453</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="exportToPDF"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>exportToPDF</b></span>
+                        <a href="#exportToPDF"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>exportToPDF()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="373"
+                                    class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:373</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="groupDataByCombustivel"></a>
+                    <span class="name">
+                        <span ><b>groupDataByCombustivel</b></span>
+                        <a href="#groupDataByCombustivel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>groupDataByCombustivel(data: any[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="139"
+                                    class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:139</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>data</td>
+                                            <td>
+                                                        <code>any[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="97"
+                                    class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:97</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="57"
+                                    class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:57</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onCombustivelChange"></a>
+                    <span class="name">
+                        <span ><b>onCombustivelChange</b></span>
+                        <a href="#onCombustivelChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onCombustivelChange(newValue: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="369"
+                                    class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:369</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>newValue</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onDataFimChange"></a>
+                    <span class="name">
+                        <span ><b>onDataFimChange</b></span>
+                        <a href="#onDataFimChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onDataFimChange(newDate: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="364"
+                                    class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:364</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>newDate</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onDataInicioChange"></a>
+                    <span class="name">
+                        <span ><b>onDataInicioChange</b></span>
+                        <a href="#onDataInicioChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onDataInicioChange(newDate: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="359"
+                                    class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:359</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>newDate</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openWarningDialog"></a>
+                    <span class="name">
+                        <span ><b>openWarningDialog</b></span>
+                        <a href="#openWarningDialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openWarningDialog()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="457"
+                                    class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:457</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="renderCharts"></a>
+                    <span class="name">
+                        <span ><b>renderCharts</b></span>
+                        <a href="#renderCharts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>renderCharts()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="225"
+                                    class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:225</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateCharts"></a>
+                    <span class="name">
+                        <span ><b>updateCharts</b></span>
+                        <a href="#updateCharts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateCharts(dataInicio: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, dataFim: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="104"
+                                    class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:104</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>dataInicio</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>dataFim</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="charts"></a>
+                    <span class="name">
+                        <span ><b>charts</b></span>
+                        <a href="#charts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Chart&lt;any, any, any&gt;[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="combustiveis"></a>
+                    <span class="name">
+                        <span ><b>combustiveis</b></span>
+                        <a href="#combustiveis"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="combustivelSelecionado"></a>
+                    <span class="name">
+                        <span ><b>combustivelSelecionado</b></span>
+                        <a href="#combustivelSelecionado"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="combustivelSubject"></a>
+                    <span class="name">
+                        <span ><b>combustivelSubject</b></span>
+                        <a href="#combustivelSubject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;string | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dataFim"></a>
+                    <span class="name">
+                        <span ><b>dataFim</b></span>
+                        <a href="#dataFim"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dataFimSubject"></a>
+                    <span class="name">
+                        <span ><b>dataFimSubject</b></span>
+                        <a href="#dataFimSubject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;string | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dataInicio"></a>
+                    <span class="name">
+                        <span ><b>dataInicio</b></span>
+                        <a href="#dataInicio"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dataInicioSubject"></a>
+                    <span class="name">
+                        <span ><b>dataInicioSubject</b></span>
+                        <a href="#dataInicioSubject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;string | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="downloadSubscription"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>downloadSubscription</b></span>
+                        <a href="#downloadSubscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subscription()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="groupedDataByCombustivel"></a>
+                    <span class="name">
+                        <span ><b>groupedDataByCombustivel</b></span>
+                        <a href="#groupedDataByCombustivel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>literal type</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="insightsByCombustivel"></a>
+                    <span class="name">
+                        <span ><b>insightsByCombustivel</b></span>
+                        <a href="#insightsByCombustivel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>literal type</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="objectKeys"></a>
+                    <span class="name">
+                        <span ><b>objectKeys</b></span>
+                        <a href="#objectKeys"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>Object.keys</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscription"></a>
+                    <span class="name">
+                        <span ><b>subscription</b></span>
+                        <a href="#subscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subscription()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/price-charts/price-charts.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, OnDestroy } from &#x27;@angular/core&#x27;;
+import { GasStationService } from &#x27;../../services/gas-station.service&#x27;;
+import * as moment from &#x27;moment&#x27;;
+import { Chart, registerables } from &#x27;chart.js&#x27;;
+import ChartDataLabels from &#x27;chartjs-plugin-datalabels&#x27;;
+import annotationPlugin from &#x27;chartjs-plugin-annotation&#x27;;
+import { BehaviorSubject, combineLatest, Subscription } from &#x27;rxjs&#x27;;
+import { filter } from &#x27;rxjs/operators&#x27;;
+import * as XLSX from &#x27;xlsx&#x27;;
+import { saveAs } from &#x27;file-saver&#x27;;
+import jsPDF from &#x27;jspdf&#x27;;
+import &#x27;jspdf-autotable&#x27;;
+import html2canvas from &#x27;html2canvas&#x27;;
+import { DownloadEventService } from &#x27;../../services/download-event.service&#x27;;
+import {MatDialog} from &quot;@angular/material/dialog&quot;;
+import {ModalAlertComponent} from &quot;../modal-alert/modal-alert.component&quot;;
+
+// Registrar os plugins
+Chart.register(...registerables);
+Chart.register([ChartDataLabels, annotationPlugin]);
+
+@Component({
+  selector: &#x27;app-price-charts&#x27;,
+  templateUrl: &#x27;./price-charts.component.html&#x27;,
+  styleUrls: [&#x27;./price-charts.component.scss&#x27;],
+})
+export class PriceChartsComponent implements OnInit, OnDestroy {
+  dataInicioSubject &#x3D; new BehaviorSubject&lt;string | null&gt;(null);
+  dataFimSubject &#x3D; new BehaviorSubject&lt;string | null&gt;(null);
+  combustivelSubject &#x3D; new BehaviorSubject&lt;string | null&gt;(null);
+  subscription: Subscription &#x3D; new Subscription();
+  groupedDataByCombustivel: { [key: string]: any[] } &#x3D; {};
+  insightsByCombustivel: { [key: string]: any } &#x3D; {};
+
+  charts: Chart&lt;any, any, any&gt;[] &#x3D; [];
+
+  // Propriedades para data binding
+  dataInicio: string &#x3D; &#x27;&#x27;;
+  dataFim: string &#x3D; &#x27;&#x27;;
+  combustivelSelecionado: string &#x3D; &#x27;&#x27;;
+
+  // Expor Object.keys para o template
+  objectKeys &#x3D; Object.keys;
+
+  // Lista de combustíveis disponíveis
+  combustiveis: string[] &#x3D; [];
+
+  // Subscription para o serviço de download
+  private downloadSubscription: Subscription &#x3D; new Subscription();
+
+  constructor(
+    private gasStationService: GasStationService,
+    private downloadEventService: DownloadEventService,
+    private dialog: MatDialog
+  ) {}
+
+  ngOnInit(): void {
+    const today &#x3D; moment().format(&#x27;YYYY-MM-DD&#x27;);
+    const sixMonthsAgo &#x3D; moment().subtract(6, &#x27;months&#x27;).format(&#x27;YYYY-MM-DD&#x27;);
+
+    // Subscribe para os eventos de exportação
+    this.downloadSubscription &#x3D; this.downloadEventService.downloadEvent$.subscribe(type &#x3D;&gt; {
+      if (type &#x3D;&#x3D;&#x3D; &#x27;pdf&#x27;) {
+        this.exportToPDF();
+      } else if (type &#x3D;&#x3D;&#x3D; &#x27;csv&#x27;) {
+        this.exportToCSV();
+      } else if (type &#x3D;&#x3D;&#x3D; &#x27;excel&#x27;) {
+        this.exportToExcel();
+      }
+    });
+
+    // Inicializar as datas
+    this.dataInicio &#x3D; sixMonthsAgo;
+    this.dataFim &#x3D; today;
+
+    // Atualizar os BehaviorSubjects com as datas iniciais
+    this.dataInicioSubject.next(this.dataInicio);
+    this.dataFimSubject.next(this.dataFim);
+
+    // Atualizar os gráficos inicialmente
+    this.updateCharts(this.dataInicio, this.dataFim);
+
+    // Subscrever às mudanças nos filtros
+    this.subscription.add(
+      combineLatest([
+        this.dataInicioSubject,
+        this.dataFimSubject,
+        this.combustivelSubject,
+      ])
+        .pipe(filter(([dataInicio, dataFim]) &#x3D;&gt; !!dataInicio &amp;&amp; !!dataFim))
+        .subscribe((data) &#x3D;&gt; {
+          this.updateCharts(String(data[0]), String(data[1]));
+        })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+    if (this.downloadSubscription) {
+      this.downloadSubscription.unsubscribe();
+    }
+  }
+
+  updateCharts(dataInicio: string, dataFim: string) {
+    if (dataInicio &amp;&amp; dataFim) {
+      this.gasStationService
+        .getAveragePriceByPosto(dataInicio, dataFim)
+        .subscribe((data: any[]) &#x3D;&gt; {
+          const filteredData &#x3D; data.filter(
+            (item: any) &#x3D;&gt; item.preco_medio !&#x3D;&#x3D; null
+          );
+
+          // Extrair a lista de combustíveis disponíveis
+          this.combustiveis &#x3D; [
+            ...new Set(filteredData.map((item) &#x3D;&gt; item.combustivel)),
+          ];
+
+          // Aplicar o filtro de combustível
+          const dataToUse &#x3D; filteredData.filter(
+            (item: any) &#x3D;&gt;
+              !this.combustivelSelecionado ||
+              item.combustivel &#x3D;&#x3D;&#x3D; this.combustivelSelecionado
+          );
+
+          this.groupedDataByCombustivel &#x3D; this.groupDataByCombustivel(dataToUse);
+
+          // Calcular os insights para cada combustível
+          this.calculateInsights();
+
+          this.destroyCharts();
+          // Esperar o DOM atualizar antes de renderizar os gráficos
+          setTimeout(() &#x3D;&gt; {
+            this.renderCharts();
+          }, 0);
+        });
+    }
+  }
+
+  groupDataByCombustivel(data: any[]) {
+    return data.reduce((acc, item) &#x3D;&gt; {
+      const combustivel &#x3D; item.combustivel;
+      if (!acc[combustivel]) {
+        acc[combustivel] &#x3D; [];
+      }
+      acc[combustivel].push(item);
+      return acc;
+    }, {});
+  }
+
+  calculateInsights() {
+    this.insightsByCombustivel &#x3D; {};
+
+    Object.keys(this.groupedDataByCombustivel).forEach((combustivel) &#x3D;&gt; {
+      const data &#x3D; this.groupedDataByCombustivel[combustivel];
+
+      const prices &#x3D; data.map((item) &#x3D;&gt; parseFloat(item.preco_medio));
+
+      const averagePrice &#x3D;
+        prices.reduce((sum, price) &#x3D;&gt; sum + price, 0) / prices.length;
+
+      const minPrice &#x3D; Math.min(...prices);
+      const maxPrice &#x3D; Math.max(...prices);
+      const priceDifference &#x3D; maxPrice - minPrice;
+
+      const minPricePosto &#x3D; data.find(
+        (item) &#x3D;&gt; parseFloat(item.preco_medio) &#x3D;&#x3D;&#x3D; minPrice
+      )?.posto;
+      const maxPricePosto &#x3D; data.find(
+        (item) &#x3D;&gt; parseFloat(item.preco_medio) &#x3D;&#x3D;&#x3D; maxPrice
+      )?.posto;
+
+      const numberOfPostos &#x3D; data.length;
+
+      const variance &#x3D;
+        prices.reduce(
+          (sum, price) &#x3D;&gt; sum + Math.pow(price - averagePrice, 2),
+          0
+        ) / prices.length;
+      const standardDeviation &#x3D; Math.sqrt(variance);
+
+      const percentageDifference &#x3D; ((maxPrice - minPrice) / minPrice) * 100;
+
+      const tolerance &#x3D; 0.02;
+
+      const equalAverage &#x3D; data.filter(
+        (item) &#x3D;&gt;
+          Math.abs(parseFloat(item.preco_medio) - averagePrice) &lt;&#x3D; tolerance
+      ).length;
+
+      const belowAverage &#x3D; data.filter(
+        (item) &#x3D;&gt; parseFloat(item.preco_medio) &lt; averagePrice - tolerance
+      ).length;
+
+      const aboveAverage &#x3D; data.filter(
+        (item) &#x3D;&gt; parseFloat(item.preco_medio) &gt; averagePrice + tolerance
+      ).length;
+
+      const belowAveragePercent &#x3D; (belowAverage / numberOfPostos) * 100;
+      const equalAveragePercent &#x3D; (equalAverage / numberOfPostos) * 100;
+      const aboveAveragePercent &#x3D; (aboveAverage / numberOfPostos) * 100;
+
+      this.insightsByCombustivel[combustivel] &#x3D; {
+        averagePrice,
+        minPrice,
+        minPricePosto,
+        maxPrice,
+        maxPricePosto,
+        priceDifference,
+        percentageDifference,
+        numberOfPostos,
+        standardDeviation,
+        priceDistribution: {
+          belowAverage,
+          equalAverage,
+          aboveAverage,
+          belowAveragePercent,
+          equalAveragePercent,
+          aboveAveragePercent,
+          numberOfPostos,
+        },
+      };
+    });
+  }
+
+  renderCharts() {
+    Object.keys(this.groupedDataByCombustivel).forEach(
+      (combustivel, index) &#x3D;&gt; {
+        const canvas &#x3D; document.getElementById(
+          &#x60;chart-${index}&#x60;
+        ) as HTMLCanvasElement;
+
+        if (canvas) {
+          const ctx &#x3D; canvas.getContext(&#x27;2d&#x27;);
+          if (ctx) {
+            const avgPrice &#x3D; this.insightsByCombustivel[combustivel]
+              .averagePrice;
+
+            const chart &#x3D; new Chart(ctx, {
+              type: &#x27;bar&#x27;,
+              data: {
+                labels: this.groupedDataByCombustivel[combustivel].map(
+                  (item) &#x3D;&gt; item.posto
+                ),
+                datasets: [
+                  {
+                    label: &#x60;Preço Médio (${combustivel}) (R$)&#x60;,
+                    data: this.groupedDataByCombustivel[combustivel].map(
+                      (item) &#x3D;&gt; item.preco_medio
+                    ),
+                    backgroundColor: &#x27;rgba(63, 80, 180, 1)&#x27;,
+                  },
+                ],
+              },
+              options: {
+                responsive: true,
+                indexAxis: &#x27;y&#x27;,
+                scales: {
+                  y: {
+                    beginAtZero: false,
+                  },
+                },
+                plugins: {
+                  datalabels: {
+                    anchor: &#x27;end&#x27;,
+                    align: &#x27;end&#x27;,
+                    formatter: (value: any) &#x3D;&gt; {
+                      return typeof value &#x3D;&#x3D;&#x3D; &#x27;number&#x27;
+                        ? value.toFixed(2)
+                        : parseFloat(value).toFixed(2);
+                    },
+                  },
+                },
+              },
+            });
+            this.charts.push(chart);
+          }
+        }
+
+        const pieCanvas &#x3D; document.getElementById(
+          &#x60;pie-chart-${index}&#x60;
+        ) as HTMLCanvasElement;
+
+        if (pieCanvas) {
+          const pieCtx &#x3D; pieCanvas.getContext(&#x27;2d&#x27;);
+          if (pieCtx) {
+            const distribution &#x3D;
+              this.insightsByCombustivel[combustivel].priceDistribution;
+
+            let labels, dataValues, backgroundColors;
+
+            if (distribution.equalAverage &#x3D;&#x3D;&#x3D; 0) {
+              labels &#x3D; [&#x27;Abaixo da Média&#x27;, &#x27;Acima da Média&#x27;];
+              dataValues &#x3D; [
+                distribution.belowAverage,
+                distribution.aboveAverage,
+              ];
+              backgroundColors &#x3D; [
+                &#x27;rgba(127,187,250,0.6)&#x27;,
+                &#x27;rgba(255, 99, 132, 0.6)&#x27;,
+              ];
+            } else {
+              labels &#x3D; [&#x27;Abaixo da Média&#x27;, &#x27;Na Média&#x27;, &#x27;Acima da Média&#x27;];
+              dataValues &#x3D; [
+                distribution.belowAverage,
+                distribution.equalAverage,
+                distribution.aboveAverage,
+              ];
+              backgroundColors &#x3D; [
+                &#x27;rgba(118,153,239,0.6)&#x27;,
+                &#x27;rgba(195,195,195,0.6)&#x27;,
+                &#x27;rgba(237,99,155,0.6)&#x27;,
+              ];
+            }
+
+            const pieChart &#x3D; new Chart(pieCtx, {
+              type: &#x27;pie&#x27;,
+              data: {
+                labels: labels,
+                datasets: [
+                  {
+                    data: dataValues,
+                    backgroundColor: backgroundColors,
+                  },
+                ],
+              },
+              options: {
+                responsive: true,
+                plugins: {
+                  legend: {
+                    position: &#x27;bottom&#x27;,
+                  },
+                  tooltip: {
+                    callbacks: {
+                      label: function (context) {
+                        const label &#x3D; context.label || &#x27;&#x27;;
+                        const value &#x3D; context.parsed;
+                        const total &#x3D; distribution.numberOfPostos;
+                        const percentage &#x3D; ((value / total) * 100).toFixed(2);
+                        return &#x60;${label}: ${value} postos (${percentage}%)&#x60;;
+                      },
+                    },
+                  },
+                },
+              },
+            });
+
+            this.charts.push(pieChart);
+          }
+        }
+      }
+    );
+  }
+
+  destroyCharts() {
+    this.charts.forEach((chart) &#x3D;&gt; chart.destroy());
+    this.charts &#x3D; [];
+  }
+
+  onDataInicioChange(newDate: any) {
+    const dateFormatted &#x3D; moment(newDate).format(&#x27;YYYY-MM-DD&#x27;);
+    this.dataInicioSubject.next(dateFormatted);
+  }
+
+  onDataFimChange(newDate: any) {
+    const dateFormatted &#x3D; moment(newDate).format(&#x27;YYYY-MM-DD&#x27;);
+    this.dataFimSubject.next(dateFormatted);
+  }
+
+  onCombustivelChange(newValue: any) {
+    this.combustivelSubject.next(newValue);
+  }
+
+  async exportToPDF(): Promise&lt;void&gt; {
+    const doc &#x3D; new jsPDF({
+      orientation: &#x27;landscape&#x27; // Mantém a orientação horizontal
+    });
+
+    const title &#x3D; &#x60;Relatório de Preços - ${moment(this.dataInicio).format(&#x27;DD/MM/YYYY&#x27;)} a ${moment(this.dataFim).format(&#x27;DD/MM/YYYY&#x27;)}&#x60;;
+
+    // Iterar sobre cada combustível
+    for (let i &#x3D; 0; i &lt; this.charts.length; i++) {
+      const combustivel &#x3D; Object.keys(this.groupedDataByCombustivel)[i];
+      const canvasElement &#x3D; document.getElementById(&#x60;chart-${i}&#x60;) as HTMLCanvasElement;
+      const pieCanvasElement &#x3D; document.getElementById(&#x60;pie-chart-${i}&#x60;) as HTMLCanvasElement;
+      const insights &#x3D; this.insightsByCombustivel[combustivel];
+
+      if (canvasElement) {
+        try {
+          // Página com o gráfico de barras
+          const canvas &#x3D; await html2canvas(canvasElement);
+          const imgData &#x3D; canvas.toDataURL(&#x27;image/png&#x27;);
+
+          // Adicionar título e gráfico de barras
+          doc.text(&#x60;${title}&#x60;, 10, 10);
+          doc.text(&#x60;Combustível: ${combustivel}&#x60;, 10, 20);
+          doc.addImage(imgData, &#x27;PNG&#x27;, 10, 30, 270, 150);
+
+          // Adicionar nova página para os insights após o gráfico de barras
+          doc.addPage();
+
+          if (pieCanvasElement &amp;&amp; insights) {
+            // Página com insights (gráfico de pizza e dados)
+            const pieCanvas &#x3D; await html2canvas(pieCanvasElement);
+            const pieImgData &#x3D; pieCanvas.toDataURL(&#x27;image/png&#x27;);
+
+            // Adicionar título e gráfico de pizza
+            doc.text(&#x60;${title}&#x60;, 10, 10);
+            doc.text(&#x60;Combustível: ${combustivel} (Insights)&#x60;, 10, 20);
+
+            // Definir tamanho proporcional para o gráfico circular
+            const pieSize &#x3D; 200; // Tamanho ajustado
+            const pieXPosition &#x3D; (doc.internal.pageSize.getWidth() - pieSize) / 2; // Centralizar horizontalmente
+
+            // Adicionar gráfico de pizza com proporções corretas
+            doc.addImage(pieImgData, &#x27;PNG&#x27;, pieXPosition, 30, pieSize, pieSize / 2); // Gráfico de pizza ajustado
+
+            // Adicionar dados de insights
+            const insightsData &#x3D; [
+              [&#x27;Preço Médio&#x27;, insights.averagePrice.toFixed(2)],
+              [&#x27;Preço Mínimo&#x27;, &#x60;${insights.minPrice.toFixed(2)} (${insights.minPricePosto})&#x60;],
+              [&#x27;Preço Máximo&#x27;, &#x60;${insights.maxPrice.toFixed(2)} (${insights.maxPricePosto})&#x60;],
+              [&#x27;Diferença Máx-Mín&#x27;, &#x60;${insights.priceDifference.toFixed(2)} (${insights.percentageDifference.toFixed(2)}%)&#x60;],
+              [&#x27;Desvio Padrão&#x27;, insights.standardDeviation.toFixed(2)],
+              [&#x27;Número de Postos&#x27;, insights.numberOfPostos],
+            ];
+
+            (doc as any).autoTable({
+              head: [[&#x27;Insight&#x27;, &#x27;Valor&#x27;]],
+              body: insightsData,
+              startY: 140,  // Ajustado para que a tabela fique logo abaixo do gráfico de pizza
+              margin: { top: 10 }
+            });
+          }
+
+          // Adicionar nova página se não for o último gráfico
+          if (i &lt; this.charts.length - 1) {
+            doc.addPage();
+          }
+        } catch (error) {
+          console.error(&#x27;Erro ao capturar o gráfico:&#x27;, error);
+        }
+      }
+    }
+
+    // Salvar o PDF
+    doc.save(&#x60;relatorio_precos_${new Date().getTime()}.pdf&#x60;);
+  }
+
+  exportToCSV(): void {
+    this.openWarningDialog();
+  }
+
+  exportToExcel(): void {
+    this.openWarningDialog();
+  }
+
+  openWarningDialog(): void {
+    this.dialog.open(ModalAlertComponent);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;charts-container&quot;&gt;
+
+  &lt;div class&#x3D;&quot;filters&quot;&gt;
+    &lt;!-- Filtros --&gt;
+    &lt;div class&#x3D;&quot;filter-group&quot;&gt;
+      &lt;mat-form-field appearance&#x3D;&quot;fill&quot;&gt;
+        &lt;mat-label&gt;Data Início&lt;/mat-label&gt;
+        &lt;input
+          matInput
+          [matDatepicker]&#x3D;&quot;inicioPicker&quot;
+          placeholder&#x3D;&quot;Data Início&quot;
+          [(ngModel)]&#x3D;&quot;dataInicio&quot;
+          (dateChange)&#x3D;&quot;onDataInicioChange($event.value)&quot;
+        /&gt;
+        &lt;mat-datepicker-toggle
+          matSuffix
+          [for]&#x3D;&quot;inicioPicker&quot;
+        &gt;&lt;/mat-datepicker-toggle&gt;
+        &lt;mat-datepicker #inicioPicker&gt;&lt;/mat-datepicker&gt;
+      &lt;/mat-form-field&gt;
+
+      &lt;mat-form-field appearance&#x3D;&quot;fill&quot;&gt;
+        &lt;mat-label&gt;Data Fim&lt;/mat-label&gt;
+        &lt;input
+          matInput
+          [matDatepicker]&#x3D;&quot;fimPicker&quot;
+          placeholder&#x3D;&quot;Data Fim&quot;
+          [(ngModel)]&#x3D;&quot;dataFim&quot;
+          (dateChange)&#x3D;&quot;onDataFimChange($event.value)&quot;
+        /&gt;
+        &lt;mat-datepicker-toggle
+          matSuffix
+          [for]&#x3D;&quot;fimPicker&quot;
+        &gt;&lt;/mat-datepicker-toggle&gt;
+        &lt;mat-datepicker #fimPicker&gt;&lt;/mat-datepicker&gt;
+      &lt;/mat-form-field&gt;
+
+      &lt;mat-form-field appearance&#x3D;&quot;fill&quot;&gt;
+        &lt;mat-label&gt;Combustível&lt;/mat-label&gt;
+        &lt;mat-select
+          [(value)]&#x3D;&quot;combustivelSelecionado&quot;
+          (selectionChange)&#x3D;&quot;onCombustivelChange($event.value)&quot;
+        &gt;
+          &lt;mat-option value&#x3D;&quot;&quot;&gt;Todos&lt;/mat-option&gt;
+          &lt;mat-option *ngFor&#x3D;&quot;let combustivel of combustiveis&quot; [value]&#x3D;&quot;combustivel&quot;&gt;
+            {{ combustivel }}
+          &lt;/mat-option&gt;
+        &lt;/mat-select&gt;
+      &lt;/mat-form-field&gt;
+
+      &lt;button class&#x3D;&quot;button-att&quot; mat-raised-button color&#x3D;&quot;primary&quot; (click)&#x3D;&quot;updateCharts(&#x27;&#x27;, &#x27;&#x27;)&quot;&gt;
+        Atualizar
+      &lt;/button&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Exibir gráficos por tipo de combustível --&gt;
+  &lt;div class&#x3D;&quot;chart-grid&quot;&gt;
+    &lt;div class&#x3D;&quot;item&quot; *ngFor&#x3D;&quot;let combustivel of objectKeys(groupedDataByCombustivel); let i &#x3D; index&quot;&gt;
+      &lt;mat-divider&gt;&lt;/mat-divider&gt;
+      &lt;h3&gt;{{ combustivel }}&lt;/h3&gt;
+      &lt;div class&#x3D;&quot;content&quot;&gt;
+        &lt;div class&#x3D;&quot;insights&quot;&gt;
+          &lt;ng-container *ngIf&#x3D;&quot;insightsByCombustivel[combustivel] as insights&quot;&gt;
+            &lt;p&gt;&lt;strong&gt;Preço Médio:&lt;/strong&gt; R$ {{ insights.averagePrice.toFixed(2) }}&lt;/p&gt;
+            &lt;p&gt;
+              &lt;strong&gt;Preço Mínimo:&lt;/strong&gt; R$ {{ insights.minPrice.toFixed(2) }} (&lt;em&gt;{{ insights.minPricePosto }}&lt;/em&gt;)
+            &lt;/p&gt;
+            &lt;p&gt;
+              &lt;strong&gt;Preço Máximo:&lt;/strong&gt; R$ {{ insights.maxPrice.toFixed(2) }} (&lt;em&gt;{{ insights.maxPricePosto }}&lt;/em&gt;)
+            &lt;/p&gt;
+            &lt;p&gt;
+              &lt;strong&gt;Diferença Máx-Mín:&lt;/strong&gt;
+              R$ {{ insights.priceDifference.toFixed(2) }}
+              ({{ insights.percentageDifference.toFixed(2) }}% maior)
+            &lt;/p&gt;
+            &lt;p&gt;&lt;strong&gt;Número de Postos:&lt;/strong&gt; {{ insights.numberOfPostos }}&lt;/p&gt;
+            &lt;p&gt;&lt;strong&gt;Desvio Padrão:&lt;/strong&gt; R$ {{ insights.standardDeviation.toFixed(2) }}&lt;/p&gt;
+
+            &lt;!-- Gráfico de pizza --&gt;
+            &lt;div class&#x3D;&quot;pie-chart&quot;&gt;
+              &lt;canvas id&#x3D;&quot;pie-chart-{{ i }}&quot;&gt;&lt;/canvas&gt;
+            &lt;/div&gt;
+          &lt;/ng-container&gt;
+        &lt;/div&gt;
+        &lt;mat-divider vertical&gt;&lt;/mat-divider&gt;
+        &lt;div class&#x3D;&quot;chart&quot;&gt;
+          &lt;canvas id&#x3D;&quot;chart-{{ i }}&quot;&gt;&lt;/canvas&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./price-charts.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.charts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title-page {
+  h1 {
+    margin: 0;
+    color: #fff;
+  }
+}
+
+.filters {
+  margin: 0;
+  padding: 0;
+
+  .filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: normal;
+    height: 100%;
+
+    mat-form-field {
+      flex: 1 1 200px;
+      min-width: 150px;
+      height: 100%;
+    }
+
+    .button-att {
+      height: 58px;
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0;
+    }
+
+  }
+}
+
+.chart-grid {
+  display: grid;
+  grid-auto-rows: auto;
+  gap: 16px;
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    h3 {
+      margin: 0;
+      color: #fff;
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 34px;
+    }
+
+    .content {
+      display: flex;
+      gap: 16px;
+
+      .insights {
+        flex: 0 0 35%;
+        padding: 16px 6px 6px 6px;
+        border-radius: 8px;
+        //background-color: rgb(65, 65, 65);
+        color: #fff;
+
+        p {
+          margin: 8px 0;
+          font-size: 14px;
+
+          strong {
+            font-weight: bold;
+          }
+
+          em {
+            font-style: italic;
+          }
+        }
+
+        .pie-chart {
+          margin-top: 16px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          canvas {
+            max-width: 100%;
+            max-height: 200px; /* Defina a altura máxima que preferir */
+            width: 100%;
+            height: auto;
+          }
+        }
+      }
+
+      .chart {
+        flex: 0 0 60%;
+        padding: 16px;
+        border-radius: 8px;
+        //background-color: rgb(65, 65, 65);
+
+        canvas {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="charts-container">  <div class="filters">    <!-- Filtros -->    <div class="filter-group">      <mat-form-field appearance="fill">        <mat-label>Data Início</mat-label>        <input          matInput          [matDatepicker]="inicioPicker"          placeholder="Data Início"          [(ngModel)]="dataInicio"          (dateChange)="onDataInicioChange($event.value)"        />        <mat-datepicker-toggle          matSuffix          [for]="inicioPicker"        ></mat-datepicker-toggle>        <mat-datepicker #inicioPicker></mat-datepicker>      </mat-form-field>      <mat-form-field appearance="fill">        <mat-label>Data Fim</mat-label>        <input          matInput          [matDatepicker]="fimPicker"          placeholder="Data Fim"          [(ngModel)]="dataFim"          (dateChange)="onDataFimChange($event.value)"        />        <mat-datepicker-toggle          matSuffix          [for]="fimPicker"        ></mat-datepicker-toggle>        <mat-datepicker #fimPicker></mat-datepicker>      </mat-form-field>      <mat-form-field appearance="fill">        <mat-label>Combustível</mat-label>        <mat-select          [(value)]="combustivelSelecionado"          (selectionChange)="onCombustivelChange($event.value)"        >          <mat-option value="">Todos</mat-option>          <mat-option *ngFor="let combustivel of combustiveis" [value]="combustivel">            {{ combustivel }}          </mat-option>        </mat-select>      </mat-form-field>      <button class="button-att" mat-raised-button color="primary" (click)="updateCharts(\'\', \'\')">        Atualizar      </button>    </div>  </div>  <!-- Exibir gráficos por tipo de combustível -->  <div class="chart-grid">    <div class="item" *ngFor="let combustivel of objectKeys(groupedDataByCombustivel); let i = index">      <mat-divider></mat-divider>      <h3>{{ combustivel }}</h3>      <div class="content">        <div class="insights">          <ng-container *ngIf="insightsByCombustivel[combustivel] as insights">            <p><strong>Preço Médio:</strong> R$ {{ insights.averagePrice.toFixed(2) }}</p>            <p>              <strong>Preço Mínimo:</strong> R$ {{ insights.minPrice.toFixed(2) }} (<em>{{ insights.minPricePosto }}</em>)            </p>            <p>              <strong>Preço Máximo:</strong> R$ {{ insights.maxPrice.toFixed(2) }} (<em>{{ insights.maxPricePosto }}</em>)            </p>            <p>              <strong>Diferença Máx-Mín:</strong>              R$ {{ insights.priceDifference.toFixed(2) }}              ({{ insights.percentageDifference.toFixed(2) }}% maior)            </p>            <p><strong>Número de Postos:</strong> {{ insights.numberOfPostos }}</p>            <p><strong>Desvio Padrão:</strong> R$ {{ insights.standardDeviation.toFixed(2) }}</p>            <!-- Gráfico de pizza -->            <div class="pie-chart">              <canvas id="pie-chart-{{ i }}"></canvas>            </div>          </ng-container>        </div>        <mat-divider vertical></mat-divider>        <div class="chart">          <canvas id="chart-{{ i }}"></canvas>        </div>      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AveragePricesComponent', 'selector': 'app-average-prices'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'GasStationDetailsComponent', 'selector': 'app-gas-station-details'},{'name': 'GasStationListComponent', 'selector': 'app-gas-station-list'},{'name': 'ModalAlertComponent', 'selector': 'app-modal-alert'},{'name': 'PriceChartsComponent', 'selector': 'app-price-charts'},{'name': 'SidenavComponent', 'selector': 'app-sidenav'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'PriceChartsComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'PriceChartsComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

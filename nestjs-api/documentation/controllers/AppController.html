@@ -204,8 +204,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="62"
-                                    class="link-to-prism">src/app.controller.ts:62</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="85"
+                                    class="link-to-prism">src/app.controller.ts:85</a></div>
                         </td>
                     </tr>
 
@@ -251,8 +251,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="57"
-                                    class="link-to-prism">src/app.controller.ts:57</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">src/app.controller.ts:80</a></div>
                         </td>
                     </tr>
 
@@ -283,7 +283,7 @@
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getHello()</code>
+                    <code>getHello(request: Request)</code>
                 </td>
             </tr>
 
@@ -297,8 +297,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="16"
-                                    class="link-to-prism">src/app.controller.ts:16</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="18"
+                                    class="link-to-prism">src/app.controller.ts:18</a></div>
                         </td>
                     </tr>
 
@@ -306,10 +306,40 @@
             <tr>
                 <td class="col-md-4">
 
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>request</td>
+                                            <td>
+                                                        <code>Request</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         <div class="io-description">
                             <b>Returns : </b>    <code>literal type</code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -343,8 +373,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="24"
-                                    class="link-to-prism">src/app.controller.ts:24</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="47"
+                                    class="link-to-prism">src/app.controller.ts:47</a></div>
                         </td>
                     </tr>
 
@@ -420,8 +450,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="52"
-                                    class="link-to-prism">src/app.controller.ts:52</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="75"
+                                    class="link-to-prism">src/app.controller.ts:75</a></div>
                         </td>
                     </tr>
 
@@ -446,20 +476,43 @@ import { AppService } from &#x27;./app.service&#x27;;
 import { HttpAdapterHost } from &#x27;@nestjs/core&#x27;;
 import { Request } from &#x27;express&#x27;;
 import { UtilService } from &#x27;./services/util.service&#x27;;
+import { readFileSync } from &#x27;fs&#x27;;
+import { join } from &#x27;path&#x27;;
 
 @Controller()
 export class AppController {
   constructor(
-    private readonly appService: AppService,
-    private readonly utilService: UtilService,
-    private readonly httpAdapterHost: HttpAdapterHost,
+      private readonly appService: AppService,
+      private readonly utilService: UtilService,
+      private readonly httpAdapterHost: HttpAdapterHost,
   ) {}
 
   @Get()
-  getHello(): { message: string; ok: boolean } {
+  getHello(@Req() request: Request): { message: string; ok: boolean; info: any } {
+    const httpServer &#x3D; this.httpAdapterHost.httpAdapter.getHttpServer();
+    const router &#x3D; httpServer?._events?.request?._router;
+    const host &#x3D; &#x60;${request.protocol}://${request.get(&#x27;host&#x27;)}&#x60;;
+    const routes &#x3D; router?.stack
+        .filter((layer) &#x3D;&gt; layer.route) // Filtra apenas as rotas
+        .map((layer) &#x3D;&gt; ({
+          method: Object.keys(layer.route.methods)[0].toUpperCase(),
+          path: &#x60;${host}${layer.route.path}&#x60;,
+        })) || [];
+
+    // Leitura dinâmica do arquivo package.json
+    const packageJsonPath &#x3D; join(__dirname, &#x27;../package.json&#x27;);
+    const packageJson &#x3D; JSON.parse(readFileSync(packageJsonPath, &#x27;utf8&#x27;));
+    const version &#x3D; packageJson.version;
+    const description &#x3D; packageJson.description;
+
     return {
       message: this.appService.getHello(),
       ok: true,
+      info: {
+        description,
+        version,
+        routes,
+      },
     };
   }
 
@@ -471,22 +524,22 @@ export class AppController {
       console.error(&#x27;Router not available on this platform.&#x27;);
       return {
         description:
-          &#x27;Nenhuma rota disponível no ambiente atual. Pode ser Vercel.&#x27;,
+            &#x27;Nenhuma rota disponível no ambiente atual. Pode ser Vercel.&#x27;,
         routes: [],
       };
     }
 
     const host &#x3D; &#x60;${request.protocol}://${request.get(&#x27;host&#x27;)}&#x60;;
     const routes &#x3D; router.stack
-      .filter((layer) &#x3D;&gt; layer.route) // Filtra apenas as rotas
-      .map((layer) &#x3D;&gt; ({
-        method: Object.keys(layer.route.methods)[0].toUpperCase(),
-        path: &#x60;${host}${layer.route.path}&#x60;, // Adiciona o domínio completo ao caminho
-      }));
+        .filter((layer) &#x3D;&gt; layer.route) // Filtra apenas as rotas
+        .map((layer) &#x3D;&gt; ({
+          method: Object.keys(layer.route.methods)[0].toUpperCase(),
+          path: &#x60;${host}${layer.route.path}&#x60;, // Adiciona o domínio completo ao caminho
+        }));
 
     return {
       description:
-        &#x27;Lista de todas as rotas disponíveis na API com domínio completo&#x27;,
+          &#x27;Lista de todas as rotas disponíveis na API com domínio completo&#x27;,
       routes,
     };
   }

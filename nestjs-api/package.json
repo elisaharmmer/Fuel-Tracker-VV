@@ -1,10 +1,10 @@
 {
   "name": "nestjs-api",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "API para retornar os dados de postos combustíveis de Vila Velha - ES do Ano de 2022 até 2024",
   "author": "Elisa Harmmer Ferreira (https://github.com/elisaharmmer) / Nícolas Aigner (https://github.com/nicolasaigner)",
   "repository": "https://github.com/elisaharmmer/Fuel-Tracker-VV",
-  "domain": "fuel-tracker-vv.vercel.app",
+  "domain": "https://fuel-tracker-vv.vercel.app",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
