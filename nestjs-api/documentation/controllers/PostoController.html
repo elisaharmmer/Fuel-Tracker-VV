@@ -146,6 +146,10 @@
                             </li>
                             <li>
                                     <span class="modifier"></span>
+                                <a href="#getPosto" >getPosto</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
                                 <a href="#getRelatorioPostos" >getRelatorioPostos</a>
                             </li>
                         </ul>
@@ -215,6 +219,82 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getPosto"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>getPosto</b></span>
+                        <a href="#getPosto"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getPosto(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Get(&#x27;:id&#x27;)<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="14"
+                                    class="link-to-prism">src/controllers/posto/posto.controller.ts:14</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getRelatorioPostos"></a>
                     <span class="name">
                             <span class="modifier"></span>
@@ -240,8 +320,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="14"
-                                    class="link-to-prism">src/controllers/posto/posto.controller.ts:14</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="19"
+                                    class="link-to-prism">src/controllers/posto/posto.controller.ts:19</a></div>
                         </td>
                     </tr>
 
@@ -303,7 +383,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Controller, Get, Query } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Controller, Get, Param, Query} from &#x27;@nestjs/common&#x27;;
 import { PostoService } from &#x27;../../services/posto.service&#x27;;
 
 @Controller(&#x27;postos&#x27;)
@@ -313,6 +393,11 @@ export class PostoController {
   @Get()
   getAllPostos() {
     return this.postoService.getAllPostos();
+  }
+
+  @Get(&#x27;:id&#x27;)
+  getPosto(@Param(&#x27;id&#x27;) id: number) {
+    return this.postoService.getOnePosto(id);
   }
 
   @Get(&#x27;relatorio&#x27;)

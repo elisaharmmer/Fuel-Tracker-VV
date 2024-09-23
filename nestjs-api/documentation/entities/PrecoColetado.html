@@ -423,7 +423,7 @@ export class PrecoColetado {
   dataColeta: Date;
 
   @ManyToOne(() &#x3D;&gt; Posto, (posto) &#x3D;&gt; posto.precosColetados)
-  @JoinColumn({ name: &#x27;PostoID&#x27; })  // Alterado para referenciar corretamente PostoID
+  @JoinColumn({ name: &#x27;PostoID&#x27; })
   posto: Posto;
 
   @ManyToOne(() &#x3D;&gt; Combustivel, (combustivel) &#x3D;&gt; combustivel.precosColetados)

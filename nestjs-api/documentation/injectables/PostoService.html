@@ -136,7 +136,12 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#getAllPostos" >getAllPostos</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getOnePosto" >getOnePosto</a>
                             </li>
                             <li>
                                 <a href="#getRelatorioPostos" >getRelatorioPostos</a>
@@ -164,7 +169,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/services/posto.service.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/services/posto.service.ts:9</a></div>
                             </td>
                         </tr>
 
@@ -213,6 +218,7 @@
                 <td class="col-md-4">
                     <a name="getAllPostos"></a>
                     <span class="name">
+                            <span class="modifier">Async</span>
                         <span ><b>getAllPostos</b></span>
                         <a href="#getAllPostos"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -220,15 +226,16 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>getAllPostos()</code>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAllPostos()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="13"
-                                    class="link-to-prism">src/services/posto.service.ts:13</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="14"
+                                    class="link-to-prism">src/services/posto.service.ts:14</a></div>
                         </td>
                     </tr>
 
@@ -237,9 +244,78 @@
                 <td class="col-md-4">
 
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="../entitys/Posto.html" target="_self" >Promise&lt;Posto[]&gt;</a></code>
+                            <b>Returns : </b>    <code>Promise&lt;any[]&gt;</code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getOnePosto"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getOnePosto</b></span>
+                        <a href="#getOnePosto"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getOnePosto(postoId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="105"
+                                    class="link-to-prism">src/services/posto.service.ts:105</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>postoId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -264,8 +340,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="17"
-                                    class="link-to-prism">src/services/posto.service.ts:17</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="155"
+                                    class="link-to-prism">src/services/posto.service.ts:155</a></div>
                         </td>
                     </tr>
 
@@ -333,23 +409,159 @@
 import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
 import { Repository } from &#x27;typeorm&#x27;;
 import { Posto } from &#x27;../entities/posto.entity&#x27;;
+import {PrecoColetado} from &quot;../entities/preco-coletado.entity&quot;;
+import {Combustivel} from &quot;../entities/combustivel.entity&quot;;
 
 @Injectable()
 export class PostoService {
-  constructor(
-    @InjectRepository(Posto)
-    private readonly postoRepository: Repository&lt;Posto&gt;,
-  ) {}
+    constructor(
+        @InjectRepository(Posto) private readonly postoRepository: Repository&lt;Posto&gt;,
+    ) {}
 
-  getAllPostos(): Promise&lt;Posto[]&gt; {
-    return this.postoRepository.find();
-  }
+    async getAllPostos(): Promise&lt;any[]&gt; {
+        // Step 1: Buscar dados do banco de dados
+        const rawResults &#x3D; await this.postoRepository.createQueryBuilder(&#x27;p&#x27;)
+            .select([
+                &#x27;p.&quot;ID_Posto&quot; AS posto_id&#x27;,
+                &#x27;p.&quot;NomeFantasia&quot; AS posto_nome&#x27;,
+                &#x27;p.&quot;Bandeira&quot; AS posto_bandeira&#x27;,
+                &#x27;p.&quot;Logradouro&quot; AS posto_logradouro&#x27;,
+                &#x27;p.&quot;Numero&quot; AS posto_numero&#x27;,
+                &#x27;p.&quot;Bairro&quot; AS posto_bairro&#x27;,
+                &#x27;p.&quot;Cidade&quot; AS posto_cidade&#x27;,
+                &#x27;p.&quot;Estado&quot; AS posto_estado&#x27;,
+                &#x27;p.&quot;CEP&quot; AS posto_cep&#x27;,
+                &#x27;c.&quot;Nome&quot; AS combustivel_nome&#x27;,
+                &#x27;pc.&quot;Preco&quot; AS preco&#x27;,
+                &#x27;pc.&quot;DataColeta&quot; AS data_coleta&#x27;
+            ])
+            .leftJoin(Combustivel, &#x27;c&#x27;, &#x27;TRUE&#x27;) // LEFT JOIN COMBUSTIVEL ON TRUE
+            .leftJoin(
+                qb &#x3D;&gt; {
+                    return qb
+                        .select([
+                            &#x27;pc_inner.&quot;PostoID&quot;&#x27;,
+                            &#x27;pc_inner.&quot;CombustivelID&quot;&#x27;,
+                            &#x27;pc_inner.&quot;Preco&quot;&#x27;,
+                            &#x27;pc_inner.&quot;DataColeta&quot;&#x27;
+                        ])
+                        .from(PrecoColetado, &#x27;pc_inner&#x27;)
+                        .where(&#x60;(pc_inner.&quot;PostoID&quot;, pc_inner.&quot;CombustivelID&quot;, pc_inner.&quot;DataColeta&quot;) IN (
+                        SELECT 
+                            pc_sub.&quot;PostoID&quot;, 
+                            pc_sub.&quot;CombustivelID&quot;, 
+                            MAX(pc_sub.&quot;DataColeta&quot;) 
+                        FROM 
+                            &quot;PRECO_COLETADO&quot; pc_sub 
+                        GROUP BY 
+                            pc_sub.&quot;PostoID&quot;, pc_sub.&quot;CombustivelID&quot;
+                    )&#x60;);
+                },
+                &#x27;pc&#x27;,
+                &#x27;pc.&quot;PostoID&quot; &#x3D; p.&quot;ID_Posto&quot; AND pc.&quot;CombustivelID&quot; &#x3D; c.&quot;ID_Combustivel&quot;&#x27;
+            )
+            .orderBy(&#x27;p.&quot;ID_Posto&quot;&#x27;, &#x27;ASC&#x27;)
+            .addOrderBy(&#x27;c.&quot;Nome&quot;&#x27;, &#x27;ASC&#x27;)
+            .getRawMany();
 
-  getRelatorioPostos(dataInicio: string, dataFim: string): Promise&lt;any[]&gt; {
-    return this.postoRepository.query(
-      &#x60;EXEC sp_ResumoPostosEPrecos @DataInicio &#x3D; &#x27;${dataInicio}&#x27;, @DataFim &#x3D; &#x27;${dataFim}&#x27;&#x60;,
-    );
-  }
+        // Step 2: Agrupar os combustíveis por posto
+        const postosMap &#x3D; new Map&lt;number, any&gt;();
+
+        rawResults.forEach(result &#x3D;&gt; {
+            const {
+                posto_id,
+                posto_nome,
+                posto_bandeira,
+                posto_logradouro,
+                posto_numero,
+                posto_bairro,
+                posto_cidade,
+                posto_estado,
+                posto_cep,
+                combustivel_nome,
+                preco,
+                data_coleta
+            } &#x3D; result;
+
+            if (!postosMap.has(posto_id)) {
+                postosMap.set(posto_id, {
+                    posto_id,
+                    posto_nome,
+                    posto_bandeira,
+                    posto_logradouro,
+                    posto_numero,
+                    posto_bairro,
+                    posto_cidade,
+                    posto_estado,
+                    posto_cep,
+                    combustiveis: []
+                });
+            }
+
+            postosMap.get(posto_id).combustiveis.push({
+                combustivel_nome,
+                preco,
+                data_coleta
+            });
+        });
+
+        // Step 3: Converter o mapa em um array
+        return Array.from(postosMap.values());
+    }
+
+    async getOnePosto(postoId: number) {
+        const rawResults &#x3D; await this.postoRepository.createQueryBuilder(&#x27;p&#x27;)
+            .leftJoinAndSelect(&#x27;p.precosColetados&#x27;, &#x27;pc&#x27;)
+            .leftJoinAndSelect(&#x27;pc.combustivel&#x27;, &#x27;c&#x27;)
+            .select([
+                &#x27;p&#x27;,
+                &#x27;c.Nome AS combustivel_nome&#x27;,
+                &#x27;pc.Preco AS preco&#x27;,
+                &#x27;pc.DataColeta AS data_coleta&#x27;
+            ])
+            .where(&#x27;p.ID_Posto &#x3D; :postoId&#x27;, { postoId })
+            .orderBy(&#x27;pc.DataColeta&#x27;, &#x27;ASC&#x27;)
+            .getRawMany();
+
+        if (rawResults.length &#x3D;&#x3D;&#x3D; 0) {
+            return null; // ou alguma resposta apropriada caso o posto não seja encontrado
+        }
+
+        const postoDetails &#x3D; {
+            posto_id: rawResults[0].p_ID_Posto,
+            cnpj: rawResults[0].p_CNPJ,
+            razao_social: rawResults[0].p_RazaoSocial,
+            nome_fantasia: rawResults[0].p_NomeFantasia,
+            bandeira: rawResults[0].p_Bandeira,
+            logradouro: rawResults[0].p_Logradouro,
+            numero: rawResults[0].p_Numero,
+            bairro: rawResults[0].p_Bairro,
+            cidade: rawResults[0].p_Cidade,
+            estado: rawResults[0].p_Estado,
+            cep: rawResults[0].p_CEP,
+            combustiveis: {}
+        };
+
+        rawResults.forEach(result &#x3D;&gt; {
+            const { combustivel_nome, preco, data_coleta } &#x3D; result;
+
+            if (!postoDetails.combustiveis[combustivel_nome]) {
+                postoDetails.combustiveis[combustivel_nome] &#x3D; [];
+            }
+
+            postoDetails.combustiveis[combustivel_nome].push({
+                preco,
+                data_coleta
+            });
+        });
+
+        return postoDetails;
+    }
+
+
+    getRelatorioPostos(dataInicio: string, dataFim: string): Promise&lt;any[]&gt; {
+        return this.postoRepository.query(&#x60;EXEC sp_ResumoPostosEPrecos @DataInicio &#x3D; &#x27;${dataInicio}&#x27;, @DataFim &#x3D; &#x27;${dataFim}&#x27;&#x60;);
+    }
 }
 </code></pre>
     </div>
