@@ -6,6 +6,14 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import annotationPlugin from 'chartjs-plugin-annotation';
 import { BehaviorSubject, combineLatest, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import html2canvas from 'html2canvas';
+import { DownloadEventService } from '../../services/download-event.service';
+import {MatDialog} from "@angular/material/dialog";
+import {ModalAlertComponent} from "../modal-alert/modal-alert.component";
 
 // Registrar os plugins
 Chart.register(...registerables);
@@ -37,11 +45,29 @@ export class PriceChartsComponent implements OnInit, OnDestroy {
   // Lista de combustíveis disponíveis
   combustiveis: string[] = [];
 
-  constructor(private gasStationService: GasStationService) {}
+  // Subscription para o serviço de download
+  private downloadSubscription: Subscription = new Subscription();
+
+  constructor(
+    private gasStationService: GasStationService,
+    private downloadEventService: DownloadEventService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     const today = moment().format('YYYY-MM-DD');
     const sixMonthsAgo = moment().subtract(6, 'months').format('YYYY-MM-DD');
+
+    // Subscribe para os eventos de exportação
+    this.downloadSubscription = this.downloadEventService.downloadEvent$.subscribe(type => {
+      if (type === 'pdf') {
+        this.exportToPDF();
+      } else if (type === 'csv') {
+        this.exportToCSV();
+      } else if (type === 'excel') {
+        this.exportToExcel();
+      }
+    });
 
     // Inicializar as datas
     this.dataInicio = sixMonthsAgo;
@@ -70,6 +96,9 @@ export class PriceChartsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    if (this.downloadSubscription) {
+      this.downloadSubscription.unsubscribe();
+    }
   }
 
   updateCharts(dataInicio: string, dataFim: string) {
@@ -142,7 +171,6 @@ export class PriceChartsComponent implements OnInit, OnDestroy {
 
       const numberOfPostos = data.length;
 
-      // Cálculo do desvio padrão
       const variance =
         prices.reduce(
           (sum, price) => sum + Math.pow(price - averagePrice, 2),
@@ -150,13 +178,10 @@ export class PriceChartsComponent implements OnInit, OnDestroy {
         ) / prices.length;
       const standardDeviation = Math.sqrt(variance);
 
-      // Cálculo da diferença percentual
       const percentageDifference = ((maxPrice - minPrice) / minPrice) * 100;
 
-      // Definir margem de tolerância
-      const tolerance = 0.02; // 2 centavos
+      const tolerance = 0.02;
 
-      // Cálculo da distribuição por faixa de preço com tolerância
       const equalAverage = data.filter(
         (item) =>
           Math.abs(parseFloat(item.preco_medio) - averagePrice) <= tolerance
@@ -170,7 +195,6 @@ export class PriceChartsComponent implements OnInit, OnDestroy {
         (item) => parseFloat(item.preco_medio) > averagePrice + tolerance
       ).length;
 
-      // Percentuais
       const belowAveragePercent = (belowAverage / numberOfPostos) * 100;
       const equalAveragePercent = (equalAverage / numberOfPostos) * 100;
       const aboveAveragePercent = (aboveAverage / numberOfPostos) * 100;
@@ -252,7 +276,6 @@ export class PriceChartsComponent implements OnInit, OnDestroy {
           }
         }
 
-        // Renderizar o gráfico de pizza
         const pieCanvas = document.getElementById(
           `pie-chart-${index}`
         ) as HTMLCanvasElement;
@@ -263,19 +286,17 @@ export class PriceChartsComponent implements OnInit, OnDestroy {
             const distribution =
               this.insightsByCombustivel[combustivel].priceDistribution;
 
-            // Ajustar labels e dados com base na presença de postos "Na Média"
             let labels, dataValues, backgroundColors;
 
             if (distribution.equalAverage === 0) {
-              // Remover a categoria "Na Média"
               labels = ['Abaixo da Média', 'Acima da Média'];
               dataValues = [
                 distribution.belowAverage,
                 distribution.aboveAverage,
               ];
               backgroundColors = [
-                'rgba(127,187,250,0.6)', // Abaixo da Média
-                'rgba(255, 99, 132, 0.6)', // Acima da Média
+                'rgba(127,187,250,0.6)',
+                'rgba(255, 99, 132, 0.6)',
               ];
             } else {
               labels = ['Abaixo da Média', 'Na Média', 'Acima da Média'];
@@ -285,9 +306,9 @@ export class PriceChartsComponent implements OnInit, OnDestroy {
                 distribution.aboveAverage,
               ];
               backgroundColors = [
-                'rgba(118,153,239,0.6)', // Abaixo da Média
-                'rgba(195,195,195,0.6)', // Na Média
-                'rgba(237,99,155,0.6)', // Acima da Média
+                'rgba(118,153,239,0.6)',
+                'rgba(195,195,195,0.6)',
+                'rgba(237,99,155,0.6)',
               ];
             }
 
@@ -307,9 +328,6 @@ export class PriceChartsComponent implements OnInit, OnDestroy {
                 plugins: {
                   legend: {
                     position: 'bottom',
-                    labels: {
-                      color: '#fff',
-                    },
                   },
                   tooltip: {
                     callbacks: {
@@ -350,5 +368,93 @@ export class PriceChartsComponent implements OnInit, OnDestroy {
 
   onCombustivelChange(newValue: any) {
     this.combustivelSubject.next(newValue);
+  }
+
+  async exportToPDF(): Promise<void> {
+    const doc = new jsPDF({
+      orientation: 'landscape' // Mantém a orientação horizontal
+    });
+
+    const title = `Relatório de Preços - ${moment(this.dataInicio).format('DD/MM/YYYY')} a ${moment(this.dataFim).format('DD/MM/YYYY')}`;
+
+    // Iterar sobre cada combustível
+    for (let i = 0; i < this.charts.length; i++) {
+      const combustivel = Object.keys(this.groupedDataByCombustivel)[i];
+      const canvasElement = document.getElementById(`chart-${i}`) as HTMLCanvasElement;
+      const pieCanvasElement = document.getElementById(`pie-chart-${i}`) as HTMLCanvasElement;
+      const insights = this.insightsByCombustivel[combustivel];
+
+      if (canvasElement) {
+        try {
+          // Página com o gráfico de barras
+          const canvas = await html2canvas(canvasElement);
+          const imgData = canvas.toDataURL('image/png');
+
+          // Adicionar título e gráfico de barras
+          doc.text(`${title}`, 10, 10);
+          doc.text(`Combustível: ${combustivel}`, 10, 20);
+          doc.addImage(imgData, 'PNG', 10, 30, 270, 150);
+
+          // Adicionar nova página para os insights após o gráfico de barras
+          doc.addPage();
+
+          if (pieCanvasElement && insights) {
+            // Página com insights (gráfico de pizza e dados)
+            const pieCanvas = await html2canvas(pieCanvasElement);
+            const pieImgData = pieCanvas.toDataURL('image/png');
+
+            // Adicionar título e gráfico de pizza
+            doc.text(`${title}`, 10, 10);
+            doc.text(`Combustível: ${combustivel} (Insights)`, 10, 20);
+
+            // Definir tamanho proporcional para o gráfico circular
+            const pieSize = 200; // Tamanho ajustado
+            const pieXPosition = (doc.internal.pageSize.getWidth() - pieSize) / 2; // Centralizar horizontalmente
+
+            // Adicionar gráfico de pizza com proporções corretas
+            doc.addImage(pieImgData, 'PNG', pieXPosition, 30, pieSize, pieSize / 2); // Gráfico de pizza ajustado
+
+            // Adicionar dados de insights
+            const insightsData = [
+              ['Preço Médio', insights.averagePrice.toFixed(2)],
+              ['Preço Mínimo', `${insights.minPrice.toFixed(2)} (${insights.minPricePosto})`],
+              ['Preço Máximo', `${insights.maxPrice.toFixed(2)} (${insights.maxPricePosto})`],
+              ['Diferença Máx-Mín', `${insights.priceDifference.toFixed(2)} (${insights.percentageDifference.toFixed(2)}%)`],
+              ['Desvio Padrão', insights.standardDeviation.toFixed(2)],
+              ['Número de Postos', insights.numberOfPostos],
+            ];
+
+            (doc as any).autoTable({
+              head: [['Insight', 'Valor']],
+              body: insightsData,
+              startY: 140,  // Ajustado para que a tabela fique logo abaixo do gráfico de pizza
+              margin: { top: 10 }
+            });
+          }
+
+          // Adicionar nova página se não for o último gráfico
+          if (i < this.charts.length - 1) {
+            doc.addPage();
+          }
+        } catch (error) {
+          console.error('Erro ao capturar o gráfico:', error);
+        }
+      }
+    }
+
+    // Salvar o PDF
+    doc.save(`relatorio_precos_${new Date().getTime()}.pdf`);
+  }
+
+  exportToCSV(): void {
+    this.openWarningDialog();
+  }
+
+  exportToExcel(): void {
+    this.openWarningDialog();
+  }
+
+  openWarningDialog(): void {
+    this.dialog.open(ModalAlertComponent);
   }
 }
