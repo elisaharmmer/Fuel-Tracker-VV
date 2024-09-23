@@ -40,8 +40,9 @@ mat-sidenav-content {
 // Define the light theme.
 $light-theme: mat.define-light-theme((
   color: (
-    primary: mat.define-palette(mat.$indigo-palette),
+    primary: mat.define-palette(mat.$pink-palette),
     accent: mat.define-palette(mat.$pink-palette, A200, A100, A400),
+    active: mat.define-palette(mat.$pink-palette),
   ),
 ));
 
@@ -50,6 +51,7 @@ $dark-theme: mat.define-dark-theme((
   color: (
     primary: mat.define-palette(mat.$indigo-palette),
     accent: mat.define-palette(mat.$cyan-palette, A200, A100, A400),
+    active: mat.define-palette(mat.$indigo-palette),
   ),
 ));
 
