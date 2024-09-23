@@ -1,0 +1,43 @@
+.parallax {
+  /* A imagem usada */
+  background-image: url('/assets/images/background-1.png');
+
+  /* Definir uma altura específica */
+  height: 400px;
+
+  /* Criar o efeito de paralaxe */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.content {
+  padding: 40px;
+  //background-color: #f9f9f9;
+  //color: #333;
+
+  h1 {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  mat-divider {
+    margin-bottom: 32px;
+  }
+
+  section {
+    margin-bottom: 32px;
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+      text-align: justify;
+    }
+  }
+}
