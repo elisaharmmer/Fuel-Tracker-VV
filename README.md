@@ -55,6 +55,14 @@ erDiagram
 ```
 
 <h1>
+Demonstração da aplicação
+</h1>
+
+<a href="https://fuel-tracker-vv-zkis.vercel.app">Frontend - Fuel Tracker VV</a>
+
+<a href="https://fuel-tracker-vv.vercel.app">Backend - Fuel Tracker VV API</a>
+
+<h1>
 Etapas do Projeto
 </h1>
 
